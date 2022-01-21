@@ -1,9 +1,10 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('groupomania-database', 'user', 'pass',{
+const sequelize = new Sequelize('groupomania-P7', 'user', 'pass',{
     dialect: 'sqlite',
-    host: './dev.sqlite'
+    storage: './dev.db'
 
 })
+
 
 module.exports = sequelize;
