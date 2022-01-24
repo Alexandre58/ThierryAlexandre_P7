@@ -2,22 +2,23 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "dev.db",
-    "host": "127.0.0.1",
+    "database": "devGoupo.db",
+    "host": "localhost",
     "dialect": "sqlite"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "dev.db",
+    "database": "devGoupo.db",
     "host": "127.0.0.1",
     "dialect": "sqlite"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "dev.db",
+    "database": "devGoupo.db",
     "host": "127.0.0.1",
     "dialect": "sqlite"
   }
 }
+
