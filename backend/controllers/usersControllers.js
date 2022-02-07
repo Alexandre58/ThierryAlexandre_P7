@@ -13,11 +13,11 @@ const password_regex =
 const name_regex =
   /^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
 module.exports = {
-  registrer: function (req, res) {
+  signup: function (req, res) {
     // Paramètres
     let { email, firstname, lastname, password, confirmPassword, bio } =
       req.body;
-    const avatar = "/static/media/1.589279a0.jpg";
+    const avatar = "/static/media/1.589279a0f8cbe999d00b.jpg";
 
     if (!email || !firstname || !lastname || !password) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
@@ -1189,7 +1189,7 @@ module.exports = {
                       let i = files.length;
                       files.forEach((filepath) => {
                         let fileName = filepath
-                          .split("http://localhost:8080/")
+                          .split("http://localhost:4000/")
                           .pop();
                         fileName = dynamiquePath + fileName;
 

@@ -1,24 +1,15 @@
-{
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "devGoupo.db",
-    "host": "localhost",
-    "dialect": "sqlite"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "devGoupo.db",
-    "host": "127.0.0.1",
-    "dialect": "sqlite"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "devGoupo.db",
-    "host": "127.0.0.1",
-    "dialect": "sqlite"
-  }
-}
-
+		
+	{
+        "development": 
+          {
+          "username": "root",
+          "password": "root",
+          "database": "mybase",
+          "host": "localhost",
+          "dialect": "mysql",
+          "dialectOptions": {
+          "charset": "utf8_general_ci"
+          },
+          "port": 8889
+          }
+      }
