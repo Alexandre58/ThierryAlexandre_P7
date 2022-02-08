@@ -5,20 +5,23 @@ const jwt = require("jsonwebtoken");
 const asyncLib = require("async");
 const fs = require("fs");
 
-// Constantes
+//********************  REGEX EMAIL
 const email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const password_regex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
-  
+//*******************  REGEX PASSWORD
+const password_regex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/; 
  /*
 const password_regex = /^[a-zA-Z]\w{3,14}$/;
 */
+//******************** REGEX FIRSTNAME AND LASTNAME 
 const name_regex =/^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
+
+//*******************************************SIGUP ********************************** 
 module.exports = {
   signup: function (req, res) {
     // Paramètres
     let { email, firstname, lastname, password, confirmPassword, bio } =
       req.body;
-    const avatar = "/static/media/fkctWwWEdRrlktfd9elt5.jpg";
+    const avatar = "/static/media/fkctWwWEdRrlktfd9elt5.jpg";// IMAGE DEFAULT
 
     if (!email || !firstname || !lastname || !password) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
@@ -195,6 +198,7 @@ module.exports = {
       }
     );
   },
+  //*********************************************************** LOGIN *****************
   login: function (req, res) {
     // Paramètres
     const email = req.body.email;

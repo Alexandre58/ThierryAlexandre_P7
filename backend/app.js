@@ -29,13 +29,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 //***************************************************USER
-app.use("/", userRoute);
+app.use("/api/", userRoute);
 //**************************************************POSTS
-app.use("/", messageRoute);
+app.use("/api/", messageRoute);
 //**************************************************LIKES
-app.use("/", likeRoute);
+app.use("/api/", likeRoute);
 //**************************************************COMMENTS
-app.use("/", commentRoute);
+app.use("/api/", commentRoute);
 
 
 
