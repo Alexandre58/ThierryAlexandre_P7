@@ -3,21 +3,35 @@ const router = express.Router();
 const usersControllers = require("../controllers/usersControllers");
 const auth = require("../middlewares/auth");
 
+/*********************SIGN-UP AND LOGIN***************************************************** */
 // localhost:4000/user/sign-up
 router.post("/user/sign-up/", usersControllers.signup);
 // localhost:4000/user/login
-router.post("/user/login/",usersControllers.login);
+router.post("/user/login/", usersControllers.login);
+
+/**********************************************************************************GET USERS */
 // localhost:4000/user/recup all users
-router.get("/all/user/", usersControllers.getAllOtherUser);
+router.get("/users/", auth, usersControllers.getAllUsers);
+//recup user profil with his token valid
+router.get("/users/profil/", auth, usersControllers.getUserProfil);
+//recup user profil with id and his token valid
+router.get("/:userId/profil/", auth, usersControllers.getUserProfileId);
 
-router.get("/users/profile/", auth, usersControllers.getUserProfile);
-router.get("/:userId/profile/", auth, usersControllers.getOtherUserProfile);
+//**************************************************************************PUT USERS PROFIF */
+//4000:/users/profil/ can change bio and avatar with token user
+router.put("/users/profil/", auth, usersControllers.updateUserProfil);
 
-router.put("/users/profile/", auth, usersControllers.updateUserProfile);
-router.put("/users/firstname/", auth, usersControllers.updateFirstname);
-router.put("/users/lastname/", auth, usersControllers.updateLastname);
+//************************************************************************PUT PATH ONLY ADMIN*/
+//4000/users/modifname/email/password/with id
+router.put("/users/modifname/", auth, usersControllers.updateName);
 router.put("/users/email/", auth, usersControllers.updateEmail);
 router.put("/users/password/", auth, usersControllers.updatePassword);
 router.put("/users/:id", auth, usersControllers.giveAdminOtherUser);
+
+/*********************DELETE****************************************** */
+// localhost:4000/user/recup users with his id
 router.delete("/user/:id", auth, usersControllers.deleteUser);
+
+
+
 module.exports = router;

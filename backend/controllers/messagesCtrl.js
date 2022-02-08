@@ -14,7 +14,8 @@ const content_limit = 4;
 const items_limit = 50;
 
 module.exports = {
-  createMessageImage: function (req, res) {
+  //4000:/posts/Images/new
+  createPostWithImage: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
@@ -107,6 +108,8 @@ module.exports = {
       }
     );
   },
+  /**********************************POST************************************************ */
+//news posts=4000/posts/new/ post users with their token
   createMessage: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
@@ -123,7 +126,7 @@ module.exports = {
     if (title.length <= title_limit || content.length <= content_limit) {
       return res.status(400).json({ error: "publication insuffisante" });
     }
-console.log(postedDate);
+
     asyncLib.waterfall(
       [
         function (done) {
@@ -192,7 +195,9 @@ console.log(postedDate);
       }
     );
   },
-  listMessages: function (req, res) {
+  /**********************************GET*********************************************** */
+//list posts = localhost:4000/user/posts + token
+  listPosts: function (req, res) {
     const fields = req.query.fields;
     const limit = parseInt(req.query.limit);
     const offset = parseInt(req.query.offset);

@@ -6,18 +6,19 @@ const asyncLib = require("async");
 const fs = require("fs");
 
 // Constantes
-const email_regex =
-  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const password_regex =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
-const name_regex =
-  /^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
+const email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const password_regex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
+  
+ /*
+const password_regex = /^[a-zA-Z]\w{3,14}$/;
+*/
+const name_regex =/^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
 module.exports = {
   signup: function (req, res) {
     // Paramètres
     let { email, firstname, lastname, password, confirmPassword, bio } =
       req.body;
-    const avatar = "/static/media/1.589279a0f8cbe999d00b.jpg";
+    const avatar = "/static/media/fkctWwWEdRrlktfd9elt5.jpg";
 
     if (!email || !firstname || !lastname || !password) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
@@ -48,7 +49,7 @@ module.exports = {
     if (!password_regex.test(password)) {
       return res.status(400).json({
         error:
-          "mot de passe non valide, 8 caractères minimum, contenant au moins une lettre minuscule, une lettre majuscule, un chiffre numérique et un caractère spécial",
+          "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilis",
       });
     }
 
@@ -183,7 +184,7 @@ module.exports = {
             token: jwt.sign(
               { userId: newUser.id, isAdmin: newUser.isAdmin },
               process.env.TOKEN,
-              { expiresIn: "24h" }
+              { expiresIn: "48h" }
             ),
           });
         } else {
@@ -256,7 +257,7 @@ module.exports = {
                 isAdmin: userFound.isAdmin,
               },
               process.env.TOKEN,
-              { expiresIn: "24h" }
+              { expiresIn: "48h" }
             ),
           });
         } else {
@@ -267,7 +268,8 @@ module.exports = {
       }
     );
   },
-  getUserProfile: function (req, res) {
+  //*********************************************************recup user profil with his token valid
+  getUserProfil: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
@@ -297,7 +299,8 @@ module.exports = {
           .json({ error: "impossible de récupérer l'utilisateur" });
       });
   },
-  getOtherUserProfile: function (req, res) {
+  //************************************************************recup user profil with id and his token valid
+  getUserProfileId: function (req, res) {
     models.User.findByPk(req.params.userId, {
       attributes: ["firstname", "lastname", "bio", "avatar", "isAdmin"],
     })
@@ -314,7 +317,9 @@ module.exports = {
           .json({ error: "impossible de récupérer l'utilisateur" });
       });
   },
-  getAllOtherUser: function (req, res) {
+  /**********************************************************************************GET USERS */
+  // localhost:4000/user/recup all users
+  getAllUsers: function (req, res) {
     const order = req.query.order;
 
     models.User.findAll({
@@ -334,7 +339,10 @@ module.exports = {
           .json({ error: "impossible de récupérer les utilisateurs" });
       });
   },
-  updateUserProfile: function (req, res) {
+//**************************************************************************PUT USERS PROFIF */
+ 
+//4000:/users/profil/ can change bio and avatar with token user
+  updateUserProfil: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
@@ -390,17 +398,21 @@ module.exports = {
       }
     );
   },
-
-  updateFirstname: function (req, res) {
+  
+  //************************************************************************PUT PATH ONLY ADMIN*/
+  //4000/users/modifname/
+  updateName: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
+    const decodedToken = jwt.verify(token, process.env.TOKEN); // path .env
     const userId = decodedToken.userId;
-
+    ///////
+    //////
     // Paramètres
     const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
 
-    if (!name_regex.test(firstname)) {
-      return res.status(400).json({ error: "Prénom non valide" });
+    if (!name_regex.test(firstname, lastname)) {
+      return res.status(400).json({ error: "Prénom ou nom valide" });
     }
     asyncLib.waterfall(
       [
@@ -423,64 +435,6 @@ module.exports = {
             userFound
               .update({
                 firstname: firstname ? firstname : userFound.firstname,
-              })
-              .then(function () {
-                done(userFound);
-              })
-              .catch(function (err) {
-                res
-                  .status(500)
-                  .json({ error: "mise à jour utilisateur impossible" });
-              });
-          } else {
-            res.status(404).json({ error: "utilisateur introuvable" });
-          }
-        },
-      ],
-      function (userFound) {
-        if (userFound) {
-          return res.status(201).json(userFound);
-        } else {
-          return res
-            .status(500)
-            .json({
-              error: "mise à jour du pseudonyme utilisateur impossible",
-            });
-        }
-      }
-    );
-  },
-  updateLastname: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
-    const userId = decodedToken.userId;
-
-    // Paramètres
-    const lastname = req.body.lastname;
-
-    if (!name_regex.test(lastname)) {
-      return res.status(400).json({ error: "NOM non valide" });
-    }
-    asyncLib.waterfall(
-      [
-        // récupère l'utilisateur dans la DBase
-        function (done) {
-          models.User.findOne({
-            where: { id: userId },
-          })
-            .then(function (userFound) {
-              done(null, userFound);
-            })
-            .catch(function (err) {
-              return res
-                .status(500)
-                .json({ error: "vérification utilisateur impossible" });
-            });
-        },
-        function (userFound, done) {
-          if (userFound) {
-            userFound
-              .update({
                 lastname: lastname ? lastname : userFound.lastname,
               })
               .then(function () {
@@ -500,15 +454,16 @@ module.exports = {
         if (userFound) {
           return res.status(201).json(userFound);
         } else {
-          return res
-            .status(500)
-            .json({
-              error: "mise à jour du pseudonyme utilisateur impossible",
-            });
+          return res.status(500).json({
+            error: "mise à jour du pseudonyme utilisateur impossible",
+          });
         }
       }
     );
   },
+  /*********************************************************************************************************************** */
+
+  /********************************************************************************************************************* */
   updateEmail: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
@@ -592,7 +547,7 @@ module.exports = {
       }
     );
   },
-
+  /**************************************************************************************************************************** */
   updatePassword: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
@@ -662,7 +617,8 @@ module.exports = {
       },
     ]);
   },
-
+/***************************************************************************ONLY ADMIN */
+/*********************DELETE****************************************** */
   deleteUser: function (req, res) {
     // Getting auth header
     const token = req.headers.authorization.split(" ")[1];
@@ -674,11 +630,9 @@ module.exports = {
         where: { isAdmin: true },
       }).then((allUserAdmin) => {
         if (userFound.isAdmin && allUserAdmin.count < 2) {
-          return res
-            .status(400)
-            .json({
-              error: "Donner les droits d'administrateur à un autre compte",
-            });
+          return res.status(400).json({
+            error: "Donner les droits d'administrateur à un autre compte",
+          });
         } else {
           asyncLib.waterfall([
             function (done) {
@@ -723,11 +677,9 @@ module.exports = {
                   done(null, userFound, userAdminFound, messageIdTab);
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error: "3 impossible de vérifier tous les messages",
-                    });
+                  return res.status(500).json({
+                    error: "3 impossible de vérifier tous les messages",
+                  });
                 });
             },
 
@@ -746,11 +698,9 @@ module.exports = {
                   );
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error: "4 impossible de vérifier tous les userDislike",
-                    });
+                  return res.status(500).json({
+                    error: "4 impossible de vérifier tous les userDislike",
+                  });
                 });
             },
 
@@ -776,11 +726,9 @@ module.exports = {
                   );
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error: "5 impossible de vérifier tous les userLike",
-                    });
+                  return res.status(500).json({
+                    error: "5 impossible de vérifier tous les userLike",
+                  });
                 });
             },
 
@@ -831,11 +779,9 @@ module.exports = {
                   );
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error: "6 impossible de vérifier tous les commentaires",
-                    });
+                  return res.status(500).json({
+                    error: "6 impossible de vérifier tous les commentaires",
+                  });
                 });
             },
 
@@ -865,11 +811,9 @@ module.exports = {
                   );
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error: "7 impossible de vérifier tous les commentsLike",
-                    });
+                  return res.status(500).json({
+                    error: "7 impossible de vérifier tous les commentsLike",
+                  });
                 });
             },
 
@@ -901,12 +845,9 @@ module.exports = {
                   );
                 })
                 .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({
-                      error:
-                        "8 impossible de vérifier tous les commentsDislike",
-                    });
+                  return res.status(500).json({
+                    error: "8 impossible de vérifier tous les commentsDislike",
+                  });
                 });
             },
             function (
@@ -978,11 +919,9 @@ module.exports = {
                         );
                       })
                       .catch((err) => {
-                        return res
-                          .status(500)
-                          .json({
-                            error: "9 impossible de supprimer les likes",
-                          });
+                        return res.status(500).json({
+                          error: "9 impossible de supprimer les likes",
+                        });
                       });
                   });
               } else {
@@ -1073,12 +1012,10 @@ module.exports = {
                             );
                           })
                           .catch((err) => {
-                            return res
-                              .status(500)
-                              .json({
-                                error:
-                                  "10 impossible de supprimer les commentaires",
-                              });
+                            return res.status(500).json({
+                              error:
+                                "10 impossible de supprimer les commentaires",
+                            });
                           });
                       });
                   });
@@ -1148,12 +1085,10 @@ module.exports = {
                           done(null, userFound, userAdminFound);
                         })
                         .catch((err) => {
-                          return res
-                            .status(500)
-                            .json({
-                              error:
-                                "11 impossible de supprimer les commentLikes",
-                            });
+                          return res.status(500).json({
+                            error:
+                              "11 impossible de supprimer les commentLikes",
+                          });
                         });
                     } else {
                       done(null, userFound);
@@ -1216,12 +1151,9 @@ module.exports = {
                             done(null, userFound, userAdminFound);
                           })
                           .catch((err) => {
-                            return res
-                              .status(500)
-                              .json({
-                                error:
-                                  "12 impossible de supprimer les messages",
-                              });
+                            return res.status(500).json({
+                              error: "12 impossible de supprimer les messages",
+                            });
                           });
                       }
                     });
@@ -1233,11 +1165,9 @@ module.exports = {
                         done(null, userFound, userAdminFound);
                       })
                       .catch((err) => {
-                        return res
-                          .status(500)
-                          .json({
-                            error: "13 impossible de supprimer les messages",
-                          });
+                        return res.status(500).json({
+                          error: "13 impossible de supprimer les messages",
+                        });
                       });
                   }
                 });

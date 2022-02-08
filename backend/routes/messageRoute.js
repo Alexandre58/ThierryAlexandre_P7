@@ -1,26 +1,35 @@
 const express = require("express");
-const messagesCtrl = require("../controllers/messagesCtrl");
+const postsController = require("../controllers/messagesCtrl");
 const router = express.Router();
 const auth = require("../middlewares/auth");
 const multer = require("../middlewares/multer-config");
 
 
+/**********************************GET*********************************************** */
+//list posts = localhost:4000/user/posts
+router.get("/posts/", /*auth, */postsController.listPosts);
+//list posts user + token
+router.get("/user/posts", auth, postsController.listMessagesUser);
+//get one message +token admin
+router.get("/:messageId", auth, postsController.getOneMessage);
+//4000/view/35/posts + token
+router.get("/view/:userId/posts", auth, postsController.listMessagesOtherUser);
 
+/**********************************POST************************************************ */
+//news posts=4000/posts/new/ post users with their token
+router.post("/posts/new/", auth, postsController.createMessage);
 
-//localhost:4000/posts/newpost
-//title,content
-router.post("/posts/newpost", auth, messagesCtrl.createMessage);
-
+//4000:/posts/Images/new
 router.post(
-  "/messagesImages/new/",
+  "/posts/Images/new",
   auth,
   multer,
-  messagesCtrl.createMessageImage
+  postsController.createPostWithImage
 );
-router.put("/:messageId/update", auth, multer, messagesCtrl.updateMessage);
-router.get("/messages/", auth, messagesCtrl.listMessages);
-router.get("/:messageId", auth, messagesCtrl.getOneMessage);
-router.get("/view/:userId/messages", auth, messagesCtrl.listMessagesOtherUser);
-router.get("/user/messages", auth, messagesCtrl.listMessagesUser);
-router.delete("/messages/:messageId", auth, messagesCtrl.deleteMessage);
+/**********************************PUT************************************************** */
+router.put("/:messageId/update", auth, multer, postsController.updateMessage);
+
+/**********************************DELETE************************************************ */
+
+router.delete("/messages/:messageId", auth, postsController.deleteMessage);
 module.exports = router;
