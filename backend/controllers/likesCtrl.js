@@ -5,7 +5,7 @@ const asyncLib = require("async");
 
 // Routes
 module.exports = {
-  likePost: function (req, res) {
+  like: function (req, res) {
     // Getting auth header
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);
@@ -167,7 +167,7 @@ module.exports = {
       },
     ]);
   },
-  dislikePost: function (req, res) {
+  dislike: function (req, res) {
     // Getting auth header
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);

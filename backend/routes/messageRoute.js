@@ -8,28 +8,24 @@ const multer = require("../middlewares/multer-config");
 /**********************************GET*********************************************** */
 //list posts = localhost:4000/user/posts
 router.get("/posts/", /*auth, */postsController.listPosts);
-//list posts user + token
-router.get("/user/posts", auth, postsController.listMessagesUser);
-//get one message +token admin
+//list posts user +  with her token
+router.get("/user/posts", auth, postsController.listPostsUser);
+//**************************get one message +token admin
 router.get("/:messageId", auth, postsController.getOneMessage);
 //4000/view/35/posts + token
 router.get("/view/:userId/posts", auth, postsController.listMessagesOtherUser);
 
 /**********************************POST************************************************ */
 //news posts=4000/posts/new/ post users with their token
-router.post("/posts/new/", auth, postsController.createMessage);
+router.post("/posts/new/", auth, postsController.createPosts);
 
 //4000:/posts/Images/new
-router.post(
-  "/posts/Images/new",
-  auth,
-  multer,
-  postsController.createPostWithImage
-);
+router.post("/posts/Images/new",auth,multer,postsController.createPostWithImage);
+
 /**********************************PUT************************************************** */
-router.put("/:messageId/update", auth, multer, postsController.updateMessage);
+router.put("/:messageId", auth, multer, postsController.updatePosts);
 
 /**********************************DELETE************************************************ */
 
-router.delete("/messages/:messageId", auth, postsController.deleteMessage);
+router.delete("/posts/:messageId", auth, postsController.deletePosts);
 module.exports = router;

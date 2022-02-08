@@ -4,7 +4,7 @@ const models = require("../models");
 const asyncLib = require("async");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-const moment = require("moment"); // pour formater les dates et heures
+const moment = require("moment"); // format Date
 const { strict } = require("assert");
 moment.locale("fr");
 
@@ -14,10 +14,11 @@ const content_limit = 4;
 const items_limit = 50;
 
 module.exports = {
+  /**********************************************************CREATE POST IMAGE */
   //4000:/posts/Images/new
   createPostWithImage: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
+    const decodedToken = jwt.verify(token, process.env.TOKEN); // look file .env
     const userId = decodedToken.userId;
 
     // Paramètres
@@ -26,11 +27,11 @@ module.exports = {
     const { title, content } = formMessage;
 
     if (!title) {
-      return res.status(400).json({ error: "champ(s) manquant(s)" });
+      return res.status(400).json({ error: "Please complete the following" });
     }
 
     if (title.length <= title_limit) {
-      return res.status(400).json({ error: "publication insuffisante" });
+      return res.status(400).json({ error: "post a longer message" });
     }
 
     asyncLib.waterfall(
@@ -43,7 +44,7 @@ module.exports = {
               done(null, userFound);
             })
             .catch(function (err) {
-              return res.status(500).json({ error: "vérification utilisateur impossible" });
+              return res.status(500).json({ error: "user verification not possible" });
             });
         },
         function (userFound, done) {
@@ -60,7 +61,7 @@ module.exports = {
               done(newMessage);
             });
           } else {
-            res.status(404).json({ error: "utilisateur introuvable" });
+            res.status(404).json({ error: "user not found" });
           }
         },
       ],
@@ -103,14 +104,14 @@ module.exports = {
           });
         } else {
           
-          return res.status(500).json({ error: "impossible de poster le message" });
+          return res.status(500).json({ error: "unable to post message" });
         }
       }
     );
   },
   /**********************************POST************************************************ */
 //news posts=4000/posts/new/ post users with their token
-  createMessage: function (req, res) {
+  createPosts: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
@@ -292,7 +293,7 @@ module.exports = {
         res.status(500).json({ error: "colonne invalide" });
       });
   },
-  listMessagesUser: function (req, res) {
+  listPostsUser: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
@@ -363,7 +364,7 @@ module.exports = {
         res.status(500).json({ error: "impossible de récupérer la publication" });
       });
   },
-  updateMessage: function (req, res) {
+  updatePosts: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
@@ -448,7 +449,7 @@ module.exports = {
       }
     );
   },
-  deleteMessage: function (req, res) {
+  deletePosts: function (req, res) {
     //Params
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);

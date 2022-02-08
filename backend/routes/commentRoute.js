@@ -3,8 +3,20 @@ const router = express.Router();
 const auth = require("../middlewares/auth");
 const commentsCtrl = require("../controllers/commentsCtrl");
 
-router.post("/:messageId/comments/new/", auth, commentsCtrl.createComment);
-router.get("/:messageId/comments", auth, commentsCtrl.listComments);
-router.put("/:commentId/comment/update", auth, commentsCtrl.updateComment);
+
+
+
+//CRUD COMMENTS
+//create comment 4000/id
+router.post("/new/:messageId", auth, commentsCtrl.createComment);
+//get 4000/comments/id
+router.get("/comments/:messageId", auth, commentsCtrl.listComments);
+//update 4000/update/id
+router.put("/update/:commentId", auth, commentsCtrl.updateComment);
+//delete/user/id/id
 router.delete("/user/:messageId/:commentId", auth, commentsCtrl.deleteComment);
+
+
+
+
 module.exports = router;

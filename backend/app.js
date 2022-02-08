@@ -10,7 +10,7 @@ const userRoute = require("./routes/userRoute");
 const messageRoute = require("./routes/messageRoute");
 const likeRoute = require("./routes/likeRoute");
 const commentRoute = require("./routes/commentRoute");
-const commentLikeRoute = require("./routes/commentLikeRoute");
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,7 +36,7 @@ app.use("/", messageRoute);
 app.use("/", likeRoute);
 //**************************************************COMMENTS
 app.use("/", commentRoute);
-app.use("/", commentLikeRoute);
+
 
 
 //images

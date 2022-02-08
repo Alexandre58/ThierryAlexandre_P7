@@ -10,9 +10,7 @@ module.exports = {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
-
-    // Paramètres
-
+    // Param
     const content = req.body.content;
     const messageId = parseInt(req.params.messageId);
 
