@@ -16,23 +16,18 @@ backend with nodejs express, sequelize,sql2
  *On Windows, these installations require to use PowerShell in administrator mode.*
 
 ---------------------
- ## User
+## User
 
-* POST...../user/sign-up
-
-* POST...../user/login
-
-* PUT....../user/:id
-
-* PUT....../user/modifname
-
-* PUT....../users/profil
-
-* DELETE.../user/:id
-
-* GET....../users/profil
-
-* GET....../users
+|           |       routes(Users)            |             |                                |          routes(Posts)       |            
+| :------------ | :----------------------:|:----------: | :-------------------------------: | --------------------: |
+|    POST       |   /user/sign-up         |             |                                   |                       |
+|    POST       |   /user/login           |             |                                   |                       |
+|    PUT        |   /user/:id             |             |                                   |                       |
+|    PUT        |   /user/modifname       |             |                                   |                       |
+|    PUT        |   /users/profil         |             |                                   |                       |
+|    DELETE     |   /user/:id             |             |                                   |                       |
+|    GET        |   /users/profil         |             |                                   |                       |
+|    GET        |   /users                |             |                                   |                       |
 
 ----------------------
 

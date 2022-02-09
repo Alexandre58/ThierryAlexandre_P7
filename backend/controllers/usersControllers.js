@@ -1223,7 +1223,7 @@ module.exports = {
             .catch(function (err) {
               return res
                 .status(500)
-                .json({ error: "impossible de vérifier l'utilisateur" });
+                .json({ error: "unable to verify user" });
             });
         },
         function (userfound, done) {
@@ -1236,7 +1236,7 @@ module.exports = {
             .catch(function (err) {
               return res
                 .status(500)
-                .json({ error: "impossible de vérifier l'admin" });
+                .json({ error: "unable to verify admin" });
             });
         },
 
@@ -1262,7 +1262,7 @@ module.exports = {
           } else {
             return res
               .status(500)
-              .json({ error: "vous n'avez pas les droits" });
+              .json({ error: "you don't have the rights" });
           }
         },
       ],
@@ -1272,7 +1272,7 @@ module.exports = {
         } else {
           return res
             .status(500)
-            .json({ error: "impossible de donner les droits à l'utilisateur" });
+            .json({ error: "unable to give permissions to user" });
         }
       }
     );

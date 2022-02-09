@@ -1,17 +1,14 @@
 // Imports
 const express = require("express");
-const bodyParser = require("body-parser");
 const path = require("path");
-require("dotenv").config();
 const app = express();
 const helmet = require("helmet");
-
 const userRoute = require("./routes/userRoute");
 const messageRoute = require("./routes/messageRoute");
 const likeRoute = require("./routes/likeRoute");
 const commentRoute = require("./routes/commentRoute");
-
-
+require("dotenv").config();
+const morgan = require('morgan')
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -24,9 +21,9 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+/*management of the POST request coming from the front-end application, extraction of the JSON body*/
+app.use(express.json());
+app.use(morgan('dev'));
 app.use(helmet());
 //***************************************************USER
 app.use("/api/", userRoute);
