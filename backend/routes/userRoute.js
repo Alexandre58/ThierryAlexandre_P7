@@ -11,11 +11,11 @@ router.post("/user/login/", usersControllers.login);
 
 /**********************************************************************************GET USERS */
 // localhost:4000/user/recup all users
-router.get("/users/", auth, usersControllers.getAllUsers);
+router.get("/users/",/* auth,*/ usersControllers.getAllUsers);
 //recup user profil with his token valid
 router.get("/users/profil/", auth, usersControllers.getUserProfil);
 //recup user profil with id and his token valid
-router.get("/:userId/profiluser/", auth, usersControllers.getUserProfileId);
+router.get("/:userId/profiluser/", /*auth,*/ usersControllers.getUserProfileId);
 
 //**************************************************************************PUT USERS PROFIF */
 //4000:/users/profil/ can change bio and avatar with token user

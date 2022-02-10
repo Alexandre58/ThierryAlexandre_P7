@@ -16,7 +16,7 @@ backend with nodejs express, sequelize,sql2
  *On Windows, these installations require to use PowerShell in administrator mode.*
 
 ---------------------
-## User
+## Routes backend
 
 |           |       routes(Users)            |             |                                |          routes(Posts)       |            
 | :------------ | :----------------------:|:----------: | :-------------------------------: | --------------------: |

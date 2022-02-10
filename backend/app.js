@@ -8,7 +8,8 @@ const messageRoute = require("./routes/messageRoute");
 const likeRoute = require("./routes/likeRoute");
 const commentRoute = require("./routes/commentRoute");
 require("dotenv").config();
-const morgan = require('morgan')
+const morgan = require('morgan');
+const auth = require("./middlewares/auth");
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
@@ -33,6 +34,11 @@ app.use("/api/", messageRoute);
 app.use("/api/", likeRoute);
 //**************************************************COMMENTS
 app.use("/api/", commentRoute);
+app.use("tokenRecup", auth,(req, res) => {
+  delete res.locals.user.password;
+  res.status(200).json(res.locals.user.dataValues.id);
+}
+);
 
 
 
