@@ -9,25 +9,30 @@ Clone this  Github Projet P7.
 
 backend with nodejs express, sequelize,sql2
 
-* Backend with nodejs express, sequelize,sql2.
-* Frontend with React and Redux.
-* node-sass : *make sure to use the corresponding version to NodeJS.* 
- *For Noe 14.0 for instance, you need node-sass in version 4.14+.*  
- *On Windows, these installations require to use PowerShell in administrator mode.*
+* Backend with nodejs express, sequelize, sql2.
+* Frontend with React, Redux, axios.
+ * css material ui.
+ * Styled Components with react.
+ * sass with styled.
 
 ---------------------
 ## Routes backend
 
-|           |       routes(Users)            |             |                                |          routes(Posts)       |            
+*Listening on port 4000
+
+|    /api      |       routes(Users)            |             |                                |          routes(Posts)       |            
 | :------------ | :----------------------:|:----------: | :-------------------------------: | --------------------: |
 |    POST       |   /user/sign-up         |             |                                   |                       |
 |    POST       |   /user/login           |             |                                   |                       |
 |    PUT        |   /user/:id             |             |                                   |                       |
 |    PUT        |   /user/modifname       |             |                                   |                       |
 |    PUT        |   /users/profil         |             |                                   |                       |
+|    PUT        |   /users/email/         |             |                                   |                       |
+|    PUT        |   /users/password/      |             |                                   |                       |
 |    DELETE     |   /user/:id             |             |                                   |                       |
-|    GET        |   /users/profil         |             |                                   |                       |
 |    GET        |   /users                |             |                                   |                       |
+|    GET        |   /:userId/profiluser/  |             |                                   |                       |
+|    GET        |   /users/profil/        |             |                                   |                       |
 
 ----------------------
 
