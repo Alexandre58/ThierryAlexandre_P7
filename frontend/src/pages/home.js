@@ -34,10 +34,10 @@ export const Home = () => {
             <Link to="/">Inscription-connexion</Link>
           </li>
           <li>
-            <Link to="/Blog">Blogs</Link>
+            <Link to="/blog">Blogs</Link>
           </li>
           <li>
-            <Link to="/Profil">Profil</Link>
+            <Link to="/profil">Profil</Link>
           </li>
         </ul>
       </nav>

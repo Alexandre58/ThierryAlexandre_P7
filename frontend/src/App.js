@@ -24,7 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
    useEffect (()=> {
      const userToken = async function() {
-           await axios.get(`${process.env.REACT_APP_API_URL}/tokenRecup`)
+           await axios.get(`${process.env.REACT_APP_API_URL}/tokenValidation`)
            .then((res)=> {
               setuserId(res.data)
            })
