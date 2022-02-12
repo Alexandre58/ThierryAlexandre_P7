@@ -1,13 +1,15 @@
 import React from 'react';
+import './blog.scss';
 
 export const Blog = () => {
     return (
-        //inclure touts les posts 
         <>
-        
-            <div>
-                <h1>bienvenu sur votre blog</h1>
-            </div>
+               
+               <main className='main_blog'>
+                    <div className='blog_container'>
+                        <h1 className='h1blog'>Bienvenu sur Groupomania publication</h1>
+                    </div>
+              </main>
         </>
     );
 };

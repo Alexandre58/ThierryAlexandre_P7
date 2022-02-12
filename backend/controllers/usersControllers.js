@@ -6,22 +6,25 @@ const asyncLib = require("async");
 const fs = require("fs");
 
 //********************  REGEX EMAIL
-const email_regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const email_regex =
+  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //*******************  REGEX PASSWORD
-const password_regex =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/; 
- /*
+const password_regex =
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
+/*
 const password_regex = /^[a-zA-Z]\w{3,14}$/;
 */
-//******************** REGEX FIRSTNAME AND LASTNAME 
-const name_regex =/^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
+//******************** REGEX FIRSTNAME AND LASTNAME
+const name_regex =
+  /^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
 
-//*******************************************SIGUP ********************************** 
+//*******************************************SIGUP **********************************
 module.exports = {
   signup: function (req, res) {
     // Paramètres
     let { email, firstname, lastname, password, confirmPassword, bio } =
       req.body;
-    const avatar = "/static/media/fkctWwWEdRrlktfd9elt5.jpg";// IMAGE DEFAULT
+    const avatar = "/static/media/fkctWwWEdRrlktfd9elt5.jpg"; // IMAGE DEFAULT
 
     if (!email || !firstname || !lastname || !password) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
@@ -251,19 +254,22 @@ module.exports = {
       // si le bon utilisateur on affiche son id et on lui attribut un token pour la session
       function (userFound) {
         if (userFound) {
-          return res.status(201).json({
+          const token = jwt.sign(
+            {
+              userId: userFound.id,
+              isAdmin: userFound.isAdmin,
+            },
+            process.env.TOKEN,
+            { expiresIn: "48h" }
+          );
+          res.cookie("token", token, { httpOnly: true, maxAge });
+          res.status(201).json({
             userId: userFound.id,
             firstname: userFound.firstname,
             lastname: userFound.lastname,
-            token: jwt.sign(
-              {
-                userId: userFound.id,
-                isAdmin: userFound.isAdmin,
-              },
-              process.env.TOKEN,
-              { expiresIn: "48h" }
-            ),
+            token: token,
           });
+          return;
         } else {
           return res
             .status(500)
@@ -343,9 +349,9 @@ module.exports = {
           .json({ error: "impossible de récupérer les utilisateurs" });
       });
   },
-//**************************************************************************PUT USERS PROFIF */
- 
-//4000:/users/profil/ can change bio and avatar with token user
+  //**************************************************************************PUT USERS PROFIF */
+
+  //4000:/users/profil/ can change bio and avatar with token user
   updateUserProfil: function (req, res) {
     const token = req.headers.authorization.split(" ")[1];
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
@@ -402,7 +408,7 @@ module.exports = {
       }
     );
   },
-  
+
   //************************************************************************PUT PATH ONLY ADMIN*/
   //4000/users/modifname/
   updateName: function (req, res) {
@@ -621,8 +627,8 @@ module.exports = {
       },
     ]);
   },
-/***************************************************************************ONLY ADMIN */
-/*********************DELETE****************************************** */
+  /***************************************************************************ONLY ADMIN */
+  /*********************DELETE****************************************** */
   deleteUser: function (req, res) {
     // Getting auth header
     const token = req.headers.authorization.split(" ")[1];
@@ -632,7 +638,7 @@ module.exports = {
     models.User.findByPk(req.params.id).then(function (userFound) {
       models.User.findAndCountAll({
         where: { isAdmin: true },
-      }).then((allUserAdmin) => {
+      }).then(allUserAdmin => {
         if (userFound.isAdmin && allUserAdmin.count < 2) {
           return res.status(400).json({
             error: "Donner les droits d'administrateur à un autre compte",
@@ -673,9 +679,9 @@ module.exports = {
                   "comments",
                 ],
               })
-                .then((allMessageFound) => {
+                .then(allMessageFound => {
                   let messageIdTab = [];
-                  allMessageFound.forEach((element) => {
+                  allMessageFound.forEach(element => {
                     messageIdTab.push(element.id);
                   });
                   done(null, userFound, userAdminFound, messageIdTab);
@@ -768,7 +774,7 @@ module.exports = {
                   const userMessageComment =
                     abc.length > 0
                       ? abc
-                          .map((item) => item.messageId)
+                          .map(item => item.messageId)
                           .filter((elt, i, a) => a.indexOf(elt) === i)
                           .sort((a, b) => a - b)
                       : [];
@@ -874,7 +880,7 @@ module.exports = {
                   where: { userId: userFound.id },
                   attributes: ["id"],
                 })
-                  .then((result) => {
+                  .then(result => {
                     let tabMessageId = [];
                     result.forEach(({ id }) => {
                       tabMessageId.push(id);
@@ -887,9 +893,9 @@ module.exports = {
                     models.Like.destroy({
                       where: { userId: userFound.id },
                     })
-                      .then((result) => {
+                      .then(result => {
                         let likeMessageIdTabDislike = [];
-                        allLikeFoundDislike.forEach((element) => {
+                        allLikeFoundDislike.forEach(element => {
                           likeMessageIdTabDislike.push(element.messageId);
                         });
                         models.Message.decrement(
@@ -899,9 +905,9 @@ module.exports = {
                           }
                         );
                       })
-                      .then((result) => {
+                      .then(result => {
                         let likeMessageIdTabLike = [];
-                        allLikeFoundLike.forEach((element) => {
+                        allLikeFoundLike.forEach(element => {
                           likeMessageIdTabLike.push(element.messageId);
                         });
                         models.Message.decrement(
@@ -922,7 +928,7 @@ module.exports = {
                           messageToDelete
                         );
                       })
-                      .catch((err) => {
+                      .catch(err => {
                         return res.status(500).json({
                           error: "9 impossible de supprimer les likes",
                         });
@@ -953,19 +959,19 @@ module.exports = {
                   where: { userId: userFound.id },
                   attributes: ["id"],
                 })
-                  .then((result) => {
+                  .then(result => {
                     let tabMessageId = [];
                     result.forEach(({ id }) => {
                       tabMessageId.push(id);
                     });
                     return tabMessageId;
                   })
-                  .then((tabMessageId) => {
+                  .then(tabMessageId => {
                     models.Comment.findAll({
                       where: { messageId: tabMessageId },
                       attributes: ["id"],
                     })
-                      .then((result) => {
+                      .then(result => {
                         let tabCommentId = [];
                         result.forEach(({ id }) => {
                           tabCommentId.push(id);
@@ -980,7 +986,7 @@ module.exports = {
                         })
                           .then(() => {
                             let commentLikeMessageIdTablike = [];
-                            allCommentLikeFoundLike.forEach((element) => {
+                            allCommentLikeFoundLike.forEach(element => {
                               commentLikeMessageIdTablike.push(
                                 element.commentId
                               );
@@ -994,7 +1000,7 @@ module.exports = {
                           })
                           .then(() => {
                             let commentLikeMessageIdTabDislike = [];
-                            allCommentLikeFoundDislike.forEach((element) => {
+                            allCommentLikeFoundDislike.forEach(element => {
                               commentLikeMessageIdTabDislike.push(
                                 element.commentId
                               );
@@ -1015,7 +1021,7 @@ module.exports = {
                               messageToDelete
                             );
                           })
-                          .catch((err) => {
+                          .catch(err => {
                             return res.status(500).json({
                               error:
                                 "10 impossible de supprimer les commentaires",
@@ -1046,7 +1052,7 @@ module.exports = {
                   where: { userId: userFound.id },
                   attributes: ["id"],
                 })
-                  .then((result) => {
+                  .then(result => {
                     let tabMessageId = [];
                     result.forEach(({ id }) => {
                       tabMessageId.push(id);
@@ -1060,7 +1066,7 @@ module.exports = {
                       models.Message.findAll({
                         where: { id: userMessageComment },
                       })
-                        .then((result) => {
+                        .then(result => {
                           const finalTab = [];
                           const objectsEqual = (o1, o2) => {
                             Object.keys(o1).map((elt, p) => {
@@ -1088,7 +1094,7 @@ module.exports = {
                         .then(() => {
                           done(null, userFound, userAdminFound);
                         })
-                        .catch((err) => {
+                        .catch(err => {
                           return res.status(500).json({
                             error:
                               "11 impossible de supprimer les commentLikes",
@@ -1113,7 +1119,7 @@ module.exports = {
               ) {
                 models.Message.findAll({
                   where: { userId: userFound.id },
-                }).then((result) => {
+                }).then(result => {
                   const resultAttachment = result.filter(({ attachment }) => {
                     return attachment !== null;
                   });
@@ -1122,17 +1128,17 @@ module.exports = {
                       .split("controllers")
                       .shift();
                     const files = resultAttachment.map(
-                      (message) => message.attachment
+                      message => message.attachment
                     );
                     const deleteFiles = (files, callback) => {
                       let i = files.length;
-                      files.forEach((filepath) => {
+                      files.forEach(filepath => {
                         let fileName = filepath
                           .split("http://localhost:4000/")
                           .pop();
                         fileName = dynamiquePath + fileName;
 
-                        fs.unlink(fileName, (err) => {
+                        fs.unlink(fileName, err => {
                           i--;
                           if (err) {
                             callback(err);
@@ -1143,7 +1149,7 @@ module.exports = {
                         });
                       });
                     };
-                    deleteFiles(files, (err) => {
+                    deleteFiles(files, err => {
                       if (err) {
                         console.log(err);
                       } else {
@@ -1154,7 +1160,7 @@ module.exports = {
                           .then(() => {
                             done(null, userFound, userAdminFound);
                           })
-                          .catch((err) => {
+                          .catch(err => {
                             return res.status(500).json({
                               error: "12 impossible de supprimer les messages",
                             });
@@ -1168,7 +1174,7 @@ module.exports = {
                       .then(() => {
                         done(null, userFound, userAdminFound);
                       })
-                      .catch((err) => {
+                      .catch(err => {
                         return res.status(500).json({
                           error: "13 impossible de supprimer les messages",
                         });
@@ -1221,9 +1227,7 @@ module.exports = {
               done(null, userfound);
             })
             .catch(function (err) {
-              return res
-                .status(500)
-                .json({ error: "unable to verify user" });
+              return res.status(500).json({ error: "unable to verify user" });
             });
         },
         function (userfound, done) {
@@ -1234,9 +1238,7 @@ module.exports = {
               done(null, userfound, userAdminFound);
             })
             .catch(function (err) {
-              return res
-                .status(500)
-                .json({ error: "unable to verify admin" });
+              return res.status(500).json({ error: "unable to verify admin" });
             });
         },
 
@@ -1260,9 +1262,7 @@ module.exports = {
                 });
             }
           } else {
-            return res
-              .status(500)
-              .json({ error: "you don't have the rights" });
+            return res.status(500).json({ error: "you don't have the rights" });
           }
         },
       ],

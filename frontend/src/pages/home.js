@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext } from "react";
 import SignUp from "../components/Signup";
 import Login from "../components/Login";
+//import './home.scss';
 
 /*fetch('http://localhost:4000/api/posts').then((response)=> {
   console.log(response);
@@ -19,25 +20,21 @@ import Login from "../components/Login";
     })
 */
 export const Home = () => {
-  const userId = useContext(createContext());
-  console.log(userId);
-
-  const [signUpModal, setSignUpModal]= useState(true);//model inscription qui s'affiche
-  const [loginModal, loginUpModal]= useState(false);
+  const [signUpModal, setSignUpModal] = useState(true); //model inscription qui s'affiche
+  const [loginModal, loginUpModal] = useState(false);
   return (
     //navBars
     <>
-    {userId}
-      <nav>
-        <ul>
+      <nav className="navBarSite" >
+        <ul className="ulHome">
           <li>
             <Link to="/">Inscription-connexion</Link>
           </li>
           <li>
-            <Link to="/blog">Blogs</Link>
+            <Link to="/Blog">Blogs</Link>
           </li>
           <li>
-            <Link to="/profil">Profil</Link>
+            <Link to="/Profil">Profil</Link>
           </li>
         </ul>
       </nav>
@@ -46,16 +43,14 @@ export const Home = () => {
         <h1>Page inscription </h1>
       </div>
       <div className="connection-form">
-          <div className="form-container">
-              <ul>
-                <li>S'incrire</li>
-                <li>Se connecter</li>
-              </ul>
-              {signUpModal && <SignUp />}
-              {loginModal && <Login />}
-              
-
-          </div>
+        <div className="form-container">
+          <ul>
+            <li>S'incrire</li>
+            <li>Se connecter</li>
+          </ul>
+          {signUpModal && <SignUp />}
+          {loginModal && <Login />}
+        </div>
       </div>
     </>
   );
