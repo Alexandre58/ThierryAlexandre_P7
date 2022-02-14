@@ -17,7 +17,7 @@ body {
     .navBarSite {
       //    border: solid 5px black;
       //  border: solid 1px whitesmoke;
-        margin-bottom: 1em;
+      margin-bottom: 1em;
     }
     .ulHome {
       display: flex;
@@ -60,7 +60,8 @@ body {
     }
   }
   .section_home {
- //   border: solid 2px black;
+    //   border: solid 2px black;
+    background-color: aliceblue;
     width: 70vw;
     margin: 10vh auto 0 auto;
     border-radius: 9px 9px 9px 9px;
@@ -70,7 +71,7 @@ body {
     padding-bottom: 5em;
   }
   .h1_Home {
-   // border: solid 2px black;
+    // border: solid 2px black;
     text-align: center;
     background-color: rgb(99, 68, 139);
     border-radius: 9px 9px 9px 9px;
@@ -81,16 +82,15 @@ body {
     .h1_home_titre {
       font-size: 1.5em;
     }
-   
   }
   //home.js  /component signup/login
   .form-container {
-  //  border: solid 2px black;
+    //  border: solid 2px black;
     display: flex;
-   // padding: 2%;
-   
+    // padding: 2%;
+
     justify-content: space-around;
-    margin:5em 0 5em 0;
+    margin: 5em 0 5em 0;
     flex-wrap: wrap;
     min-width: 200px;
     row-gap: 10px;
@@ -100,7 +100,7 @@ body {
       align-items: center;
       justify-content: center;
       flex-direction: column;
-  //    border: solid 2px rgb(158, 36, 36);
+      //    border: solid 2px rgb(158, 36, 36);
       border-radius: 9px 9px 9px 9px;
       -webkit-box-shadow: 3px 2px 12px 0px #474444;
       box-shadow: 3px 2px 12px 0px #474444;
@@ -110,7 +110,7 @@ body {
       max-width: 300px;
       min-width: 100px;
       .h2signup {
-        color:aliceblue;
+        color: aliceblue;
         font-size: 1.5em;
       }
       .form_signup {
@@ -119,15 +119,29 @@ body {
         row-gap: 1em;
         margin-top: 1em;
       }
-     
+      .btnSignup {
+        background: rgb(148, 129, 172);
+        //  border: 1px solid black;
+        padding: 1em;
+        color: aliceblue;
+      }
+      .btnType {
+        border-radius: 9px 9px 9px 9px;
+        -webkit-box-shadow: 3px 2px 12px 0px #474444;
+        box-shadow: 3px 2px 12px 0px #474444;
+        padding: 0.5em;
+      }
+      .btnSignup:hover {
+        transform: scale(1.05);
+      }
     }
     .login_components {
       background-color: rgb(99, 68, 139);
       display: flex;
       justify-content: center;
-     align-items: center;
+      align-items: center;
       flex-direction: column;
-     // border: solid 2px black;
+      // border: solid 2px black;
       border-radius: 9px 9px 9px 9px;
       -webkit-box-shadow: 3px 2px 12px 0px #474444;
       box-shadow: 3px 2px 12px 0px #474444;
@@ -142,10 +156,25 @@ body {
         margin-top: 2em;
       }
       .h2login {
-        color:aliceblue;
+        color: aliceblue;
         font-size: 1.5em;
       }
-    }
 
+      .btnLogin {
+        background: rgb(148, 129, 172);
+        //  border: 1px solid black;
+        padding: 1em;
+        color: aliceblue;
+      }
+      .btnType {
+        border-radius: 9px 9px 9px 9px;
+        -webkit-box-shadow: 3px 2px 12px 0px #474444;
+        box-shadow: 3px 2px 12px 0px #474444;
+        padding: 0.5em;
+      }
+      .btnLogin:hover {
+        transform: scale(1.05);
+      }
+    }
   }
 }

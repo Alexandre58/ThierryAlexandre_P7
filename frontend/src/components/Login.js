@@ -6,13 +6,13 @@ const Login = () => {
         <div className='login_components'>
             <Typography variant='h2' className='h2login' >Déjà incris</Typography> 
             <form className='form_login'>
-                <input type="text" placeholder='Votre prenom' required />
-                <input type="text" placeholder='Votre nom' required />
-                <input type="text" placeholder='mot de passe required'/>
+                <input className="btnType" type="text" placeholder='Votre prenom' required />
+                <input className="btnType" type="text" placeholder='Votre nom' required />
+                <input className="btnType" type="password" placeholder='mot de passe' required/>
              
-                <input type="email" placeholder='exemple@groupomania.com' required/>
+                <input className="btnType" type="email" placeholder='exemple@groupomania.com' required/>
  
-           <input type="submit" value="envoyer" />
+           <button type="submit" className='btnLogin'>Se connecter</button>
         
         </form>
         </div>
