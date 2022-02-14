@@ -9,7 +9,7 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserToken } from "./actions/user.actions";
-
+import { Typography } from '@material-ui/core';
 const UidContext = createContext();
 const App = () => {
   const dispatch = useDispatch();

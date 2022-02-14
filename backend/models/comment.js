@@ -1,5 +1,7 @@
-
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Comment extends Model {
     /**
@@ -19,21 +21,17 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
         },
       });
-     
     }
   }
-  Comment.init(
-    {
-      messageId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
-      content: DataTypes.STRING,
-      commentLikes: DataTypes.INTEGER,
-      commentDislikes: DataTypes.INTEGER,
-    },
-    {
-      sequelize,
-      modelName: "Comment",
-    }
-  );
+  Comment.init({
+    messageId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    content: DataTypes.STRING,
+    commentLikes: DataTypes.INTEGER,
+    commentDislikes: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Comment',
+  });
   return Comment;
 };

@@ -11,7 +11,7 @@ router.post("/user/login/", usersControllers.login);
 
 /**********************************************************************************GET USERS */
 // localhost:4000/user/recup all users
-router.get("/users/",/* auth,*/ usersControllers.getAllUsers);
+router.get("/users/", auth, usersControllers.getAllUsers);
 //recup user profil with his token valid
 router.get("/users/profil/", auth, usersControllers.getUserProfil);
 //recup user profil with id and his token valid
@@ -31,7 +31,5 @@ router.put("/users/:id", auth, usersControllers.giveAdminOtherUser);
 /*********************DELETE****************************************** */
 // localhost:4000/user/recup users with his id
 router.delete("/user/:id", auth, usersControllers.deleteUser);
-
-
 
 module.exports = router;

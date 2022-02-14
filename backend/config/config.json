@@ -1,15 +1,14 @@
-		
-	{
-        "development": 
-          {
-          "username": "root",
-          "password": "root",
-          "database": "mybase",
-          "host": "localhost",
-          "dialect": "mysql",
-          "dialectOptions": {
-          "charset": "utf8_general_ci"
-          },
-          "port": 8889
-          }
-      }
+{
+  "development": 
+    {
+    "username": "root",
+    "password": "root",
+    "database": "mybase",
+    "host": "localhost",
+    "dialect": "mysql",
+    "dialectOptions": {
+    "charset": "utf8_general_ci"
+    },
+    "port": 8889
+    }
+}

@@ -27,12 +27,16 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
 
+/*
 app.use("*", (req, res) => {
   res.json({ error: 404 });
 });
+*/
+
 app.use("tokenRecup", auth, (req, res) => {
   res.status(200).json(res);
 });
+
 //***************************************************USER
 app.use("/api", userRoute);
 //**************************************************POSTS

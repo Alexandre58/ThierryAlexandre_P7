@@ -262,7 +262,7 @@ module.exports = {
             process.env.TOKEN,
             { expiresIn: "48h" }
           );
-          res.cookie("token", token, { httpOnly: true, maxAge });
+          res.cookie("token", token, { httpOnly: true/*, maxAge */});/**********************************token cookie */
           res.status(201).json({
             userId: userFound.id,
             firstname: userFound.firstname,
