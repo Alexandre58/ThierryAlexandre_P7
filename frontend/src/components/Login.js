@@ -4,7 +4,7 @@ import React from 'react';
 const Login = () => {
     return (
         <div className='login_components'>
-            <Typography variant='h2' className='h2login' >Déjà incris</Typography> 
+            <Typography variant='h2' className='h2login' >Se connecter</Typography> 
             <form className='form_login'>
                 <input className="btnType" type="text" placeholder='Votre prenom' required />
                 <input className="btnType" type="text" placeholder='Votre nom' required />

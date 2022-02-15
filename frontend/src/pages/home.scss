@@ -125,6 +125,9 @@ body {
         padding: 1em;
         color: aliceblue;
       }
+      .btnSignup:active {
+        background: rgb(80, 52, 116);
+      }
       .btnType {
         border-radius: 9px 9px 9px 9px;
         -webkit-box-shadow: 3px 2px 12px 0px #474444;
@@ -165,6 +168,9 @@ body {
         //  border: 1px solid black;
         padding: 1em;
         color: aliceblue;
+      }
+      .btnLogin:active {
+        background: rgb(80, 52, 116);
       }
       .btnType {
         border-radius: 9px 9px 9px 9px;

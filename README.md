@@ -13,7 +13,7 @@ backend with nodejs express, sequelize,sql2
 * Frontend with React, Redux, axios.
  * css material ui.
  * Styled Components with react.
- * sass with styled.
+ * sass.
 
 ---------------------
 ## Routes backend

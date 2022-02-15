@@ -1,7 +1,7 @@
 //import logo from "./logo.svg";
 import "./App.scss";
 import React, { useEffect, useState, createContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { Home } from "./pages/home";
 import { Profil } from "./pages/profil";
 import { Blog } from "./pages/blog";
@@ -9,7 +9,7 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserToken } from "./actions/user.actions";
-import { Typography } from '@material-ui/core';
+
 const UidContext = createContext();
 const App = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,8 @@ const App = () => {
     dispatch(getUserToken());
   }, [dispatch]);
   console.log(userData);
-
+//if i want "/" i call exact component
+//Redirect = return "/"
   return (
     <UidContext.Provider value={userData}>
       <Router>
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/blog" element component={Blog} />
           <Route path="/login" element component={Login} />
           <Route path="/signUp" element component={SignUp} />
+          <Redirect to="/" />
         </Switch>
       </Router>
     </UidContext.Provider>

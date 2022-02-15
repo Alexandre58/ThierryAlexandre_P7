@@ -1,0 +1,80 @@
+.login_components {
+    background-color: rgb(99, 68, 139);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1em;
+    border-radius: 9px 9px 9px 9px;
+    -webkit-box-shadow: 3px 2px 12px 0px #474444;
+    box-shadow: 3px 2px 12px 0px #474444;
+    padding: 2em;
+    height: 300px;
+    max-width: 200px;
+    min-width: 150px;
+    .form_login {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1em;
+      margin-top: 2em;
+    }
+    .h2login {
+      color: aliceblue;
+      font-size: 1.5em;
+    }
+
+    .btnLogin {
+      background: rgb(148, 129, 172);
+     
+      color: aliceblue;
+    }
+    .btnLogin:active {
+      background: rgb(99, 68, 139);
+      color: aliceblue;
+      text-align: center;
+      font-size: 1.2em;
+      border-radius: 9px 9px 9px 9px;
+      -webkit-box-shadow: 3px 2px 12px 0px #474444;
+      box-shadow: 3px 2px 12px 0px #474444;
+
+     
+     
+      list-style-type: none;
+    }
+    .btnType {
+      border-radius: 9px 9px 9px 9px;
+      -webkit-box-shadow: 3px 2px 12px 0px #474444;
+      box-shadow: 3px 2px 12px 0px #474444;
+      padding: 0.5em;
+    }
+
+    .ul_liSignUpForm li {
+    
+        color: rgb(23, 7, 44);
+        text-align: center;
+        font-size: 1.2em;
+        border-radius: 9px 9px 9px 9px;
+        -webkit-box-shadow: 3px 2px 12px 0px #474444;
+        box-shadow: 3px 2px 12px 0px #474444;
+        padding: 0.5em 0 0.5em 0;
+        width: 100%;
+        min-width: 130px;
+        max-width: 180px;
+        list-style-type: none;
+        
+      }
+
+  }
+ .active-btn {
+  background: rgb(99, 68, 139);
+  color: aliceblue;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 2px 12px 0px #474444;
+  box-shadow: 3px 2px 12px 0px #474444;
+  padding: 0.5em;
+  width: 20%;
+  list-style-type: none;
+  margin: 0.2em;
+}

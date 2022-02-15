@@ -5,7 +5,7 @@ import Login from "../components/Login";
 import { NavBar } from '../components/NavBar'
 import { Typography } from '@material-ui/core';
 import './home.scss'
-//import './home.scss';
+
 
 /*fetch('http://localhost:4000/api/posts').then((response)=> {
   console.log(response);
