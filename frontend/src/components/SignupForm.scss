@@ -19,14 +19,15 @@
   }
   .form_signup {
     display: flex;
-    flex-direction: column;
-    row-gap: 1em;
-    margin-top: 1em;
+      flex-direction: column;
+      color: azure;
+     
   }
   .btnSignup {
     background: rgb(148, 129, 172);
       padding: 1em;
       color: aliceblue;
+      margin-top: 1em;
   }
   .btnSignup:active {
     background: rgb(99, 68, 139);
