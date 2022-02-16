@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import { Home } from "./pages/home";
 import { Profil } from "./pages/profil";
 import { Blog } from "./pages/blog";
-import Login from "./components/Login";
-import SignUp from "./components/Signup";
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { getUserToken } from "./actions/user.actions";
 
@@ -19,8 +19,7 @@ const App = () => {
     dispatch(getUserToken());
   }, [dispatch]);
   console.log(userData);
-//if i want "/" i call exact component
-//Redirect = return "/"
+
   return (
     <UidContext.Provider value={userData}>
       <Router>
@@ -28,8 +27,8 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/profil" element component={Profil} />
           <Route path="/blog" element component={Blog} />
-          <Route path="/login" element component={Login} />
-          <Route path="/signUp" element component={SignUp} />
+        {/*  <Route path="/login" element component={Login} />
+          <Route path="/signUp" element component={SignUp} />*/} 
           <Redirect to="/" />
         </Switch>
       </Router>

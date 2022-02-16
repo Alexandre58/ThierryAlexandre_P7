@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //import SignInForm from './SignInForm';
-import '../SignupForm.scss';
+import './SignupForm.scss';
 import axios from 'axios';
 import { Typography } from "@material-ui/core";
 const SignUpForm = () => {

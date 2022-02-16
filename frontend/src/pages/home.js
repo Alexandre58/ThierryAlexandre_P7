@@ -1,11 +1,11 @@
 //import { Link } from "react-router-dom";
 import React, { useState, useContext, createContext } from "react";
-import SignUp from "../components/Signup";
-import Login from "../components/Login";
+
+
 import { NavBar } from '../components/NavBar'
 import { Typography } from '@material-ui/core';
 import './home.scss'
-
+import Log from "../components/Log";
 
 /*fetch('http://localhost:4000/api/posts').then((response)=> {
   console.log(response);
@@ -23,6 +23,9 @@ import './home.scss'
     })
 */
 export const Home = () => {
+    
+
+
   const [signUpModal, setSignUpModal] = useState(true); //model inscription qui s'affiche
   const [loginModal, loginUpModal] = useState(false);
   return (
@@ -38,8 +41,8 @@ export const Home = () => {
           <div className="connection-form">
             <div className="form-container">
             {/*{signUpModal && <SignUp />} */} 
-              <SignUp />
-              <Login />
+            
+              <Log signin={false} signup={true} />
             </div>
           </div>
       </section>

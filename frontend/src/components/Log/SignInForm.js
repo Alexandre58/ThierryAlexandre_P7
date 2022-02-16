@@ -1,7 +1,7 @@
 import React  from 'react';
 import { useState }from 'react';
 import { Typography } from "@material-ui/core";
-import '../SignInForm.scss';
+import './SignInForm.scss';
 import axios from 'axios';
 
 const SignInForm = () => {

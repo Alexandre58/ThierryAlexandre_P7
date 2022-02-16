@@ -29,6 +29,9 @@
       color: aliceblue;
       margin-top: 1em;
     }
+    .btnLogin:hover {
+      transform: scale(1.05);
+    }
     .btnLogin:active {
       background: rgb(99, 68, 139);
       color: aliceblue;
@@ -37,9 +40,6 @@
       border-radius: 9px 9px 9px 9px;
       -webkit-box-shadow: 3px 2px 12px 0px #474444;
       box-shadow: 3px 2px 12px 0px #474444;
-
-     
-     
       list-style-type: none;
     }
     .btnType {
