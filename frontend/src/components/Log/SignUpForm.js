@@ -13,18 +13,19 @@ const SignUpForm = () => {
 
       const handleRegister = async (e) => {
         e.preventDefault();
-        
+        const firstnameError = document.querySelector(".confirmPassword.error");
+        const lastnameError = document.querySelector(".confirmPassword.error");
         const confirmPasswordError = document.querySelector(".confirmPassword.error");
         const emailError = document.querySelector(".email.error");
         const passwordError = document.querySelector(".password.error");
-        const passwordConfirmError = document.querySelector(".password-confirm.error");
+        
      
     
         confirmPassword.innerHTML = "";
     
     
         if (password !== confirmPassword) {
-          if (password !== confirmPassword) passwordConfirmError.innerHTML = "Les mots de passe ne correspondent pas";
+          if (password !== confirmPassword) confirmPasswordError.innerHTML = "Les mots de passe ne correspondent pas";
     
         } else {
           await axios({
@@ -41,6 +42,8 @@ const SignUpForm = () => {
             .then((res) => {
               console.log(res);
               if (res.data.errors) {
+                firstnameError.innerHTML = res.data.errors.firstname;
+                lastnameError.innerHTML = res.data.errors.lastname;
                 confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
                 passwordError.innerHTML = res.data.errors.password;
                 emailError.innerHTML = res.data.errors.email;
@@ -62,24 +65,24 @@ const SignUpForm = () => {
         <form action="" onSubmit={handleRegister} id="sing-up-form" className="form_signup">
     
              <label htmlFor="firstname">Prenom</label>
-            <input className="btnType" type="text" name="firstname" id="firstname" onChange={(e) => setFirstname(e.target.value)} value={firstname} placeholder="Votre prenom" required />
+            <input className="btnType" type="text" name="firstname" id="firstname" placeholder="Votre prenom" required onChange={(e) => setFirstname(e.target.value)} value={firstname} />
             <div className='firstname error'></div>
          
             <label htmlFor="lastname">Nom</label>
-            <input className="btnType" type="text" name="lastname" id="lastname" onChange={(e) => setLastname(e.target.value)} value={lastname}  placeholder="Votre nom" required />
+            <input className="btnType" type="text" name="lastname" id="lastname"   placeholder="Votre nom" required onChange={(e) => setLastname(e.target.value)} value={lastname} />
             <div className='lastname error'></div>
 
             <label htmlFor="password">Password</label>
-            <input className="btnType" type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="mot de passe" required />
+            <input className="btnType" type="password" name="password" id="password" placeholder="mot de passe" required  onChange={(e) => setPassword(e.target.value)} value={password} />
             <div className='password error'></div>
 
             
             <label htmlFor="confirmPassword"> Confirmation Password</label>
-            <input className="btnType" type="password" name="confirmPassword" id="confirmPassword" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} placeholder="mot de passe confirmation" required />
+            <input className="btnType" type="password" name="confirmPassword" id="confirmPassword" placeholder="mot de passe confirmation" required  onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
             <div className='password error'></div>
 
             <label htmlFor="email">Email</label>
-            <input className="btnType" type="text" name="email" id="email" onChange={(e)=> setEmail(e.target.value)} value={email} placeholder="exemple@groupomania.com" required />
+            <input className="btnType" type="text" name="email" id="email" placeholder="exemple@groupomania.com" required onChange={(e)=> setEmail(e.target.value)} value={email} />
             <div className='email error'></div>
    
         <button type="submit" className="btnSignup">S'inscrire</button>

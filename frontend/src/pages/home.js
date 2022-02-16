@@ -3,9 +3,10 @@ import React, { useState, useContext, createContext } from "react";
 
 
 import { NavBar } from '../components/NavBar'
+import { Footer } from '../components/Footer'
 import { Typography } from '@material-ui/core';
 import './home.scss'
-import Log from "../components/Log";
+import Log from "../components/Log/index";
 
 /*fetch('http://localhost:4000/api/posts').then((response)=> {
   console.log(response);
@@ -26,8 +27,8 @@ export const Home = () => {
     
 
 
-  const [signUpModal, setSignUpModal] = useState(true); //model inscription qui s'affiche
-  const [loginModal, loginUpModal] = useState(false);
+  //const [signUpModal, setSignUpModal] = useState(true); 
+  //const [loginModal, loginUpModal] = useState(false);
   return (
     //scss in home.scss
     <>
@@ -40,12 +41,12 @@ export const Home = () => {
           </div>
           <div className="connection-form">
             <div className="form-container">
-            {/*{signUpModal && <SignUp />} */} 
-            
               <Log signin={false} signup={true} />
+           
             </div>
           </div>
       </section>
+      <Footer />
     </>
   );
 };

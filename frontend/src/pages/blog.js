@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { NavBar } from '../components/NavBar'
 import { Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import { Footer } from '../components/Footer'
 //import { UidContext } from '../App';
 
 export const Blog = () => {
@@ -28,6 +29,7 @@ export const Blog = () => {
                    
                    </Container>
               </section>
+       <Footer />    
         </>
     );
 };

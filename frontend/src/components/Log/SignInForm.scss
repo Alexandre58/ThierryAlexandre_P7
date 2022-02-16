@@ -24,7 +24,7 @@
     }
 
     .btnLogin {
-      background: rgb(148, 129, 172);
+      background: rgb(40, 15, 68);
       padding: 1em;
       color: aliceblue;
       margin-top: 1em;
@@ -48,7 +48,9 @@
       box-shadow: 3px 2px 12px 0px #474444;
       padding: 0.5em;
     }
-
+    .btnType:hover {
+      transform: scale(1.03);
+    }
     .ul_liSignUpForm li {
     
         color: rgb(23, 7, 44);

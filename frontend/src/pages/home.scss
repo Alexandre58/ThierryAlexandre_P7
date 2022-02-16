@@ -52,7 +52,7 @@ body {
               .img_navBar img {
            
                 background: transparent;
-                opacity: 0.8;
+                
                 height: 8vh;
                 width: 100%;
                 margin: 10px auto;
@@ -94,6 +94,41 @@ body {
             min-width: 200px;
             row-gap: 10px;
           }
-
+         & .footer {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 50px;
+            justify-content: space-around;
+            flex-wrap: wrap-reverse;
+            //   border: solid 1px black;
+            width: 100%;
+            background-color: rgb(99, 68, 139);
+            border-radius: 9px 9px 9px 9px;
+            -webkit-box-shadow: 3px 5px 12px 10px #524f4f;
+            box-shadow: 3px 5px 12px 10px #524f4f;
+            height: 50px;
+          }
+          & .p_footer {
+          
+            color: aliceblue;
+          }
+          & .img_footer {
+            display: flex;
+        
+            
+          }
+          & .img_footer img {
+            z-index: 1;
+            padding: 5px;
+            background: rgb(99, 68, 139);
+            background-clip: padding-box;
+            
+            height: 8vh;
+            width: 100%;
+            margin: 10px auto;
+            border-radius: 9px 9px 9px 9px;
+            -webkit-box-shadow: 3px 2px 12px 0px #1f1616;
+            box-shadow: 3px 2px 25px 0px #1f1616;
+          }
       } 
-     
+    

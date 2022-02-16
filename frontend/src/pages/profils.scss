@@ -2,11 +2,11 @@
   
   display: flex;
   flex-wrap: wrap;
- 
+
   column-gap: 2%;
   margin: auto;
   max-width: 70%;
-  height: 100%;
+
   margin-top: 70px;
   padding: 10px;
   background-color: #f1f6f7;
@@ -56,15 +56,23 @@
       padding: 2em;
     //  border: solid 3px rgb(15, 13, 13);
     }
-    & .img_container_profil {
+     .img_container_profil {
       position: absolute;
      // border: solid 3px rgb(18, 128, 51);
       width: 120px;
       height: 120px;
       border-radius: 100px;
-
       margin: 2.5em;
       background-color: #e4d7d7;
+    }
+    .img_profil {
+      object-fit:cover;
+      width: 120px;
+      height: 120px;
+      border-radius: 100px;
+      -webkit-box-shadow: 5px 2px 29px 5px #0f0202;
+      box-shadow: 5px 2px 29px 5px #0f0202;
+      
     }
   }
   .signin_profil {
