@@ -12,7 +12,9 @@ const initialState = {
     job: "OpenClassrooms and fullstack dev",
     techno:"Js,Backend nodejs, React, angular ,redux..",
     pays: "Cameroun"
+   
   };
+  
   const rootReducer = (state = initialState, action) => {
     return state;
   };

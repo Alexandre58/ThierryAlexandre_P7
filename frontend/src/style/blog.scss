@@ -1,0 +1,50 @@
+$color-red: #fd2b01;
+@mixin add-shadow-black{
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 5px 12px 10px #868585;
+  box-shadow: 3px 5px 12px 10px #868585;
+}
+  @mixin add-shadow-white{
+    border-radius: 9px 9px 9px 9px;
+    -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
+    box-shadow: 3px 2px 12px 0px #e4d7d7;
+    }  
+
+.section_blog {
+  position: relative;
+  margin: auto;
+  max-width: 1110px;
+  margin-right: 5%;
+  margin-left: 5%;
+  height: 100%;
+  padding: 5em 2em;
+  margin-top: 150px;
+
+  background-color: #f4f9fa;
+  @include add-shadow-black;
+  .blog_container {
+    position: absolute;
+    //  margin: auto;
+    margin-top: -110px;
+    margin-left: 10%;
+    max-height: 100px;
+    width: 70%;
+    text-align: center;
+    background-color:  $color-red;
+   
+    @include add-shadow-black;
+    
+  }
+  .h1blog {
+    color: #f3eded;
+    padding: 1.5em;
+    font-size: 1em;
+  }
+  .message_notConnectBlog {
+    padding: 2em;
+    @include add-shadow-black;
+    & p {
+      font-size: 1.5em;
+    }
+  }
+}

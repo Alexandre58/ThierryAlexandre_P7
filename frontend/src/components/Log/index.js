@@ -11,7 +11,7 @@ const Log = (props) => {
     const [signUpModal, setSignUpModal] = useState(props.signup);
     const [signInModal, setSignInModal] = useState(props.signin);
     const handleModals = (e) => {
-           if(e.target.id === "sign-up") {
+           if(e.target.id === "sign-up-form") {
                setSignInModal(false);
                setSignUpModal(true);
            } else if (e.target.id === "login") {
@@ -24,7 +24,7 @@ const Log = (props) => {
         <div>
             <div>
                  <ul className='ul_liSignUpForm'>
-                   <li onClick={handleModals} id="sign-up" className={signUpModal ? "active-btn" : null}>S'inscrire</li>
+                   <li onClick={handleModals} id="sign-up-form" className={signUpModal ? "active-btn" : null}>S'inscrire</li>
                    <li onClick={handleModals} id ="login" className={signInModal ? "active-btn" : null}>Se connecter</li>
                  </ul>
                  {signUpModal && <SignUpForm />}

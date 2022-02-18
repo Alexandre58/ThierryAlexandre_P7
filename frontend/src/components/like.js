@@ -1,10 +1,10 @@
 import React from 'react';
 
- const Like = ({ messages })=> {
+const Like = ({})=> {
     return (
         <div>
           <img src="" alt="logo like" />
-          <span>{ messages.likes }</span>
+          <span>{}</span>
        </div>
     );
 };

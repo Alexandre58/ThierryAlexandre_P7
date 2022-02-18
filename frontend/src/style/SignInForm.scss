@@ -1,14 +1,27 @@
+$color-red: #fd2b01;
+$color-red-black: #a8341d;
+
+@mixin add-shadow-black{
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 5px 12px 10px #868585;
+  box-shadow: 3px 5px 12px 10px#868585;
+  }
+  @mixin add-shadow-white{
+    border-radius: 9px 9px 9px 9px;
+    -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
+    box-shadow: 3px 2px 12px 0px #e4d7d7;
+    }  
+
+
 .login_components {
-    background-color: rgb(99, 68, 139);
+  background-color:  $color-red;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 1em;
-    border-radius: 9px 9px 9px 9px;
-    -webkit-box-shadow: 3px 2px 12px 0px #474444;
-    box-shadow: 3px 2px 12px 0px #474444;
-    padding: 2em;
+    @include add-shadow-black;
+    padding: 3em 2em;
     height: 300px;
     max-width: 200px;
     min-width: 150px;
@@ -16,7 +29,7 @@
       display: flex;
       flex-direction: column;
       color: azure;
-     
+      
     }
     .h2login {
       color: aliceblue;
@@ -24,60 +37,53 @@
     }
 
     .btnLogin {
-      background: rgb(40, 15, 68);
+      background-color: $color-red-black;
       padding: 1em;
       color: aliceblue;
       margin-top: 1em;
+      margin-bottom: 1em;
+   
     }
     .btnLogin:hover {
       transform: scale(1.05);
     }
     .btnLogin:active {
-      background: rgb(99, 68, 139);
+      background-color:  $color-red;
       color: aliceblue;
       text-align: center;
-      font-size: 1.2em;
-      border-radius: 9px 9px 9px 9px;
-      -webkit-box-shadow: 3px 2px 12px 0px #474444;
-      box-shadow: 3px 2px 12px 0px #474444;
+      @include add-shadow-black;
       list-style-type: none;
     }
     .btnType {
-      border-radius: 9px 9px 9px 9px;
-      -webkit-box-shadow: 3px 2px 12px 0px #474444;
-      box-shadow: 3px 2px 12px 0px #474444;
+   //   @include add-shadow-white;
       padding: 0.5em;
+      
     }
     .btnType:hover {
       transform: scale(1.03);
     }
     .ul_liSignUpForm li {
     
-        color: rgb(23, 7, 44);
+        color: black;
         text-align: center;
         font-size: 1.2em;
-        border-radius: 9px 9px 9px 9px;
-        -webkit-box-shadow: 3px 2px 12px 0px #474444;
-        box-shadow: 3px 2px 12px 0px #474444;
-       
+        @include add-shadow-black;
         width: 100%;
         min-width: 130px;
         max-width: 180px;
         list-style-type: none;
         
       }
-
   }
  .active-btn {
-  background: rgb(99, 68, 139);
+  background-color:  $color-red;
   color: aliceblue;
   text-align: center;
   font-size: 1.2em;
-  border-radius: 9px 9px 9px 9px;
-  -webkit-box-shadow: 3px 2px 12px 0px #474444;
-  box-shadow: 3px 2px 12px 0px #474444;
+  @include add-shadow-black;
   padding: 0.5em;
   width: 20%;
   list-style-type: none;
   margin: 0.2em;
 }
+
