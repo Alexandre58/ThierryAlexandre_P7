@@ -12,16 +12,16 @@ const UidContext = createContext();
 
 
 const App = () => {
-  const dispatch = useDispatch();
+ /* const dispatch = useDispatch();
   const userData = useSelector(state => state.userReducer);
   console.log(userData);
   useEffect(() => {
     dispatch(getUserToken());
   }, [dispatch]);
   console.log(userData);
-
+*/
   return (
-    <UidContext.Provider value={userData}>
+    <UidContext.Provider value={"id"}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />

@@ -34,6 +34,7 @@ app.use("*", (req, res) => {
 app.use("tokenRecup", auth, (req, res) => {
   res.status(200).json(res);
 });
+
 //***************************************************USER
 app.use("/api", userRoute);
 //**************************************************POSTS

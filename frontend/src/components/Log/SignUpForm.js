@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-//import SignInForm from './SignInForm';
 import '../../style/SignupForm.scss';
 import axios from 'axios';
 import { Typography } from "@material-ui/core";
@@ -8,21 +7,29 @@ const SignUpForm = () => {
       const [firstname, setFirstname]= useState('');
       const [lastname, setLastname]= useState('');
       const [password, setPassword]= useState('');
-      const[confirmPassword,setConfirmPassword]= useState('');
+      const [confirmPassword, setConfirmPassword]= useState('');
       const [email, setEmail]= useState('');
-
+      const bio = '';
       const handleRegister = async (e) => {
         e.preventDefault();
-        const firstnameError = document.querySelector(".confirmPassword.error");
-        const lastnameError = document.querySelector(".confirmPassword.error");
+        const firstnameError = document.querySelector(".firstname.error");
+        const lastnameError = document.querySelector(".lastname.error");
         const passwordError = document.querySelector(".password.error");
         const confirmPasswordError = document.querySelector(".confirmPassword.error");
         const emailError = document.querySelector(".email.error");
 
-       confirmPassword.innerHTML = "";
-    /////////////////////////
-    ////////////
+      // confirmPassword.innerHTML = "";
+  
+    let data = {
+      firstname,
+      lastname,
+      password,
+      confirmPassword,
+      email,
+      bio
 
+    }
+   
      axios({
             method: "post",
             url: `http://localhost:4000/api/user/sign-up`,
@@ -30,11 +37,14 @@ const SignUpForm = () => {
               firstname,
               lastname,
               password,
-             confirmPassword,
-              email
+              confirmPassword,
+              email,
+              bio
+              
             },
           })
             .then((res) => {
+            //  console.log(data);
               console.log(res);
               if (res.data.errors) {
                 firstnameError.innerHTML = res.data.errors.firstname;
