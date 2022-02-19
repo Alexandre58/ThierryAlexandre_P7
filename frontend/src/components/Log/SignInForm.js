@@ -67,6 +67,7 @@ const SignInForm = () => {
             <input className ="btnType" type ="password" name ="password" id ="password" onChange = {(e) => setPassword(e.target.value)} value = {password} placeholder ="mot de passe" required/>
             <div className ='password error'></div>
             <br/>  
+          
             <label htmlFor = "email">Email</label>
             <input className ="btnType" type ="email" name ="email" id ="email" onChange = {(e)=> setEmail(e.target.value)} value = {email} placeholder ="exemple@groupomania.com" required/>
             <div className ='email error'></div>

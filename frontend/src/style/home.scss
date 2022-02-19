@@ -104,9 +104,11 @@ body {
     background-color: $color-red;
     @include add-shadow-black;
     height: 50px;
+    
   }
   & .p_footer {
     color: aliceblue;
+  
   }
   & .img_footer {
     display: flex;

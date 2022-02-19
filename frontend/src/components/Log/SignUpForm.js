@@ -8,7 +8,7 @@ const SignUpForm = () => {
       const [firstname, setFirstname]= useState('');
       const [lastname, setLastname]= useState('');
       const [password, setPassword]= useState('');
-//      const[confirmPassword,setConfirmPassword]= useState('');
+      const[confirmPassword,setConfirmPassword]= useState('');
       const [email, setEmail]= useState('');
 
       const handleRegister = async (e) => {
@@ -16,10 +16,10 @@ const SignUpForm = () => {
         const firstnameError = document.querySelector(".confirmPassword.error");
         const lastnameError = document.querySelector(".confirmPassword.error");
         const passwordError = document.querySelector(".password.error");
-     //   const confirmPasswordError = document.querySelector(".confirmPassword.error");
+        const confirmPasswordError = document.querySelector(".confirmPassword.error");
         const emailError = document.querySelector(".email.error");
 
-      //  confirmPassword.innerHTML += "";
+       confirmPassword.innerHTML = "";
     /////////////////////////
     ////////////
 
@@ -30,7 +30,7 @@ const SignUpForm = () => {
               firstname,
               lastname,
               password,
-         //     confirmPassword,
+             confirmPassword,
               email
             },
           })
@@ -40,7 +40,7 @@ const SignUpForm = () => {
                 firstnameError.innerHTML = res.data.errors.firstname;
                 lastnameError.innerHTML = res.data.errors.lastname;
                 passwordError.innerHTML = res.data.errors.password;
-       //         confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
+                confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
                 emailError.innerHTML = res.data.errors.email;
               } 
             })
@@ -69,8 +69,10 @@ const SignUpForm = () => {
             <input className= "btnType" type="password" name="password" id="password" placeholder="mot de passe" required  onChange={(e) => setPassword(e.target.value)} value={password} />
             <div className= 'password error'></div>
 
-    
-
+            <label htmlFor = "password">Confirm Password</label>
+            <input className ="btnType" type ="password" name ="confirmPassword" id ="confirmPassword" onChange = {(e) => setConfirmPassword(e.target.value)} value = {confirmPassword} placeholder ="confirmer le mot de passe" required/>
+            <div className ='confirmPassword error'></div>
+ 
             <label htmlFor= "email">Email</label>
             <input className="btnType" type="email" name="email" id="email" placeholder="exemple@groupomania.com" required onChange={(e)=> setEmail(e.target.value)} value={email} />
             <div className='email error'></div>
