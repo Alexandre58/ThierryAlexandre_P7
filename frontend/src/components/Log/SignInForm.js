@@ -16,8 +16,9 @@ const SignInForm = () => {
 
     /*`http://localhost:4000/api/user/login`*/
     axios({
-      methode: "post",
+      
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
+      method: "post",
       withCredentials: true,
       data: {
         "password": password,
@@ -25,7 +26,7 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
-        console.log({
+        console.log("then" + {
           password,
           email,
         });
@@ -34,7 +35,7 @@ const SignInForm = () => {
           passwordError.innerHTML = res.data.errors.password;
           emailError.innerHTML = res.data.errors.email;
         } else {
-          window.location = "/";
+          window.location = "/blog";
         }
       })
       .catch((err) => {

@@ -1,5 +1,6 @@
 $color-red: #fd2b01;
 $color-red-black: #a8341d;
+$color-red-white: #f7efee;
 
 @mixin add-shadow-black{
   border-radius: 9px 9px 9px 9px;
@@ -14,13 +15,13 @@ $color-red-black: #a8341d;
 
 
 .login_components {
-  background-color:  $color-red;
+    background-color:  $color-red;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 1em;
-    @include add-shadow-black;
+    @include add-shadow-white;
     padding: 3em 2em;
     height: 300px;
     max-width: 200px;

@@ -206,7 +206,8 @@ module.exports = {
     // Paramètres
     const email = req.body.email;
     const password = req.body.password;
-
+    console.log(req.body.email);
+    console.log(password);
     if (email == null || password == null) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
     }
@@ -218,10 +219,12 @@ module.exports = {
             where: { email: email },
           })
             .then(function (userFound) {
+              
               done(null, userFound);
             })
             .catch(function (err) {
               return res
+              
                 .status(500)
                 .json({ error: "vérification utilisateur impossible" });
             });

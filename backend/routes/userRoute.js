@@ -7,7 +7,7 @@ const auth = require("../middlewares/auth");
 // localhost:4000/user/sign-up
 router.post("/user/sign-up/", usersControllers.signup);
 // localhost:4000/user/login
-router.post("/user/login/", usersControllers.login);
+router.post("/user/login", usersControllers.login);
 
 /**********************************************************************************GET USERS */
 // localhost:4000/user/recup all users

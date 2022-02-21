@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
+import { UidContext } from '../App';
 
 
 export const NavBar = () => {
+   const uid = useContext(UidContext);
+   const userData = useSelector((state) => state.userReducer);
+console.log(userData);
+
+
     return (
-        <>
+    <>
         <header className="header_navBar">
             <nav className="navBarSite" >
                 <ul className="ulHome">
@@ -17,12 +24,22 @@ export const NavBar = () => {
                     <li>
                       <Link to="/Profil">Profil</Link>
                     </li>
-                </ul>              
+                </ul>
+                        
             </nav>
-            <div className='img_navBar'>
-                    <img src={require ("../images/icon-left-font-long.png") } alt="logo du site groupomania" />
-            </div>
+           
+                {uid ? (
+                  <p className='p_Navbar'> bienvenu {userData.firstname}</p>        
+                ) : ( 
+                  <p className='p_Navbar'>Merci de bien vouloir vous connecter</p>
+                )}
+            
+            <Link to="/Blog">
+              <div className='img_navBar'>
+                      <img src={require ("../images/icon-left-font-long.png") } alt="logo de notre site groupomania" />
+              </div>
+            </Link>
         </header>
-        </>
+   </>  
     );
 };

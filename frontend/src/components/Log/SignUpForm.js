@@ -79,7 +79,7 @@ const SignUpForm = () => {
             <input className= "btnType" type="password" name="password" id="password" placeholder="mot de passe" required  onChange={(e) => setPassword(e.target.value)} value={password} />
             <div className= 'password error'></div>
 
-            <label htmlFor = "password">Confirm Password</label>
+            <label htmlFor = "confirmPassword">Confirm Password</label>
             <input className ="btnType" type ="password" name ="confirmPassword" id ="confirmPassword" onChange = {(e) => setConfirmPassword(e.target.value)} value = {confirmPassword} placeholder ="confirmer le mot de passe" required/>
             <div className ='confirmPassword error'></div>
  

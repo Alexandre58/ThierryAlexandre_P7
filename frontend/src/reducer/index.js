@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import  userReducer  from "./post.reducer";
-import  postReducer  from "./user.reducer";
+import  userReducer  from "./user.reducer";
+import  postReducer  from "./post.reducer";
 //
 
 //stock tout les reducer et envoi a l'index.js
-
+/*
 const initialState = {
     uid: "user id",
     userName: "Joel",
@@ -14,7 +14,8 @@ const initialState = {
     pays: "Cameroun"
    
   };
-  
+   */
+  const initialState = {}
   const rootReducer = (state = initialState, action) => {
     return state;
   };

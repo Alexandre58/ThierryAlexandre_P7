@@ -3,25 +3,46 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import { Home } from "./pages/home";
 import { Profil } from "./pages/profil";
 import { Blog } from "./pages/blog";
+import axios from 'axios';
 
+import { useDispatch } from "react-redux";
+//import { getUserToken } from "./actions/user.actions";
+import { getUser } from "./actions/user.actions";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getUserToken } from "./actions/user.actions";
-
-const UidContext = createContext();
+export const UidContext = createContext();
 
 
 const App = () => {
- /* const dispatch = useDispatch();
-  const userData = useSelector(state => state.userReducer);
-  console.log(userData);
-  useEffect(() => {
+  const [userId, setUserId ] = useState(null);
+  const dispatch = useDispatch();
+ // const userData = useSelector(state => state.userReducer);
+ // console.log(userData);
+/*  useEffect(() => {
     dispatch(getUserToken());
   }, [dispatch]);
   console.log(userData);
 */
+
+  useEffect(() => {
+    const fetchToken = async() => {
+      await axios ({
+        method : "get",
+        url: `${process.env.REACT_APP_API_URL}tokenRecup`,
+        withCredentials: true,
+      })
+      .then((res)=> {
+        console.log(res);
+        setUserId(res.data)
+      })
+      .catch((err)=> console.log("No Token recup"))
+    }
+       fetchToken();
+
+       if(userId) dispatch(getUser(userId))
+    }, [userId, dispatch]);
+
   return (
-    <UidContext.Provider value={"id"}>
+    <UidContext.Provider value={userId}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
