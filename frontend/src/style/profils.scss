@@ -77,7 +77,7 @@ $color-red: #fd2b01;
       width: 100px;
       height: 100px;
       border-radius: 100px;
-      margin:1em;
+      margin:-2.5em;
       background-color: #e4d7d7;
     }
     .img_profil {
@@ -99,5 +99,13 @@ $color-red: #fd2b01;
       height: 50%;
       margin-top: 50px;
     }
+    @media screen and (max-width: 600px) {
+      .content_profil_button {
+        padding: 0.2em;
+        height: 100px;
+        margin-top: 0px;
+        margin: 1em;
+        }
+    } 
   
 }

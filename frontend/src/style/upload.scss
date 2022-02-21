@@ -23,7 +23,6 @@ $color-red: #f8340c;
         align-items: center;
         background-color: aliceblue;
         @include add-shadow-black;
-        
     }
         .content_profil_input {
             font-size: 1em;
@@ -37,9 +36,8 @@ $color-red: #f8340c;
         .content_profil_input:hover {
             transform: scale(1.02);
         }
-        .content_profil_label {
-            
-            font-weight: 900;
+        .content_profil_label { 
+           font-size: 1em;
             padding: 0.8em;
             background-color: rgb(240, 224, 224);
             @include add-shadow-black;
@@ -47,7 +45,30 @@ $color-red: #f8340c;
             margin: 1em;
             color: white;
         }
-    
+        @media screen and (max-width: 600px) {
+            .upload_img_profil {
+                height: 400px;
+                max-width: 245px;
+                
+            }
+            .content_profil_input {
+            
+                margin: 0.5em;
+                
+            }
+          }
+          @media screen and (max-width: 400px) {
+            .upload_img_profil {
+                height: 400px;
+                max-width: 205px;
+                
+            }
+            .content_profil_input {
+            
+                margin: 0.5em;
+                
+            }
+          } 
     
     
 
