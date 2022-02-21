@@ -51,8 +51,8 @@ module.exports = {
     if (!name_regex.test(lastname)) {
       return res.status(400).json({ error: "NOM non valide" });
     }
-
-  /*  if (!password_regex.test(password)) {
+    /*
+    if (!password_regex.test(password)) {
       return res.status(400).json({
         error:
           "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilis",
@@ -219,12 +219,11 @@ module.exports = {
             where: { email: email },
           })
             .then(function (userFound) {
-              
               done(null, userFound);
             })
             .catch(function (err) {
               return res
-              
+
                 .status(500)
                 .json({ error: "vérification utilisateur impossible" });
             });
@@ -265,7 +264,10 @@ module.exports = {
             process.env.TOKEN,
             { expiresIn: "48h" }
           );
-          res.cookie("token", token, { httpOnly: true/*, maxAge*/ });
+          res.cookie("token", token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
+          });
           res.status(201).json({
             userId: userFound.id,
             firstname: userFound.firstname,

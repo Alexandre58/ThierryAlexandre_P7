@@ -6,8 +6,8 @@ import { UidContext } from '../App';
 
 export const NavBar = () => {
    const uid = useContext(UidContext);
-   const userData = useSelector((state) => state.userReducer);
-console.log(userData);
+   const userId = useSelector((state) => state.userReducer);
+console.log(userId);
 
 
     return (
@@ -29,7 +29,7 @@ console.log(userData);
             </nav>
            
                 {uid ? (
-                  <p className='p_Navbar'> bienvenu {userData.firstname}</p>        
+                  <p className='p_Navbar'> Bienvenue {userId.firstname}</p>        
                 ) : ( 
                   <p className='p_Navbar'>Merci de bien vouloir vous connecter</p>
                 )}

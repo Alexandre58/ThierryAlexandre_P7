@@ -1,7 +1,7 @@
 {
-  "name": "groupomania_backend",
+  "name": "groupomania",
   "version": "1.0.0",
-  "description": "Backend du projet 7 Openclassrooms (Groupomznia)",
+  "description": "Projet Openclassroom ",
   "main": "server.JS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
     "openclassrooms",
     "projet 7"
   ],
-  "author": "Code Dragi {};",
+  "author": "Thierry Alexandre",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",

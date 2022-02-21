@@ -1,23 +1,26 @@
 const jwt = require("jsonwebtoken");
+const models = require("../models");
 
 module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
-    const userId = decodedToken.userId;
-    console.log(userId);
-    if (req.body.userId && req.body.userId !== userId) {
-      throw "Invalid user ID";
-    } else {
-      console.log(userId);
-      next();
-    }
-  } catch {
-    // invalid token
-    res.status(401).json({
-      error: "Vous N'avez pas l'autorisation Token !",
+  const token = req.cookies.token;
+
+  if (token !== undefined && token !== null) {
+    jwt.verify(token, process.env.TOKEN, async (err, decodedToken) => {
+      if (err) {
+        res.user = null;
+        //res.cookie("jwt", "", { maxAge: 1 });
+        next();
+      } else {
+        let user = await models.User.findAll({
+          where: { id: decodedToken.userId },
+        });
+        res.user = user[0].dataValues;
+        next();
+      }
     });
+  } else {
+    console.log(token);
+    res.user = null;
+    next();
   }
 };
-
-

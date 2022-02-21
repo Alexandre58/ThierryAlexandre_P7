@@ -24,22 +24,23 @@ const App = () => {
 */
 
   useEffect(() => {
-    const fetchToken = async() => {
+    let fetchToken = async() => {
       await axios ({
         method : "get",
-        url: `${process.env.REACT_APP_API_URL}tokenRecup`,
+        url: `${process.env.REACT_APP_API_URL}/tokenRecup`,
         withCredentials: true,
       })
-      .then((res)=> {
-        console.log(res);
-        setUserId(res.data)
+      .then((res) => {
+    
+        setUserId(res.data);
       })
-      .catch((err)=> console.log("No Token recup"))
+      .catch((err)=>  console.log(err))
+      
     }
        fetchToken();
-
-       if(userId) dispatch(getUser(userId))
-    }, [userId, dispatch]);
+       console.log(userId);
+       if(userId) dispatch(getUser(userId));
+    },[userId, dispatch]);
 
   return (
     <UidContext.Provider value={userId}>

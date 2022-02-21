@@ -35,8 +35,7 @@ export const Profil = () => {
       <section className="section_profil">
         <div className="profil_container">
           <Typography variant="h1" className="h1profil">
-            {userId.firstname} Bienvenu sur votre profil {userId.firstname}{" "}
-            Groupomania
+            Vous pouvez changer votre bio et votre photo {userId.firstname} {userId.lastname}
           </Typography>
         </div>
 
@@ -66,20 +65,11 @@ export const Profil = () => {
             )}
             {updateForm && (
               <>
-                <TextareaAutosize
-                  defaultValue={userId.bio}
-                  onChange={(e) => setBio(e.target.value)}
-                  aria-label="minimum height"
-                  className="content_profil2"
-                  minRows={20}
-                  placeholder="Laissez-vous guider par votre imagination..."
-                />
-                <button className="content_profil_button"  onClick={handleUpdate}>
-                  Valider vos modifications
-                </button>
+                <TextareaAutosize defaultValue={ userId.bio } onChange={(e) => setBio(e.target.value)} aria-label="minimum height" className="content_profil2" minRows={20} placeholder="Laissez-vous guider par votre imagination..." />
+                <button className="content_profil_button2" onClick={handleUpdate}>Valider vos modifications</button>
               </>
             )}
-           
+            
           </div>
           <div className="signin_profil">
             <UploadImg />

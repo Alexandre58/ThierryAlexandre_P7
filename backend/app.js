@@ -2,7 +2,6 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const cors = require("cors");
 const helmet = require("helmet");
 const userRoute = require("./routes/userRoute");
 const messageRoute = require("./routes/messageRoute");
@@ -11,28 +10,30 @@ const commentRoute = require("./routes/commentRoute");
 require("dotenv").config();
 const morgan = require("morgan");
 const auth = require("./middlewares/auth");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true,
-  allowedHeaders: ["sessionId", "Content-Type"],
-  exposedHeaders: ["sessionId"],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-};
-app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 /*management of the POST request coming from the front-end application, extraction of the JSON body*/
 app.use(express.json());
-app.use(morgan("dev"));
-app.use(helmet());
-/*
-app.use("*", (req, res) => {
-  res.json({ error: 404 });
-});
-*/
-app.use("tokenRecup", auth, (req, res) => {
-  res.status(200).json(res);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.get("*", auth);
+
+app.get("/tokenRecup", auth, (req, res) => {
+  delete res.user.password;
+  res.status(200).json(res.user.id);
 });
 
 //***************************************************USER
