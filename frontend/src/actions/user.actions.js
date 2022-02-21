@@ -4,6 +4,7 @@ export const GET_USER = "GET_USER";
 export const GET_USER_ERROR = "GET_USER_ERROR";
 export const GET_USER_TOKEN = "GET_USER_TOKEN";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
+export const UPDATE_BIO = "UPDATE_BIO";
 
 //envoi ver post.reducer avec dispatch(dispatch envoi vers le reducer)
 export const getUser = (userId) => {
@@ -18,7 +19,7 @@ export const getUser = (userId) => {
       });
   };
 };
-
+//token recup
 export const getUserToken = () => {
   return dispatch => {
     return axios
@@ -28,11 +29,11 @@ export const getUserToken = () => {
       });
   };
 };
-
+//images
 export const uploadPicture = (data, id) => {
   return (dispatch)=> {
     return axios 
-    .post(`${process.env.REACT_APP_API_URL}/api/users/profil/`, data)
+    .post(`${process.env.REACT_APP_API_URL}/images`, data)
     .then((res) => {
       return axios 
       .get(`${process.env.REACT_APP_API_URL}/api/users/${id}/`)
@@ -44,4 +45,21 @@ export const uploadPicture = (data, id) => {
       })
     })
   }
+}
+
+//update bio profil.js
+
+export const updateBio = (userId, bio) => {
+       return (dispatch) => {
+         return axios({
+           method: "put",
+           url:`${process.env.REACT_APP_API_URL}/api/users/profil/` + userId,
+           data: { bio }
+         })
+         .then((res)=> {
+           dispatch({ type: UPDATE_BIO, payload:bio })
+         })
+         .catch((err) => console.log(err));
+       }
+
 }

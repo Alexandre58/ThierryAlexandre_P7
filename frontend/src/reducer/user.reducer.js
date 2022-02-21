@@ -1,6 +1,7 @@
 import {
   GET_USER,
   GET_USER_TOKEN,
+  UPDATE_BIO,
   UPLOAD_PICTURE,
  // GET_USER_ERROR,
 } from "../actions/user.actions";
@@ -19,8 +20,13 @@ export default function userReducer(state = initialState, action) {
    case UPLOAD_PICTURE:
      return {
        ...state,
-       picture: action.payload
-     }
+       images: action.payload
+     };
+  case UPDATE_BIO:
+    return {
+      ...state,
+      bio: action.payload
+    }
 
    default:
      return state;

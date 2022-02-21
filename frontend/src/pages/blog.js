@@ -18,7 +18,7 @@ export const Blog = () => {
   console.log(posts);
 
   //) => state.postReducer.firstname si l'on veut
-  console.log(posts);
+  
   return (
     <>
       <NavBar />
@@ -27,10 +27,11 @@ export const Blog = () => {
           <Typography variant="h1" className="h1blog">
             Bienvenu sur Groupomania publications
           </Typography>
+
         </div>
         <Container>
-        <MediaCard />
-      </Container>
+          <MediaCard />
+       </Container>
    {/*    {userData ? (
           <>
             <Container>

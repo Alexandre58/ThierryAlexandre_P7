@@ -1,23 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import Comment from './Comment'
+import Comment from './Comment';
+
+//material ui
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
-
-
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+
+
 export const useStyles = makeStyles({
   root: {
     maxWidth: 400,
@@ -29,8 +31,8 @@ export const useStyles = makeStyles({
 });
 
 export default function MediaCard() {
- const posts = useSelector((state) => state.postReducer);
- console.log("result de post :" + posts.content);
+  const posts = useSelector((state) => state.postReducer);
+  console.log(posts);
 
   const classes = useStyles();
   return (
@@ -43,7 +45,7 @@ export default function MediaCard() {
             imga
             </Avatar>
         }
-        title="Thierry Alexandre"
+        title="Thierry Alexandreeeee"
         subheader="September 14, 2016"
         ></CardHeader>
             <CardMedia

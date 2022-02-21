@@ -70,11 +70,11 @@ $color-red-black: #a8341d;
   margin: 0.2em;
 }
 .ul_liSignUpForm li {
-  
+
   color: black;
   text-align: center;
   font-size: 1.2em;
-  @include add-shadow-white;
+  @include add-shadow-black;
   padding: 0.5em 0 0.5em 0;
   width: 100%;
   min-width: 110px;

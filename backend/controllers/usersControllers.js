@@ -52,12 +52,12 @@ module.exports = {
       return res.status(400).json({ error: "NOM non valide" });
     }
 
-    if (!password_regex.test(password)) {
+  /*  if (!password_regex.test(password)) {
       return res.status(400).json({
         error:
           "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilis",
       });
-    }
+    }*/
 
     if (password !== confirmPassword) {
       return res
