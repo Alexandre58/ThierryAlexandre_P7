@@ -1,12 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-
-
-
-
+import { useSelector } from "react-redux";
 //import file.js
 import Comment from './Comment';
-
 //material ui
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -18,7 +13,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,30 +21,24 @@ export const useStyles = makeStyles({
   root: {
     maxWidth: 300,
     margin:30
-    
   },
   media: {
     height: 240,
     padding: 0
-    
   },
 });
 
 export default function MediaCard() {
-  const dispatch = useDispatch();
+ 
   const posts = useSelector((state) => state.postReducer);
   console.log(posts);
 //USER
   const userId = useSelector((state) => state.userReducer);
-
-
- 
-  console.log(posts);
+  console.log(userId);
 
   const classes = useStyles();
   return (
     <>
-       
         <Card className={classes.root}>
         <CardActionArea>
         <CardHeader

@@ -44,7 +44,7 @@ export const Profil = () => {
             <img
               src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
               className="img_profil"
-              alt="logo du site groupomania"
+              alt="image profil"
             />
             {/*a mettre          <img src={userId.attachment} alt="image de l'utilisateur groupomania" />
                     UPLOAD profil_container
@@ -52,7 +52,6 @@ export const Profil = () => {
                     <p>{errors.format}</p>
               */}
           </div>
-
           <div className="bio_profil_container">
             <h3>Votre bio</h3>
             {updateForm === false && (

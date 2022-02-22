@@ -1,0 +1,49 @@
+$color-red: #fd3c16;
+$color-red-white:rgba(230, 43, 6, 0.8);
+
+@mixin add-shadow-black {
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 5px 12px 10px #868585;
+  box-shadow: 3px 5px 12px 10px #868585;
+}
+@mixin add-shadow-white {
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
+  box-shadow: 3px 2px 12px 0px #e4d7d7;
+}
+
+
+
+.user-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.8em;
+    background-color: $color-red;
+    @include add-shadow-black;
+    font-size: 0.9em;
+    color: rgb(243, 193, 193);
+    margin-top: -230px;
+    margin-left: -80px;
+    width: 150px;
+    .user-container {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      margin:-2.5em;
+      background-color: #e4d7d7;
+    }
+    .img_profil {
+      margin-left: 100px;
+      margin-top: -30px;
+      position: absolute;
+      object-fit: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      -webkit-box-shadow: 5px 2px 29px 5px #0f0202;
+      box-shadow: 5px 2px 29px 5px #0f0202;
+    }
+}
