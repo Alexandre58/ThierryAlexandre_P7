@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import { Home } from "./pages/home";
 import { Profil } from "./pages/profil";
 import { Blog } from "./pages/blog";
+import Logout from './components/Log/Logout';
 import axios from 'axios';
 
 import { useDispatch } from "react-redux";
@@ -40,6 +41,7 @@ const App = () => {
        fetchToken();
        console.log(userId);
        if(userId) dispatch(getUser(userId));
+       
     },[userId, dispatch]);
 
   return (
@@ -47,6 +49,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/deconnexion" component={Logout} />
           <Route path="/profil" element component={Profil} />
           <Route path="/blog" element component={Blog} />
         {/*  <Route path="/login" element component={Login} />

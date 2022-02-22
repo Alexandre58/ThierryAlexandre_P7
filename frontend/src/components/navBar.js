@@ -17,9 +17,16 @@ export const NavBar = () => {
         <header className="header_navBar">
             <nav className="navBarSite" >
                 <ul className="ulHome">
-                    <li>
-                      <Link to="/">Connexion</Link>
-                    </li>
+                { uid ? 
+                  <li>
+                   <Link to="/deconnexion">Deconnection</Link>
+                 </li>
+             :
+                   <li>
+                     <Link to="/">Connexion</Link>
+                  </li>
+             }
+               
                     <li>
                       <Link to="/Blog">Blogs</Link>
                     </li>

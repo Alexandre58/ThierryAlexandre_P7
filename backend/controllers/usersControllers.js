@@ -18,8 +18,18 @@ const password_regex = /^[a-zA-Z]\w{3,14}$/;
 const name_regex =
   /^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
 
+
+
+
+
 //*******************************************SIGUP **********************************
 module.exports = {
+  deconnect : function(req, res) {
+    res.cookie("token",{ maxAge: 1 });
+    res.redirect("/");
+  },
+
+
   signup: function (req, res) {
     // Paramètres
     let { email, firstname, lastname, password, confirmPassword, bio } =

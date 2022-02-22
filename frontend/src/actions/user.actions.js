@@ -30,13 +30,13 @@ export const getUserToken = () => {
   };
 };
 //images
-export const uploadPicture = (data, id) => {
+export const uploadPicture = (data, userId) => {
   return (dispatch)=> {
     return axios 
     .post(`${process.env.REACT_APP_API_URL}/images`, data)
     .then((res) => {
       return axios 
-      .get(`${process.env.REACT_APP_API_URL}/api/users/${id}/`)
+      .get(`${process.env.REACT_APP_API_URL}/api/users/${userId}/`)
       .then((res) => {
         dispatch({type: UPLOAD_PICTURE, payload: res.data.avatar})
       })
