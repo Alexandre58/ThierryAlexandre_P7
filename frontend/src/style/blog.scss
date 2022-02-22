@@ -25,14 +25,15 @@ $color-red-white:rgba(230, 43, 6, 1);
 
   .blog_container {
     position: absolute;
-    font-size: 1.2em;
+    font-size: 1em;
     margin-top: -110px;
     margin-left: 10%;
     max-height: 100px;
     width: 70%;
     text-align: center;
-    background-color:  $color-red-white;
     @include add-shadow-black;
+    background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+    url("../images/icon-left-font-long.png" );
    
   }
   .container_blog_mediaCard {
@@ -44,9 +45,40 @@ $color-red-white:rgba(230, 43, 6, 1);
         url("../images/icon-left-font-long.png" );
         object-fit: cover;
         @include add-shadow-black;
+        margin-top: 30px;
+  }
+  .form_mediaCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 5px;
+    padding: 1em;
+    background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+    url("../images/icon-left-font-long.png" );
+    min-height: 100px;
+    width: 50%;
+    @include add-shadow-black;
+    margin: auto;
+    .input_title_mediaCard {
+      height: 30px;
+      width: 90%;
+      @include add-shadow-black;
+    }
+    .input_post_mediaCard {
+      width: 90%;
+      min-height: 200px;
+      @include add-shadow-black;
+    }
+    .input_button_mediaCard {
+      margin: 1em;
+      padding: 0.5em;
+      width: 90%;
+      @include add-shadow-black;
+    }
   }
   .h1blog {
-    color: #f3eded;
+    color: black;
     padding: 1.5em;
     font-size: 1em;
   }

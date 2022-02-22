@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_POSTS = "GET_POSTS";
+export const ADD_POSTS = "ADD_POSTS";
 
 //envoi vers post.reducer (dispatch envoi vers le reducer api/posts)
 export const getPosts = ()=> {
@@ -15,4 +16,16 @@ export const getPosts = ()=> {
     };
 };
 //?_sort=id&_order=desc
-//recuperer res.data dans reducer pour le traiter
+
+//add post
+export const addPost = (data)=> {
+    return (dispatch) => {
+        return  axios 
+        .post('http://localhost:4000/api/posts/new', data)
+        .then((res)=>{
+           console.log(res);
+               dispatch({type: ADD_POSTS, payload: data})
+        })
+        .catch((err)=> console.log(err));
+    };
+};

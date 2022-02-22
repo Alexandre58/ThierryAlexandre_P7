@@ -1,10 +1,6 @@
 import { useSelector } from "react-redux";
-//scss
-import '../style/blog.scss'
+
 //import { BlogNotConnect  } from "../components/BlogNotConnect";
-import MediaCard from "../components/MediaCard";
-
-
 //material ui
 import { Typography } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
@@ -13,6 +9,11 @@ import { Footer } from "../components/Footer";
 import { isEmpty } from "../components/Utils";
 import Users from '../components/Users';
 import { NavBar } from "../components/NavBar";
+import MediaCard from "../components/MediaCard";
+import FormPost from '../components/FormPost'
+//scss
+import '../style/blog.scss'
+
 
 export const Blog = () => {
  // const dispatch = useDispatch();
@@ -32,11 +33,12 @@ export const Blog = () => {
           </Typography>
 
         </div>
+       
         <Container>
+        <FormPost/>
           <div className="container_blog_mediaCard" >
             {!isEmpty(posts) && posts.map((post, index) => <MediaCard post={post} key={index} />)}
-          </div>
-          
+          </div>  
        </Container>
    {/*    {userId ? (
           <>

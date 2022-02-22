@@ -20,10 +20,11 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     flex-direction: column;
     justify-content: center;
     padding: 0.8em;
-    background-color: $color-red;
+    background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+    url("../images/icon-left-font-long.png" );
     @include add-shadow-black;
-    font-size: 0.9em;
-    color: rgb(243, 193, 193);
+    font-size: 1em;
+    color: black;
     margin-top: -230px;
     margin-left: -80px;
     width: 150px;

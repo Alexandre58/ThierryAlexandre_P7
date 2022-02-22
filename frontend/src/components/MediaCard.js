@@ -61,11 +61,8 @@ export default function MediaCard() {
                Dite moi ce que vous en pensez?
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Lorem ipsum dolor sit amet. Est ratione molestiae quo totam nisi aut nostrum repellendus nam sapiente quas sed quis dolores eum vero omnis et neque reiciendis. Eos totam cumque et voluptatem alias cum mollitia voluptas in possimus dolores! Sed quaerat dolorem qui nemo consequatur cum saepe deserunt. Aut facilis temporibus sed aliquam mollitia id aperiam sequi.
+            Lorem ipsum dolor sit amet. Est ratione molestiae quo totam nisi aut nostrum repellendus nam sapiente quas sed quis dolores eum vero omnis et neque reiciendis. Eos totam cumque et voluptatem alias cum mollitia voluptas in possimus dolores! Sed quaerat 
 
-            Qui molestias ratione ut perspiciatis molestiae fugit eius non veniam laboriosam! Ut corporis rerum et maiores minus qui consectetur pariatur a facere reprehenderit quo pariatur facere sed internos minus. Sit provident magni est minima amet hic nobis deserunt ex repudiandae necessitatibus. Ad excepturi quidem in blanditiis soluta qui excepturi eum quae soluta aut nobis inventore.
-            
-            Eos alias saepe ut odio numquam in quae quia est beatae nulla eum enim internos. Et neque consequatur et maxime voluptatem aut omnis incidunt qui dignissimos assumenda ex nulla error nam dolores.
             </Typography>
             </CardContent>
         </CardActionArea>
