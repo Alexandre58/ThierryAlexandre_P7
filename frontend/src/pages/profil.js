@@ -4,28 +4,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 //css
 import "../style/profils.scss";
+//import
 import { NavBar } from "../components/NavBar";
 import UploadImg from "../images/UploadImg";
-
 //material ui
 import { Typography } from "@material-ui/core";
 import { Footer } from "../components/Footer";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { updateBio } from "../actions/user.actions";
 
-export const Profil = () => {
-  //BIO
-  const [bio, setBio] = useState("");
-  const [updateForm, setUpdateForm] = useState(false);
-  const dispatch = useDispatch();
 
+export const Profil = () => {
+ 
+  const dispatch = useDispatch();
+ //BIO
+ const [bio, setBio] = useState("");
+ const [updateForm, setUpdateForm] = useState(false);
   //USER
   const userId = useSelector((state) => state.userReducer);
   //  const postId = useSelector((state) => state.postReducer);
 
   //function validate change bio
   const handleUpdate = () => {
-    dispatch(updateBio(userId._id, bio));
+    dispatch(updateBio(userId.id, bio));
     setUpdateForm(false);
   };
 

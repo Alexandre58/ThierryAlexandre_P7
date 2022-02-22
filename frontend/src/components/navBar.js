@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import { UidContext } from '../App';
 
 
 export const NavBar = () => {
    const uid = useContext(UidContext);
+   
    const userId = useSelector((state) => state.userReducer);
-console.log(userId);
+   
 
 
     return (
