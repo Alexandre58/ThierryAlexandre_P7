@@ -38,7 +38,7 @@ export const NavBar = () => {
             </nav>
            
                 {uid ? (
-                  <p className='p_Navbar'> Bienvenue {userId.firstname}</p>        
+                  <p className='p_Navbar'> Bonjour {userId.firstname}</p>        
                 ) : ( 
                   <p className='p_Navbar'>Merci de bien vouloir vous connecter</p>
                 )}

@@ -35,7 +35,7 @@ $color-red: #fd2b01;
   .h1profil {
     color: #f3eded;
     padding: 1.5em;
-    font-size: 1em;
+    font-size: 1.1em;
   }
   .profil_page {
     display: flex;
@@ -44,7 +44,9 @@ $color-red: #fd2b01;
     @include add-shadow-black;
     width: 100%;
     margin: 1em;
-    background-color: rgb(248, 251, 252);
+    background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+    url("../images/icon-left-font-long.png" );
+    object-fit: cover;
     margin-top: 60px;
     .content_profil2 {
       @include add-shadow-black;
@@ -67,14 +69,19 @@ $color-red: #fd2b01;
       background-color: $color-red;
       @include add-shadow-black;
       margin-top: 300px;
+      color: black;
+      font-size: 1.2em;
       }
       .content_profil_button2 {
         padding: 0.5em;
-      background-color: $color-red;
-      @include add-shadow-black;
+        background-color: $color-red;
+        @include add-shadow-black;
         z-index: 10;
+        color: black;
+        font-size: 1.2em;
+        margin: 1em;
       }
-    .content_profil_button:hover {
+    .content_profil_button:hover, .content_profil_button2:hover {
          transform: scale(1.05);
 
     }

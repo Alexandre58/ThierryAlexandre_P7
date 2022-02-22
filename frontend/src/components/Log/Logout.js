@@ -7,7 +7,7 @@ import cookie from 'js-cookie'
 const Logout = () => {
   function effacerCookies() {
     cookie.remove("token",{
-      expires:1
+      expires: 1
  });
   }
    

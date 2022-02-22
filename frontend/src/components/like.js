@@ -4,7 +4,7 @@ const Like = ({})=> {
     return (
         <div>
           <img src="" alt="logo like" />
-          <span>{}</span>
+          <span>{post.likes}</span>
        </div>
     );
 };

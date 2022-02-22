@@ -1,12 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
+
+
+
+//import file.js
 import Comment from './Comment';
 
 //material ui
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,25 +21,36 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
-  
+    maxWidth: 300,
+    margin:30
+    
   },
   media: {
     height: 240,
+    padding: 0
+    
   },
 });
 
 export default function MediaCard() {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.postReducer);
+  console.log(posts);
+//USER
+  const userId = useSelector((state) => state.userReducer);
+
+
+ 
   console.log(posts);
 
   const classes = useStyles();
   return (
-    <Grid container spacing={3}>   
+    <>
+       
         <Card className={classes.root}>
         <CardActionArea>
         <CardHeader
@@ -45,8 +59,8 @@ export default function MediaCard() {
             imga
             </Avatar>
         }
-        title="Thierry Alexandreeeee"
-        subheader="September 14, 2016"
+        title= {userId.firstname} 
+        subheader= {userId.lastname}
         ></CardHeader>
             <CardMedia
             className={classes.media}
@@ -81,7 +95,7 @@ export default function MediaCard() {
           <Divider light />
           <Comment />
         </Card>
-       
-    </Grid> 
+ 
+    </>
   );
 }

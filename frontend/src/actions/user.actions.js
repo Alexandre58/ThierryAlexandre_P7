@@ -10,7 +10,7 @@ export const UPDATE_BIO = "UPDATE_BIO";
 export const getUser = (userId) => {
   return (dispatch) => {
     return axios
-      .get(`${process.env.REACT_APP_API_URL}/api/${userId}/profiluser`)
+      .get(`${process.env.REACT_APP_API_URL}/api/users`)
       .then(res => {
         dispatch({ type: GET_USER, payload: res.data });
       })

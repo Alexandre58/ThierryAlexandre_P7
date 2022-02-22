@@ -66,26 +66,29 @@ export const Profil = () => {
                 </button>
               </>
             )}
+          
             {updateForm && (
               <>
-                <TextareaAutosize
-                  defaultValue={userId.bio}
-                  onChange={(e) => setBio(e.target.value)}
-                  aria-label="minimum height"
-                  className="content_profil2"
-                  minRows={20}
-                  placeholder="Laissez-vous guider par votre imagination..."
-                />
-                <button
-                  className="content_profil_button2"
-                  onClick={handleUpdate}
-                >
-                  Valider vos modifications
-                </button>
+              <TextareaAutosize
+              defaultValue={userId.bio}
+              onChange={(e) => setBio(e.target.value)}
+              aria-label="minimum height"
+              className="content_profil2"
+              minRows={20}
+              placeholder="Laissez-vous guider par votre imagination..."
+            />
+            <button
+              className="content_profil_button2"
+              onClick={handleUpdate}
+            >
+              Valider vos modifications
+            </button>
               </>
             )}
           </div>
+      
           <div className="signin_profil">
+
             <UploadImg />
           </div>
         </div>

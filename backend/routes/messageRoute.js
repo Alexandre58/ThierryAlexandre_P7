@@ -6,7 +6,7 @@ const multer = require("../middlewares/multer-config");
 
 
 /**********************************GET*********************************************** */
-//list posts = localhost:4000/user/posts
+//list posts = localhost:4000/api/posts
 router.get("/posts/", /*auth, */postsController.listPosts);
 //list posts user +  with her token
 router.get("/user/posts", auth, postsController.listPostsUser);

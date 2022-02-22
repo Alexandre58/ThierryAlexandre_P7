@@ -1,5 +1,5 @@
 $color-red: #fd2b01;
-
+$color-red-white:rgba(230, 43, 6, 0.8);
 
 @mixin add-shadow-black {
   border-radius: 9px 9px 9px 9px;
@@ -30,7 +30,9 @@ body {
     .p_Navbar {
      color: white;
       @include add-shadow-white;
-      padding: 1em;
+      padding: 0.7em;
+      background-color: $color-red-white;
+      font-size: 1.2em;
     }
     .navBarSite {
       margin-bottom: 1em;
