@@ -30,15 +30,16 @@ export const getUserToken = () => {
   };
 };
 //images
-export const uploadPicture = (data, userId) => {
+export const uploadPicture = (data, id) => {
   return (dispatch)=> {
     return axios 
     .post(`${process.env.REACT_APP_API_URL}/images`, data)
     .then((res) => {
       return axios 
-      .get(`${process.env.REACT_APP_API_URL}/api/users/${userId}/`)
+      .get(`${process.env.REACT_APP_API_URL}/api/users/${id}`)
       .then((res) => {
-        dispatch({type: UPLOAD_PICTURE, payload: res.data.avatar})
+        dispatch({type: UPLOAD_PICTURE, payload: res.data.images})
+        
       })
       .catch((err)=> {
         console.log(err);
@@ -54,7 +55,8 @@ export const updateBio = (userId, bio) => {
          return axios({
            method: "put",
            url:`${process.env.REACT_APP_API_URL}/api/users/profil/` + userId,
-           data: { bio }
+           data: { bio },
+           withCredentials: true,
          })
          .then((res)=> {
            dispatch({ type: UPDATE_BIO, payload:bio })

@@ -18,14 +18,18 @@ export const getPosts = ()=> {
 //?_sort=id&_order=desc
 
 //add post
-export const addPost = (data)=> {
-    return (dispatch) => {
-        return  axios 
-        .post('http://localhost:4000/api/posts/new', data)
-        .then((res)=>{
-           console.log(res);
-               dispatch({type: ADD_POSTS, payload: data})
+export const addPost = data => {
+    return dispatch => {
+      return axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/api/posts/new`,
+        data: data,
+        withCredentials: true,
+      })
+        .then(res => {
+          console.log(res);
+          dispatch({ type: ADD_POSTS, payload: data });
         })
-        .catch((err)=> console.log(err));
+        .catch(err => console.log(err));
     };
-};
+  };

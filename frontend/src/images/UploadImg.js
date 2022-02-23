@@ -11,18 +11,18 @@ const UploadImg = () => {
     const handlePicture =(e)=> {
           e.preventDefault();
           const data = new FormData();
-          data.append("avatar", userId.avatar);
-          data.append("userId", userId._id);
+          data.append("lastname", userId.lastname);
+          data.append("userId", userId.id);
           data.append("file", file);
 
-          dispatch(uploadPicture(data, userId._id));
+          dispatch(uploadPicture(data, userId.id));
 
     }
     return (
         <>
         <form action="" onSubmit={handlePicture} className="upload_img_profil">
                 <label  className="content_profil_label"  htmlFor="file">Click pour changer votre image</label>
-                <input className="content_profil_input"  type="file" id="file" name="file" accept=".jpg, .jpeg, .png" 
+                <input className="content_profil_input"  type="file" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" 
                  onChange={(e) => setFile(e.target.files[0])} />
        
                     <br/>

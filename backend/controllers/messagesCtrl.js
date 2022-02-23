@@ -112,7 +112,7 @@ module.exports = {
   /**********************************POST************************************************ */
 //news posts=4000/posts/new/ post users with their token
   createPosts: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 

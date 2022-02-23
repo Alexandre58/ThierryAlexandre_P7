@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { UidContext } from '../App';
-
+import { isEmpty } from "../components/Utils";
 export const NavBar = () => {
    const uid = useContext(UidContext);
    
-   const userId = useSelector((state) => state.userReducer);
-   
-
+   const users = useSelector((state) => state.userReducer);
 
     return (
     <>
@@ -39,7 +37,7 @@ export const NavBar = () => {
             </nav>
            
                 {uid ? (
-                  <p className='p_Navbar'> Bonjour {userId.firstname}</p>        
+                  <p className='p_Navbar'> Bonjour {!isEmpty(users[0]) && users[0].firstname}</p>        
                 ) : ( 
                   <p className='p_Navbar'>Merci de bien vouloir vous connecter</p>
                 )}

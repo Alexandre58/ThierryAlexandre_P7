@@ -1,0 +1,39 @@
+$color-red: #fd2b01;
+$color-red-white:rgba(230, 43, 6, 0.8);
+
+@mixin add-shadow-black {
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 5px 12px 10px #868585;
+  box-shadow: 3px 5px 12px 10px #868585;
+}
+@mixin add-shadow-white {
+  border-radius: 9px 9px 9px 9px;
+  -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
+  box-shadow: 3px 2px 12px 0px #e4d7d7;
+}
+
+
+
+
+.container_comment {
+    display: flex;
+    flex-direction: column;
+    
+    row-gap: 1em;
+    margin: 0.6em;
+    height: auto;
+    text-align: center;
+    @include add-shadow-black;
+    .comment_textArea {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        width: 90%;
+        height: 50px;
+    }
+    & input {
+        background-color: $color-red;
+        color: white;
+    }
+}

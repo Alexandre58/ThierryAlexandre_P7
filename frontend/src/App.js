@@ -39,7 +39,7 @@ const App = () => {
       
     }
        fetchToken();
-       console.log(userId);
+       
        if(userId) dispatch(getUser(userId));
        
     },[userId, dispatch]);

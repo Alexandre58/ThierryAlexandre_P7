@@ -1,11 +1,20 @@
 import React from 'react';
 
-const Like = ({})=> {
+import CardActions from '@material-ui/core/CardActions';
+
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import IconButton from '@material-ui/core/IconButton';
+
+const Like = ()=> {
     return (
-        <div>
-          <img src="" alt="logo like" />
-          <span>{post.likes}</span>
-       </div>
+     
+        <CardActions disableSpacing>
+            <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
+            </IconButton>
+            
+       </CardActions>
+       
     );
 };
 

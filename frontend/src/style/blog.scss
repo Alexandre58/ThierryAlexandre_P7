@@ -58,6 +58,12 @@ $color-red-white:rgba(230, 43, 6, 1);
     width: 50%;
     @include add-shadow-black;
     margin: auto;
+    .p_form_mediaCard {
+      border: solid black 1px;
+    font-size: 1.2em;
+      @include add-shadow-black;
+      padding: 0.5em;
+    }
     .input_title_mediaCard {
       height: 30px;
       width: 90%;
@@ -86,6 +92,9 @@ $color-red-white:rgba(230, 43, 6, 1);
     & p {
       font-size: 1.5em;
     }
+  }
+  .CartContent_title_content {
+    min-height: 200px;
   }
   @media screen and (max-width: 500px){
     .blog_container {

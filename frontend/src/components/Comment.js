@@ -1,10 +1,15 @@
 import React from 'react';
+import { useSelector } from "react-redux";
+import { isEmpty } from "../components/Utils";
+import "../style/comment.scss"
+
+
+//matrial ui
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
+
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Comment() {
+export default function Comment(post) {
+ //USER
+  const users = useSelector((state) => state.userReducer);
+
+
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -30,27 +40,19 @@ export default function Comment() {
   };
 
   return (
-    <div className={classes.root}>
    
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography className={classes.heading}>Béatrice Dupont</Typography>
-          <Typography className={classes.secondaryHeading}>
-            votre commentaire
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          Lorem ipsum dolor sit amet. At nobis omnis est nihil galisum quo ipsa nulla ut sequi dolores et sint iure quo accusantium voluptatem sed maxime voluptas. 33 accusamus esse aut deserunt quae et officiis sint rem nesciunt eaque eos incidunt enim ab voluptatem consequatur est commodi iure. Sed sint debitis qui voluptas modi aut perferendis omnis! Ut temporibus quaerat aut officiis voluptas et veniam.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+        <>
+      
+          <div>
+             <form className='container_comment'>
+                  <Typography className={classes.heading}>{!isEmpty(users[0]) && users[0].firstname} {!isEmpty(users[0]) && users[0].lastname}</Typography>
+                  <textarea className='comment_textArea' defaultValue={post.content} placeholder="Vous desirez mettre un  commentaire..."></textarea>
+                   <input type="submit" value="Validez votre commentaire" />
+              </form>   
+          </div>     
+          
+       </>  
      
  
-    </div>
   );
 }
