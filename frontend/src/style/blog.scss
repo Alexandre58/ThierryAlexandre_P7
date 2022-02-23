@@ -32,7 +32,7 @@ $color-red-white:rgba(230, 43, 6, 1);
     width: 70%;
     text-align: center;
     @include add-shadow-black;
-    background-color: rgba(230, 43, 6, 1);
+    background-color: rgba(230, 43, 6, 0.9);
   }
   .container_blog_mediaCard {
         display: flex;
@@ -45,6 +45,7 @@ $color-red-white:rgba(230, 43, 6, 1);
         @include add-shadow-black;
         margin-top: 30px;
   }
+  
   .form_mediaCard {
     display: flex;
     flex-direction: column;
@@ -54,15 +55,18 @@ $color-red-white:rgba(230, 43, 6, 1);
     padding: 1em;
     background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
     url("../images/icon-left-font-long.png" );
-    min-height: 100px;
     width: 50%;
     @include add-shadow-black;
     margin: auto;
     .p_form_mediaCard {
-      border: solid black 1px;
-    font-size: 1.2em;
+      background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+      url("../images/icon-left-font-long.png" );
+      text-align: center;
+      font-size: 1.4em;
       @include add-shadow-black;
-      padding: 0.5em;
+      padding: 1em;
+      width: 90%;
+      margin-bottom: 10px;
     }
     .input_title_mediaCard {
       height: 30px;

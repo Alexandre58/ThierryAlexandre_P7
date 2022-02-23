@@ -50,8 +50,8 @@ export default function MediaCard({ post }) {
             imga
             </Avatar>
         }
-        title= {post.UserId}
-        subheader= {users.userId}
+        title= {users[0].firstname}
+        subheader= {users[0].lastname}
         ></CardHeader>
             <CardMedia
             className={classes.media}

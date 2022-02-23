@@ -15,7 +15,7 @@ import FormPost from '../components/FormPost'
 
 //scss
 import '../style/blog.scss'
-/*
+/*pour memoire et remettre la connection correct 
 {userId ? <Home/> :
         <>
   }
@@ -31,6 +31,7 @@ export const Blog = () => {
   const userId = useSelector((state) => state.userReducer);
   console.log(userId);
 
+
   return (
     <>
       
@@ -38,15 +39,15 @@ export const Blog = () => {
           <section className="section_blog">
           <Users />
           <div className="blog_container">
-            <Typography variant="h1" className="h1blog">
-              Bienvenu sur Groupomania publications {userId.firstname} {userId.lastname}
+            <Typography variant="h1" className="h1blog">         
+              Bienvenu {userId[0].firstname} {userId[0].lastname} sur Groupomania publications 
             </Typography>
           </div>
-       
           <Container>
             <FormPost/>
             <div className="container_blog_mediaCard" >
               {!isEmpty(posts) && posts.map((post, index) => <MediaCard post={post} key={index} />)}
+              
             </div>  
           </Container>
           {/*{userId ? (

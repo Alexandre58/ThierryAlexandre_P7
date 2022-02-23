@@ -7,10 +7,10 @@ export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
 
 //envoi ver post.reducer avec dispatch(dispatch envoi vers le reducer)
-export const getUser = (userId) => {
+export const getUser = (id) => {
   return (dispatch) => {
     return axios
-      .get(`${process.env.REACT_APP_API_URL}/api/users`)
+      .get(`${process.env.REACT_APP_API_URL}/api/users/ `)
       .then(res => {
         dispatch({ type: GET_USER, payload: res.data });
       })
@@ -54,7 +54,7 @@ export const updateBio = (userId, bio) => {
        return (dispatch) => {
          return axios({
            method: "put",
-           url:`${process.env.REACT_APP_API_URL}/api/users/profil/` + userId,
+           url:`${process.env.REACT_APP_API_URL}/api/users/profil/` + userId.id,
            data: { bio },
            withCredentials: true,
          })
