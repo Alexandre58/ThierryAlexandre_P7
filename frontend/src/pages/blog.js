@@ -11,9 +11,17 @@ import Users from '../components/Users';
 import { NavBar } from "../components/NavBar";
 import MediaCard from "../components/MediaCard";
 import FormPost from '../components/FormPost'
+//import { Home } from './home';
+
 //scss
 import '../style/blog.scss'
+/*
+{userId ? <Home/> :
+        <>
+  }
+    </>
 
+ */
 
 export const Blog = () => {
  // const dispatch = useDispatch();
@@ -22,36 +30,42 @@ export const Blog = () => {
 //USER
   const userId = useSelector((state) => state.userReducer);
   console.log(userId);
+
   return (
     <>
-      <NavBar />
-      <section className="section_blog">
-        <Users />
-        <div className="blog_container">
-          <Typography variant="h1" className="h1blog">
-            Bienvenu sur Groupomania publications {userId.firstname} {userId.lastname}
-          </Typography>
-
-        </div>
+      
+          <NavBar />
+          <section className="section_blog">
+          <Users />
+          <div className="blog_container">
+            <Typography variant="h1" className="h1blog">
+              Bienvenu sur Groupomania publications {userId.firstname} {userId.lastname}
+            </Typography>
+          </div>
        
-        <Container>
-        <FormPost/>
-          <div className="container_blog_mediaCard" >
-            {!isEmpty(posts) && posts.map((post, index) => <MediaCard post={post} key={index} />)}
-          </div>  
-       </Container>
-   {/*    {userId ? (
-          <>
-            <Container>
-              <MediaCard />
-            </Container>
-          </>
-        ) : (
-          <BlogNotConnect />
-        )}*/}  
-      </section>
+          <Container>
+            <FormPost/>
+            <div className="container_blog_mediaCard" >
+              {!isEmpty(posts) && posts.map((post, index) => <MediaCard post={post} key={index} />)}
+            </div>  
+          </Container>
+          {/*{userId ? (
+            <>
+              <Container>
+                <MediaCard />
+              </Container>
+            </>
+          ) : (
+            <BlogNotConnect />
+          )}*/}  
+          </section>
 
-      <Footer />
-    </>
+          <Footer />
+        </>
+    
   );
+    
+
+    
+
 };

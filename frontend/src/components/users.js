@@ -11,12 +11,12 @@ const Users = () => {
 
   return (
     <div className="user-container">
-        <p>{!isEmpty(users[0]) && users[0].firstname} {users[0].lastname}</p>
+        <p>{!isEmpty(users[0]) && users[0].firstname} {!isEmpty(users[0]) && users[0].lastname}</p>
         <div className="img__users">
         <img
           src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
           className="img_profil"
-          alt="image profil"
+          alt="image profil utilisateur connecté"
         />
       </div>
         <p>Like{!isEmpty(users[0]) && users[0].likes > 1 ? "s": null } : {!isEmpty(users[0]) && users[0].likes}</p>

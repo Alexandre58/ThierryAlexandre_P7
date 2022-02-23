@@ -24,10 +24,12 @@ const name_regex =
 
 //*******************************************SIGUP **********************************
 module.exports = {
-  deconnect : function(req, res) {
-    res.cookie("token",{ maxAge: 1 });
-    res.redirect("/");
-  },
+  
+deconnect: function (req, res) {
+  res.clearCookie("token");
+  req.session.destroy();
+  res.redirect("/");
+},
 
 
   signup: function (req, res) {

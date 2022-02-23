@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.get("*", auth);
 
 app.get("/tokenRecup", auth, (req, res) => {
-  delete res.user.password;
+  res.user && delete res.user.password;
   res.status(200).json(res.user.id);
 });
 

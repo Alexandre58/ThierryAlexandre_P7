@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
+//import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -66,10 +66,10 @@ export default function MediaCard() {
             </Typography>
             </CardContent>
         </CardActionArea>
-          <List component="nav" className={classes.root} aria-label="mailbox folders">
+     {/**     <List component="nav" className={classes.root} aria-label="mailbox folders">
               <Divider />
               <Divider light />    
-          </List>
+          </List>*/} 
           <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon />

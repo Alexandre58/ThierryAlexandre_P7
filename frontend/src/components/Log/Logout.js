@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import cookie from 'js-cookie'
-
+import cookie from 'js-cookie';
+import "../../style/logout.scss";
 
 
 const Logout = () => {
@@ -26,13 +26,12 @@ const Logout = () => {
    )
    window.location = "/";
   }
- 
-  
-
     return (
-      <li onClick={logout}>
-          <p>Voulez-vous vous deconnecter</p>
-      </li>
+      <div className='logout_deconnect_container'>
+          <li onClick={logout}>
+              <p className='logout_deconnect'>Voulez-vous vous deconnecter</p>
+          </li>
+      </div>
     );
 };
 

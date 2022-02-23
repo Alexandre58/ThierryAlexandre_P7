@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { UidContext } from '../App';
 
-
 export const NavBar = () => {
    const uid = useContext(UidContext);
    
@@ -14,9 +13,12 @@ export const NavBar = () => {
     return (
     <>
         <header className="header_navBar">
+    
             <nav className="navBarSite" >
                 <ul className="ulHome">
+
                 { uid ? 
+                  
                   <li>
                    <Link to="/deconnexion">Deconnection</Link>
                  </li>
