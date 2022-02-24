@@ -37,16 +37,16 @@ $color-red-white:rgba(230, 43, 6, 1);
   .container_blog_mediaCard {
         display: flex;
         flex-direction: column;
-        row-gap: 30px;
         margin: auto;
-        padding: 10px;
+        justify-content: center;
         align-items: center;
-        justify-content:center;
+        row-gap: 30px;
         background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
         url("../images/icon-left-font-long.png" );
         object-fit: cover;
         @include add-shadow-black;
         margin-top: 30px;
+        padding-top: 50px;
     
        & .btnDeleteAndMofified_mediaCard_container {
          display: flex;
@@ -91,9 +91,7 @@ $color-red-white:rgba(230, 43, 6, 1);
     padding: 1em;
     background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
     url("../images/icon-left-font-long.png" );
-    width: 100%;
-    max-width: 500px;
-
+    width: 50%;
     @include add-shadow-black;
     margin: auto;
     .p_form_mediaCard {

@@ -1,10 +1,15 @@
 import React, { useEffect, useState, createContext } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import { Home } from "./pages/home";
 import { Profil } from "./pages/profil";
 import { Blog } from "./pages/blog";
-import Logout from './components/Log/Logout';
-import axios from 'axios';
+import Logout from "./components/Log/Logout";
+import axios from "axios";
 
 import { useDispatch } from "react-redux";
 //import { getUserToken } from "./actions/user.actions";
@@ -12,37 +17,33 @@ import { getUser } from "./actions/user.actions";
 
 export const UidContext = createContext();
 
-
 const App = () => {
-  const [userId, setUserId ] = useState(null);
+  const [userId, setUserId] = useState(null);
   const dispatch = useDispatch();
- // const userData = useSelector(state => state.userReducer);
- // console.log(userData);
-/*  useEffect(() => {
+  // const userData = useSelector(state => state.userReducer);
+  // console.log(userData);
+  /*  useEffect(() => {
     dispatch(getUserToken());
   }, [dispatch]);
   console.log(userData);
 */
 
   useEffect(() => {
-    let fetchToken = async() => {
-      await axios ({
-        method : "get",
+    let fetchToken = async () => {
+      await axios({
+        method: "get",
         url: `${process.env.REACT_APP_API_URL}/tokenRecup`,
         withCredentials: true,
       })
-      .then((res) => {
-    
-        setUserId(res.data);
-      })
-      .catch((err)=>  console.log(err))
-      
-    }
-       fetchToken();
-       
-       if(userId) dispatch(getUser(userId));
-       
-    },[userId, dispatch]);
+        .then(res => {
+          setUserId(res.data);
+        })
+        .catch(err => console.log(err));
+    };
+    fetchToken();
+
+    if (userId) dispatch(getUser(userId));
+  }, [userId]);
 
   return (
     <UidContext.Provider value={userId}>
@@ -52,8 +53,8 @@ const App = () => {
           <Route path="/deconnexion" component={Logout} />
           <Route path="/profil" element component={Profil} />
           <Route path="/blog" element component={Blog} />
-        {/*  <Route path="/login" element component={Login} />
-          <Route path="/signUp" element component={SignUp} />*/} 
+          {/*  <Route path="/login" element component={Login} />
+          <Route path="/signUp" element component={SignUp} />*/}
           <Redirect to="/" />
         </Switch>
       </Router>
