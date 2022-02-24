@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 //import { isEmpty } from "../components/Utils";
 //css blog.scss
+
 import "../style/blog.scss";
 
 //import file.js
@@ -47,11 +48,10 @@ export default function MediaCard({ post }) {
   return (
     <>
         <Card className={classes.root}>
-        <div className='btnDeleteAndMofified_mediaCard_container'>
-          <BtnDeletePost />
-          <BtnModifiedPost />
-        </div>
-       
+            <div className='btnDeleteAndMofified_mediaCard_container'>
+              <BtnDeletePost />
+              <BtnModifiedPost />
+            </div>
         <CardActionArea>
         <CardHeader
         avatar={

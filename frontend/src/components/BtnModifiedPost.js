@@ -5,9 +5,7 @@ const BtnModifiedPost = () => {
       
         
     return (
-        
-            <button className='btn_btnModifiedPost'>Modifier</button>
-     
+       <button className='btn_btnModifiedPost'>Modifier</button>
     );
 };
 
