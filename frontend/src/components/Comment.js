@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import { isEmpty } from "../components/Utils";
+import BtnValid from './BtnValid';
+
 import "../style/comment.scss"
 
 
 //matrial ui
 import { makeStyles } from '@material-ui/core/styles';
-
 import Typography from '@material-ui/core/Typography';
 
 
@@ -47,7 +48,8 @@ export default function Comment(post) {
              <form className='container_comment'>
                   <Typography className={classes.heading}>{!isEmpty(users[0]) && users[0].firstname} {!isEmpty(users[0]) && users[0].lastname}</Typography>
                   <textarea className='comment_textArea' defaultValue={post.content} placeholder="Vous desirez mettre un  commentaire..."></textarea>
-                   <input type="submit" value="Validez votre commentaire" />
+               {/**    <input type="submit" value="Validez votre commentaire" />*/} 
+               <BtnValid />
               </form>   
           </div>     
           

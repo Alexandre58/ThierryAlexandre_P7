@@ -1,7 +1,7 @@
 //raccourci rsc
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import BtnValid from '../components/BtnValid';
 //css
 import "../style/profils.scss";
 //import
@@ -76,12 +76,13 @@ export const Profil = () => {
               minRows={20}
               placeholder="Laissez-vous guider par votre imagination..."
             />
-            <button
+         {/**   <button
               className="content_profil_button2"
               onClick={handleUpdate}
             >
               Valider vos modifications
-            </button>
+            </button>*/}
+            <BtnValid />
               </>
             )}
           </div>

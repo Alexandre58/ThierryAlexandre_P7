@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BtnModifiedPost = () => {
+const BtnModified = () => {
      
       
         
@@ -9,5 +9,5 @@ const BtnModifiedPost = () => {
     );
 };
 
-export default BtnModifiedPost;
+export default BtnModified;
 

@@ -7,7 +7,7 @@ export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const UPDATE_BIO = "UPDATE_BIO";
 
 //envoi ver post.reducer avec dispatch(dispatch envoi vers le reducer)
-export const getUser = (id) => {
+export const getUser = () => {
   return (dispatch) => {
     return axios
       .get(`${process.env.REACT_APP_API_URL}/api/users/ `)

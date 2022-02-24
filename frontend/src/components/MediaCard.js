@@ -7,8 +7,8 @@ import "../style/blog.scss";
 
 //import file.js
 import Comment from './Comment';
-import BtnDeletePost from './BtnDeletePost';
-import BtnModifiedPost from './BtnModifiedPost';
+import BtnDelete from './BtnDelete';
+import BtnModified from './BtnModified';
 
 
 //material ui
@@ -49,8 +49,8 @@ export default function MediaCard({ post }) {
     <>
         <Card className={classes.root}>
             <div className='btnDeleteAndMofified_mediaCard_container'>
-              <BtnDeletePost />
-              <BtnModifiedPost />
+              <BtnDelete />
+              <BtnModified />
             </div>
         <CardActionArea>
         <CardHeader
@@ -60,8 +60,8 @@ export default function MediaCard({ post }) {
             </Avatar>
         }
        
-        title= {users[0].firstname}
-        subheader= {users[0].lastname}
+         title= {users[0].firstname}  
+         subheader= {users[0].lastname}  
         ></CardHeader>
             <CardMedia
             className={classes.media}
@@ -91,6 +91,7 @@ export default function MediaCard({ post }) {
           <Divider />
           <Divider light />
           <Comment />
+        
         </Card>
       
     </>

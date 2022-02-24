@@ -40,7 +40,7 @@ export const Blog = () => {
           <Users />
           <div className="blog_container">
             <Typography variant="h1" className="h1blog">         
-    Bienvenu {/*  {userId[0].firstname} {userId[0].lastname}*/}  sur Groupomania publications 
+                   Bienvenu {/*  {userId[0].firstname} {userId[0].lastname}*/}  sur Groupomania publications 
             </Typography>
           </div>
           <Container>

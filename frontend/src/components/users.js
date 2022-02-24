@@ -19,7 +19,7 @@ const Users = () => {
           alt="image profil utilisateur"
         />
       </div>
-        <p>Like{!isEmpty(users[0]) && users[0].likes > 1 ? "s": null } : {!isEmpty(users[0]) && users[0].likes}</p>
+     
       
     </div>
   );
