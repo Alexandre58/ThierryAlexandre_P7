@@ -25,10 +25,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
   root: {
-    maxWidth: 300,
-    margin:10,
-    minWidth:280
-   
+   // maxWidth: 550,
+    margin:0,
+  //  minWidth:280
   },
   media: {
     height: 240,
@@ -47,7 +46,8 @@ export default function MediaCard({ post }) {
   const classes = useStyles();
   return (
     <>
-        <Card className={classes.root}>
+    <div className='container_mediaCard'>
+        <Card >
             <div className='btnDeleteAndMofified_mediaCard_container'>
               <BtnDelete />
               <BtnModified />
@@ -97,7 +97,7 @@ export default function MediaCard({ post }) {
           <Comment post = {post}/>
         
         </Card>
-      
+     </div> 
     </>
   );
 }

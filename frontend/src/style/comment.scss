@@ -18,9 +18,10 @@ $color-red-white:rgba(230, 43, 6, 0.8);
 .container_comment {
     display: flex;
     flex-direction: column;
+    width: 900px;
     padding: 0.5em;
     row-gap: 1em;
-    margin: 0.6em;
+    margin:auto;
     height: auto;
     text-align: center;
     @include add-shadow-black;
@@ -36,4 +37,19 @@ $color-red-white:rgba(230, 43, 6, 0.8);
         background-color: $color-red;
         color: white;
     }
-}
+   
+    }
+    @media screen and (max-width: 1050px){
+      .container_comment {
+        border: solid 2px black;
+        width: 500px;
+        margin: auto;
+      }
+      @media screen and (max-width: 650px){
+        .container_comment {
+          border: solid 2px black;
+          width: 300px;
+          margin: auto;
+        }  
+    }
+  }
