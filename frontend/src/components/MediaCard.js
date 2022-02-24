@@ -1,11 +1,15 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import { isEmpty } from "../components/Utils";
+//import { isEmpty } from "../components/Utils";
 //css blog.scss
 import "../style/blog.scss";
-import Like from './Like'
+
 //import file.js
 import Comment from './Comment';
+import BtnDeletePost from './BtnDeletePost';
+import BtnModifiedPost from './BtnModifiedPost';
+
+
 //material ui
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -43,6 +47,11 @@ export default function MediaCard({ post }) {
   return (
     <>
         <Card className={classes.root}>
+        <div className='btnDeleteAndMofified_mediaCard_container'>
+          <BtnDeletePost />
+          <BtnModifiedPost />
+        </div>
+       
         <CardActionArea>
         <CardHeader
         avatar={
@@ -50,6 +59,7 @@ export default function MediaCard({ post }) {
             imga
             </Avatar>
         }
+       
         title= {users[0].firstname}
         subheader= {users[0].lastname}
         ></CardHeader>
@@ -77,7 +87,7 @@ export default function MediaCard({ post }) {
               <Divider />
               <Divider light />    
           </List>*/} 
-          <Like />
+        
           <Divider />
           <Divider light />
           <Comment />
