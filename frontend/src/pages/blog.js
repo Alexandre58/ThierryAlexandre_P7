@@ -18,6 +18,8 @@ import '../style/blog.scss'
 /*pour memoire et remettre la connection correct 
 {userId ? <Home/> :
         <>
+j'ai enlever cette redirection qui fait un bug
+
   }
     </>
 
@@ -33,7 +35,9 @@ export const Blog = () => {
 
 //
   return (
-    <>
+    
+      
+       <>
       
           <NavBar />
           <section className="section_blog">
@@ -61,10 +65,12 @@ export const Blog = () => {
           </section>
 
           <Footer />
-        </>
-    
+          </>
+        
+       
   );
-    
+   
+   
 
     
 

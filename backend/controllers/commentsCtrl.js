@@ -7,7 +7,7 @@ moment.locale("fr");
 
 module.exports = {
   createComment: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     // Param
@@ -83,7 +83,7 @@ module.exports = {
     );
   },
   listComments: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     const messageId = parseInt(req.params.messageId);
@@ -138,7 +138,7 @@ module.exports = {
       });
   },
   updateComment: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
 
@@ -205,7 +205,7 @@ module.exports = {
     );
   },
   deleteComment: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
 

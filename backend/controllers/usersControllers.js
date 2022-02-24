@@ -297,7 +297,7 @@ deconnect: function (req, res) {
   },
   //*********************************************************recup user profil with his token valid
   getUserProfil: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
@@ -370,7 +370,7 @@ deconnect: function (req, res) {
 
   //4000:/users/profil/ can change bio and avatar with token user
   updateUserProfil: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
@@ -429,7 +429,7 @@ deconnect: function (req, res) {
   //************************************************************************PUT PATH ONLY ADMIN*/
   //4000/users/modifname/
   updateName: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // path .env
     const userId = decodedToken.userId;
     ///////
@@ -492,7 +492,7 @@ deconnect: function (req, res) {
 
   /********************************************************************************************************************* */
   updateEmail: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
@@ -576,7 +576,7 @@ deconnect: function (req, res) {
   },
   /**************************************************************************************************************************** */
   updatePassword: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
@@ -648,7 +648,7 @@ deconnect: function (req, res) {
   /*********************DELETE****************************************** */
   deleteUser: function (req, res) {
     // Getting auth header
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     // Params
@@ -1232,7 +1232,7 @@ deconnect: function (req, res) {
     });
   },
   giveAdminOtherUser: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
 

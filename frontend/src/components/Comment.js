@@ -1,7 +1,10 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../components/Utils";
 import BtnValid from './BtnValid';
+import BtnDelete from './BtnDelete';
+import BtnModified from './BtnModified';
+import { addComment, getPosts } from '../actions/post.action'
 
 import "../style/comment.scss"
 
@@ -9,8 +12,6 @@ import "../style/comment.scss"
 //matrial ui
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,17 +28,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Comment(post) {
+export default function Comment({post}) {
  //USER
+ console.log(post);
+  const [content, setComment] = React.useState("");
   const users = useSelector((state) => state.userReducer);
-
-
-
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+ // const [expanded, setExpanded] = React.useState(false);
+  const dispatch = useDispatch();
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+
+
+  const handleChange =(e) => {
+    e.preventDefault();
+     dispatch(addComment(post, {content: content, messageId:post.id}) )
+     .then(()=> dispatch(getPosts()) )
+     .then(()=> setComment("") )
+
   };
 
   return (
@@ -45,12 +52,16 @@ export default function Comment(post) {
         <>
       
           <div>
-             <form className='container_comment'>
+             <form className='container_comment' onSubmit={e => handleChange(e) }>
                   <Typography className={classes.heading}>{!isEmpty(users[0]) && users[0].firstname} {!isEmpty(users[0]) && users[0].lastname}</Typography>
-                  <textarea className='comment_textArea' defaultValue={post.content} placeholder="Vous desirez mettre un  commentaire..."></textarea>
-               {/**    <input type="submit" value="Validez votre commentaire" />*/} 
+                  <textarea className='comment_textArea' value={content} onChange= {(e)=> setComment(e.target.value)} defaultValue={post.content} placeholder="Vous desirez mettre un  commentaire..."></textarea>
+              {/*   <input type="submit" value="Validez votre commentaire" />*/} 
                <BtnValid />
-              </form>   
+               <BtnModified /> 
+               <BtnDelete /> 
+
+              </form>
+               
           </div>     
           
        </>  

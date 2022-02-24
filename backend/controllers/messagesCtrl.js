@@ -294,7 +294,7 @@ module.exports = {
       });
   },
   listPostsUser: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
 
@@ -365,7 +365,7 @@ module.exports = {
       });
   },
   updatePosts: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
@@ -451,7 +451,7 @@ module.exports = {
   },
   deletePosts: function (req, res) {
     //Params
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     const messageId = parseInt(req.params.messageId);

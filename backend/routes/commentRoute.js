@@ -8,7 +8,7 @@ const commentsCtrl = require("../controllers/commentsCtrl");
 
 //CRUD COMMENTS
 //create comment 4000/id
-router.post("/new/:messageId", auth, commentsCtrl.createComment);
+router.post("/comment/new/:messageId", auth, commentsCtrl.createComment);
 //get 4000/comments/id
 router.get("/comments/:messageId", auth, commentsCtrl.listComments);
 //update 4000/update/id

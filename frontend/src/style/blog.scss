@@ -36,9 +36,10 @@ $color-red-white:rgba(230, 43, 6, 1);
   }
   .container_blog_mediaCard {
         display: flex;
-        flex-wrap: wrap;
+       flex-direction: column;
         margin: auto;
-        justify-content: space-evenly;
+        align-items: center;
+        justify-content:center;
         background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
         url("../images/icon-left-font-long.png" );
         object-fit: cover;
@@ -88,7 +89,9 @@ $color-red-white:rgba(230, 43, 6, 1);
     padding: 1em;
     background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
     url("../images/icon-left-font-long.png" );
-    width: 50%;
+    width: 100%;
+    max-width: 500px;
+
     @include add-shadow-black;
     margin: auto;
     .p_form_mediaCard {
