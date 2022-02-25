@@ -65,7 +65,9 @@ body {
     transform: scale(1.05);
     opacity: 1;
   }
-
+  li:visited {
+    color: #1b1919;
+  }
   .img_navBar img {
     background: transparent;
     height: 8vh;

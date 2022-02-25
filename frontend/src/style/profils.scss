@@ -25,8 +25,8 @@ $color-red: #fd2b01;
   .profil_container {
     //  margin: auto;
     bottom: 76vh;
-    max-height: 100px;
-    width: 100%;
+    max-height: 100vw;
+    margin: auto;
     text-align: center;
     background-color:  rgb(247, 231, 231);
     //  border: solid 1px whitesmoke;
@@ -89,7 +89,7 @@ $color-red: #fd2b01;
         z-index: 10;
         color: black;
         font-size: 1.2em;
-        margin: 1em;
+      
       }
     .content_profil_button:hover, .content_profil_button2:hover {
          transform: scale(1.05);

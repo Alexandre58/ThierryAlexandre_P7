@@ -48,4 +48,14 @@ $color-red-white:rgba(230, 43, 6, 0.8);
       box-shadow: 5px 2px 29px 5px #0f02029a;
     
     }
+ 
+}
+@media screen and (max-width:600px){
+  .user-container {
+    margin-left: 0em !important;
+  }
+  .user-container {
+    display: none;
+  }
+
 }

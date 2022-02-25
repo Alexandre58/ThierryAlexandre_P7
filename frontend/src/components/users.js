@@ -18,7 +18,7 @@ const Users = () => {
         <img
           src={require("../images/icon.png")}
           className="img_profil"
-          alt="image profil utilisateur"
+          alt="profil utilisateur"
         />
       </div>
     </div>

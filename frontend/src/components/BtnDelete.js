@@ -1,6 +1,5 @@
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import { deletePost, getComments, deleteComment } from "../actions/post.action";
 import axios from "axios";

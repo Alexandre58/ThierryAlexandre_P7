@@ -29,7 +29,8 @@ const Logout = () => {
     return (
       <div className='logout_deconnect_container'>
           <li onClick={logout}>
-              <p className='logout_deconnect'>Voulez-vous vous deconnecter</p>
+              <p className='logout_deconnect'>Merci de votre visite, cliquer pour valider la déconnexion...<br/>A bientôt!</p>
+
           </li>
       </div>
     );
