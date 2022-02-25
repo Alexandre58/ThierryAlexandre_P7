@@ -1,4 +1,4 @@
-$color-red: #fd2b01;
+$color-red: #fab9ab;
 $color-red-black: #a8341d;
 
 
@@ -15,7 +15,7 @@ $color-red-black: #a8341d;
 
 
 .signup_components {
-  background-color:  $color-red;
+  background-color:  rgb(250, 235, 235);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,13 +27,13 @@ $color-red-black: #a8341d;
   min-width: 150px;
   margin: 1em;
   .h2signup {
-    color: aliceblue;
+   font-weight: 400;
     font-size: 1.5em;
   }
   .form_signup {
     display: flex;
     flex-direction: column;
-    color: azure;
+    
   }
   .btnSignup {
     background:$color-red-black;

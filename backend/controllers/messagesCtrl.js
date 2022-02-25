@@ -44,7 +44,9 @@ module.exports = {
               done(null, userFound);
             })
             .catch(function (err) {
-              return res.status(500).json({ error: "user verification not possible" });
+              return res
+                .status(500)
+                .json({ error: "user verification not possible" });
             });
         },
         function (userFound, done) {
@@ -56,7 +58,9 @@ module.exports = {
               dislikes: 0,
               UserId: userFound.id,
               comments: 0,
-              attachment: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+              attachment: `${req.protocol}://${req.get("host")}/images/${
+                req.file.filename
+              }`,
             }).then(function (newMessage) {
               done(newMessage);
             });
@@ -73,7 +77,8 @@ module.exports = {
           var order = req.query.order;
           models.Message.findAll({
             order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-            attributes: fields !== "*" && fields != null ? fields.split(",") : null,
+            attributes:
+              fields !== "*" && fields != null ? fields.split(",") : null,
             limit: !isNaN(limit) ? limit : null,
             offset: !isNaN(offset) ? offset : null,
             include: [
@@ -83,34 +88,37 @@ module.exports = {
               },
             ],
           }).then(function (allMessageFound) {
-            const allMessageFoundParsed = JSON.parse(JSON.stringify(allMessageFound));
+            const allMessageFoundParsed = JSON.parse(
+              JSON.stringify(allMessageFound)
+            );
 
             if (allMessageFound) {
-              const messagesFormated = allMessageFoundParsed.map((element) => {
-                const postedDate = moment(element.createdAt).local().format("MMMM Do YYYY, h:mm:ss a");
+              const messagesFormated = allMessageFoundParsed.map(element => {
+                const postedDate = moment(element.createdAt)
+                  .local()
+                  .format("MMMM Do YYYY, h:mm:ss a");
                 element.createdAt = postedDate;
-                
-                console.log(postedDate);
-                
 
-                const updatedDate = moment(element.updatedAt).local().format("MMMM Do YYYY, h:mm:ss a");
+                console.log(postedDate);
+
+                const updatedDate = moment(element.updatedAt)
+                  .local()
+                  .format("MMMM Do YYYY, h:mm:ss a");
                 element.updatedAt = updatedDate;
                 return element;
-                
               });
-              
+
               return res.status(201).json(messagesFormated);
             }
           });
         } else {
-          
           return res.status(500).json({ error: "unable to post message" });
         }
       }
     );
   },
   /**********************************POST************************************************ */
-//news posts=4000/posts/new/ post users with their token
+  //news posts=4000/posts/new/ post users with their token
   createPosts: function (req, res) {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
@@ -138,7 +146,9 @@ module.exports = {
               done(null, userFound);
             })
             .catch(function (err) {
-              return res.status(500).json({ error: "vérification utilisateur impossible" });
+              return res
+                .status(500)
+                .json({ error: "vérification utilisateur impossible" });
             });
         },
         function (userFound, done) {
@@ -166,7 +176,8 @@ module.exports = {
           var order = req.query.order;
           models.Message.findAll({
             order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-            attributes: fields !== "*" && fields != null ? fields.split(",") : null,
+            attributes:
+              fields !== "*" && fields != null ? fields.split(",") : null,
             limit: !isNaN(limit) ? limit : null,
             offset: !isNaN(offset) ? offset : null,
             include: [
@@ -176,14 +187,20 @@ module.exports = {
               },
             ],
           }).then(function (allMessageFound) {
-            const allMessageFoundParsed = JSON.parse(JSON.stringify(allMessageFound));
+            const allMessageFoundParsed = JSON.parse(
+              JSON.stringify(allMessageFound)
+            );
 
             if (allMessageFound) {
-              const messagesFormated = allMessageFoundParsed.map((element) => {
-                const postedDate = moment(element.createdAt).local().format("MMMM Do YYYY, h:mm:ss a");
+              const messagesFormated = allMessageFoundParsed.map(element => {
+                const postedDate = moment(element.createdAt)
+                  .local()
+                  .format("MMMM Do YYYY, h:mm:ss a");
                 element.createdAt = postedDate;
 
-                const updatedDate = moment(element.updatedAt).local().format("MMMM Do YYYY, h:mm:ss a");
+                const updatedDate = moment(element.updatedAt)
+                  .local()
+                  .format("MMMM Do YYYY, h:mm:ss a");
                 element.updatedAt = updatedDate;
                 return element;
               });
@@ -191,13 +208,15 @@ module.exports = {
             }
           });
         } else {
-          return res.status(500).json({ error: "impossible de poster le message" });
+          return res
+            .status(500)
+            .json({ error: "impossible de poster le message" });
         }
       }
     );
   },
   /**********************************GET*********************************************** */
-//list posts = localhost:4000/user/posts + token
+  //list posts = localhost:4000/user/posts + token
   listPosts: function (req, res) {
     const fields = req.query.fields;
     const limit = parseInt(req.query.limit);
@@ -225,14 +244,17 @@ module.exports = {
     })
       .then(function (messages) {
         const messagesParsed = JSON.parse(JSON.stringify(messages));
-       
+
         if (messages) {
-          const messagesFormated = messagesParsed.map((element) => {
-           
-            const postedDate = moment(element.createdAt).local().format("MMMM Do YYYY, h:mm:ss a");
+          const messagesFormated = messagesParsed.map(element => {
+            const postedDate = moment(element.createdAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss a");
             element.createdAt = postedDate;
 
-            const updatedDate = moment(element.updatedAt).local().format("MMMM Do YYYY, h:mm:ss a");
+            const updatedDate = moment(element.updatedAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss a");
             element.updatedAt = updatedDate;
             return element;
           });
@@ -274,12 +296,15 @@ module.exports = {
       .then(function (messages) {
         const messagesParsed = JSON.parse(JSON.stringify(messages));
         if (messages) {
-          const messagesFormated = messagesParsed.map((element) => {
-         
-            const postedDate = moment(element.createdAt).local().format("MMMM Do YYYY, h:mm:ss a");
+          const messagesFormated = messagesParsed.map(element => {
+            const postedDate = moment(element.createdAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss a");
             element.createdAt = postedDate;
 
-            const updatedDate = moment(element.updatedAt).local().format("MMMM Do YYYY, h:mm:ss a");
+            const updatedDate = moment(element.updatedAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss a");
             element.updatedAt = updatedDate;
             return element;
           });
@@ -323,11 +348,15 @@ module.exports = {
       .then(function (messages) {
         const messagesParsed = JSON.parse(JSON.stringify(messages));
         if (messages) {
-          const messagesFormated = messagesParsed.map((element) => {
-            const postedDate = moment(element.createdAt).local().format("MMMM Do YYYY, h:mm:ss");
+          const messagesFormated = messagesParsed.map(element => {
+            const postedDate = moment(element.createdAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss");
             element.createdAt = postedDate;
 
-            const updatedDate = moment(element.updatedAt).local().format("MMMM Do YYYY, h:mm:ss a");
+            const updatedDate = moment(element.updatedAt)
+              .local()
+              .format("MMMM Do YYYY, h:mm:ss a");
             element.updatedAt = updatedDate;
             return element;
           });
@@ -361,7 +390,9 @@ module.exports = {
         }
       })
       .catch(function (err) {
-        res.status(500).json({ error: "impossible de récupérer la publication" });
+        res
+          .status(500)
+          .json({ error: "impossible de récupérer la publication" });
       });
   },
   updatePosts: function (req, res) {
@@ -395,7 +426,9 @@ module.exports = {
               done(null, messageFound, userFound);
             })
             .catch(function (err) {
-              return res.status(500).json({ error: "vérification utilisateur impossible" });
+              return res
+                .status(500)
+                .json({ error: "vérification utilisateur impossible" });
             });
         },
         function (messageFound, userFound, done) {
@@ -406,18 +439,25 @@ module.exports = {
               done(null, messageFound, userFound, userFoundAdmin);
             })
             .catch(function (err) {
-              return res.status(500).json({ error: "vérification utilisateur impossible" });
+              return res
+                .status(500)
+                .json({ error: "vérification utilisateur impossible" });
             });
         },
         function (messageFound, userFound, userFoundAdmin, done) {
           if (messageFound) {
-            if (messageFound.UserId === userFound.id || (userFoundAdmin.isAdmin && userFoundAdmin.id === userId)) {
+            if (
+              messageFound.UserId === userFound.id ||
+              (userFoundAdmin.isAdmin && userFoundAdmin.id === userId)
+            ) {
               if (req.file) {
                 messageFound
                   .update({
                     title: title ? title : messageFound.title,
                     content,
-                    attachment: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+                    attachment: `${req.protocol}://${req.get("host")}/images/${
+                      req.file.filename
+                    }`,
                   })
                   .then(function (newMessageFound) {
                     done(newMessageFound);
@@ -433,7 +473,9 @@ module.exports = {
                   });
               }
             } else {
-              res.status(404).json({ error: "cette publication ne vous appartient guère" });
+              res
+                .status(404)
+                .json({ error: "cette publication ne vous appartient guère" });
             }
           } else {
             res.status(404).json({ error: "utilisateur introuvable" });
@@ -444,7 +486,9 @@ module.exports = {
         if (messageFound) {
           return res.status(201).json(messageFound);
         } else {
-          return res.status(500).json({ error: "impossible de poster la modification" });
+          return res
+            .status(500)
+            .json({ error: "impossible de poster la modification" });
         }
       }
     );
@@ -455,101 +499,21 @@ module.exports = {
     const decodedToken = jwt.verify(token, process.env.TOKEN);
     const userId = decodedToken.userId;
     const messageId = parseInt(req.params.messageId);
-
-    asyncLib.waterfall([
-      function (done) {
-        models.Comment.findAll({
-          where: { messageId },
-          attributes: ["id"],
+    console.log(messageId);
+    models.Comment.destroy({
+      where: { messageId: messageId },
+    }).then(results => {
+      models.Message.destroy({
+        where: { id: messageId },
+      })
+        .then(function (destroyMessageFound) {
+          return res.status(201).json(destroyMessageFound);
         })
-          .then(function (commentsFound) {
-            let commentIds = [];
-
-            commentsFound.map(({ id }) => {
-              commentIds.push(id);
-            });
-            done(null, commentIds);
-          })
-          .catch(function (err) {
-            res.status(500).json({ error: "vérification commentaire impossible" });
-          });
-      },
-      function (commentIds, done) {
-        models.CommentsLike.destroy({
-          where: { commentId: commentIds },
-        })
-          .then(function () {
-            done(null);
-          })
-          .catch(function (err) {
-            res.status(500).json({ error: "impossible de supprimer les commentaires like" });
-          });
-      },
-      function (done) {
-        models.Comment.destroy({
-          where: { messageId: messageId },
-        })
-          .then(() => {
-            models.Like.destroy({
-              where: { messageId: messageId },
-            });
-            done(null);
-          })
-          .catch((err) => {
-            return res.status(500).json({ error: "impossible de supprimer les commentaires" });
-          });
-      },
-      function (done) {
-        models.Message.findOne({
-          where: { id: messageId },
-        })
-          .then(function (messageFound) {
-            done(null, messageFound);
-          })
-          .catch(function (err) {
-            return res.status(500).json({ error: "impossible de vérifier la publication" });
-          });
-      },
-      function (messageFound, done) {
-        models.User.findOne({
-          where: { isAdmin: true, id: userId },
-        })
-          .then(function (userFoundAdmin) {
-            done(null, messageFound, userFoundAdmin);
-          })
-          .catch(function (err) {
-            res.status(500).json({ error: "impossible de véifier l'utilisateur" });
-          });
-      },
-      function (messageFound, userFoundAdmin, done) {
-        if (messageFound.UserId === userId || (userFoundAdmin.isAdmin === true && userFoundAdmin.id === userId)) {
-          if (messageFound.attachment === null) {
-            messageFound
-              .destroy({
-                where: { id: messageId },
-              })
-              .then(function (destroyMessageFound) {
-                return res.status(201).json(destroyMessageFound);
-              })
-              .catch(function (err) {
-                res.status(500).json({ error: "impossible de supprimer la publication" });
-              });
-          } else {
-            const filename = messageFound.attachment.split("/images/")[1];
-            fs.unlink(`images/${filename}`, (err) => {
-              if (err) return res.status(500).json({ error: "impossible de supprimer la publication" });
-              messageFound
-                .destroy({
-                  where: { id: messageId },
-                })
-                .then((destroyMessageFoundImg) => {
-                  return res.status(201).json(destroyMessageFoundImg);
-                });
-            });
-          }
-        } else return res.status(500).json({ error: "la publication ne vous appartient pas" });
-      },
-    ]);
+        .catch(function (err) {
+          res
+            .status(500)
+            .json({ error: "impossible de supprimer la publication" });
+        });
+    });
   },
 };
-

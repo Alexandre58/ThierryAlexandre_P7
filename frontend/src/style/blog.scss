@@ -1,5 +1,5 @@
-$color-red: #fd2b01;
-$color-red-white:rgba(230, 43, 6, 1);
+$color-red: #fce4df;
+$color-red-white:rgb(247, 235, 233);
 @mixin add-shadow-black{
   border-radius: 9px 9px 9px 9px;
   -webkit-box-shadow: 3px 5px 12px 10px #b4afaf;
@@ -14,14 +14,13 @@ $color-red-white:rgba(230, 43, 6, 1);
 .section_blog {
   display: flex;
   position: relative;
-  margin: auto;
-  margin-right: 1%;
-  margin-left: 1%;
+  margin: 0;
   height: 100%;
+  max-width:800vw ;
   padding: 5em 2em;
   margin-top: 150px;
   background-color: #f4f9fa;
-  @include add-shadow-black;
+  box-shadow: 3px 2px 12px 0px #131212;
 
   .blog_container {
     position: absolute;
@@ -32,7 +31,7 @@ $color-red-white:rgba(230, 43, 6, 1);
     width: 70%;
     text-align: center;
     @include add-shadow-black;
-    background-color: rgba(230, 43, 6, 0.9);
+    background-color: rgb(250, 243, 243);
   }
   .container_blog_mediaCard {
         display: flex;
@@ -41,12 +40,13 @@ $color-red-white:rgba(230, 43, 6, 1);
         justify-content: center;
         align-items: center;
         row-gap: 30px;
-        background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+        background-image: linear-gradient(rgba(248, 164, 148, 0.4), rgba(243, 236, 234, 0.1)),
         url("../images/icon-left-font-long.png" );
         object-fit: cover;
         @include add-shadow-black;
         margin-top: 30px;
         padding-top: 50px;
+       
     
        & .btnDeleteAndMofified_mediaCard_container {
          display: flex;
@@ -110,11 +110,14 @@ $color-red-white:rgba(230, 43, 6, 1);
       width: 90%;
       @include add-shadow-black;
     }
+    .input_button_mediaCard:hover {
+      transform: scale(1.02);
+    }
   }
   .h1blog {
-    color: white;
+    font-weight: 400;
     padding: 1.5em;
-    font-size: 1em;
+    font-size: 1.2em;
   }
   .message_notConnectBlog {
     padding: 2em;
@@ -131,9 +134,7 @@ $color-red-white:rgba(230, 43, 6, 1);
 }
 @media screen and (max-width: 850px){
   .form_mediaCard {
-    border: solid 2px rgb(197, 9, 9);
     min-width: 400px;
-
   }
   
   .p_form_mediaCard {

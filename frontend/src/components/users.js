@@ -16,7 +16,7 @@ const Users = () => {
       </p>
       <div className="img__users">
         <img
-          src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
+          src={require("../images/icon.png")}
           className="img_profil"
           alt="image profil utilisateur"
         />

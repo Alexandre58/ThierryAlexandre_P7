@@ -1,9 +1,4 @@
-import {
-  ADD_POSTS,
-  GET_POSTS,
-  ADD_COMMENT,
-  GET_COMMENTS,
-} from "../actions/post.action";
+import { ADD_POSTS, DELETE_POST, GET_POSTS } from "../actions/post.action";
 
 const initialState = {};
 
@@ -15,10 +10,8 @@ export default function postReducer(state = initialState, action) {
       return action.payload;
     case ADD_POSTS:
       return [action.payload, ...state];
-    case ADD_COMMENT:
-      return action.payload;
-    case GET_COMMENTS:
-      return action.payload;
+    case DELETE_POST:
+      return [action.payload, ...state];
     default:
       return state;
   }

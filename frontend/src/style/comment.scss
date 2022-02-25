@@ -36,7 +36,8 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     }
     .button_comment {
       display: flex;
-      flex-direction: column;
+      justify-content: space-around;
+      
     }
     & input {
         background-color: $color-red;
@@ -46,13 +47,12 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     }
 @media screen and (max-width: 1050px){
   .container_comment {
-    border: solid 2px black;
     width: 500px;
     margin: auto;
   }
   @media screen and (max-width: 650px){
     .container_comment {
-      border: solid 2px black;
+
       width: 300px;
       margin: auto;
     }  

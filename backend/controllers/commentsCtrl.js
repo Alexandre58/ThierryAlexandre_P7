@@ -105,17 +105,13 @@ module.exports = {
       include: [
         {
           model: models.User,
-          attributes: ["firstname", "lastname", "avatar"],
-        },
-        {
-          model: models.CommentsLike,
         },
       ],
     })
-      .then((messages) => {
+      .then(messages => {
         const messagesParsed = JSON.parse(JSON.stringify(messages));
         if (messages) {
-          const messagesFormated = messagesParsed.map((element) => {
+          const messagesFormated = messagesParsed.map(element => {
             const postedDate = moment(element.createdAt)
               .local()
               .format("MMMM Do YYYY, h:mm:ss a");
@@ -213,7 +209,7 @@ module.exports = {
 
     let messageId = parseInt(req.params.messageId);
     let commentId = parseInt(req.params.commentId);
-
+    console.log(messageId, commentId);
     if (messageId <= 0) {
       return res.status(400).json({ error: "paramètres invalide" });
     }
@@ -259,8 +255,9 @@ module.exports = {
               .json({ error: "impossible de vérifier l'utilisateur" });
           });
       },
-      function (messageFound, commentFound, userFoundAdmin, done) {
+      /*function (messageFound, commentFound, userFoundAdmin, done) {
         if (commentFound) {
+          console.log(commentFound);
           models.Comment.findOne({
             where: {
               messageId: messageId,
@@ -269,7 +266,7 @@ module.exports = {
             .then(function (commentFound) {
               done(null, messageFound, commentFound, userFoundAdmin);
             })
-            .catch(function (_err) {
+            .catch(function (err) {
               return res.status(500).json({
                 error: "impossible de vérifier le commentaire et l'utilisateur",
               });
@@ -277,8 +274,8 @@ module.exports = {
         } else {
           return res.status(500).json({ error: "ce commentaire n'existe pas" });
         }
-      },
-      function (messageFound, commentFound, userFoundAdmin, done) {
+      },*/
+      /*function (messageFound, commentFound, userFoundAdmin, done) {
         models.CommentsLike.findAll({
           where: { commentId },
           attributes: ["id"],
@@ -322,7 +319,7 @@ module.exports = {
               error: "impossible de supprimer les likes du commentaire",
             });
           });
-      },
+      },*/
 
       function (messageFound, commentFound, userFoundAdmin, _done) {
         if (commentFound) {
@@ -333,13 +330,13 @@ module.exports = {
             models.Comment.destroy({
               where: { id: commentId },
             })
-              .then((commentFound) => {
+              .then(commentFound => {
                 messageFound.update({
                   comments: messageFound.comments - 1,
                 });
                 return res.status(201).json(commentFound);
               })
-              .catch((_err) => {
+              .catch(_err => {
                 return res
                   .status(500)
                   .json({ error: "impossible de supprimer ce commentaire" });
@@ -348,14 +345,14 @@ module.exports = {
             models.Comment.destroy({
               where: { id: commentId, userId: userId },
             })
-              .then((commentFound) => {
+              .then(commentFound => {
                 messageFound.update({
                   comments: messageFound.comments - 1,
                 });
 
                 return res.status(201).json(commentFound);
               })
-              .catch((_err) => {
+              .catch(_err => {
                 return res
                   .status(500)
                   .json({ error: "impossible de supprimer ce commentaire" });

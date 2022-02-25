@@ -42,7 +42,7 @@ export const Profil = () => {
         <div className="profil_page">
           <div className="img_container_profil">
             <img
-              src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
+              src={require("../images/icon.png")}
               className="img_profil"
               alt="image profil"
             />

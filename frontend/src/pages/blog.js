@@ -16,7 +16,6 @@ import { getComments } from "../actions/post.action";
 
 //scss
 import "../style/blog.scss";
-import "../style/btnDeleteandMody.scss";
 /*pour memoire et remettre la connection correct 
 {userId ? <Home/> :
         <>
@@ -28,10 +27,8 @@ import "../style/btnDeleteandMody.scss";
 export const Blog = () => {
   const dispatch = useDispatch();
   const posts = useSelector(state => state.postReducer);
-  console.log(posts);
   //USER
   const userId = useSelector(state => state.userReducer);
-  console.log(userId);
 
   //
   return (
@@ -50,7 +47,7 @@ export const Blog = () => {
           <div className="container_blog_mediaCard">
             {!isEmpty(posts) &&
               posts.map((post, index) => {
-                return <MediaCard post={post} key={index} />;
+                return <MediaCard post={post} key={post.id} />;
               })}
           </div>
         </Container>

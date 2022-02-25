@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../components/Utils";
 import BtnValid from "./BtnValid";
 import BtnDelete from "./BtnDelete";
 import BtnModified from "./BtnModified";
-import { addComment, getComments, getPosts } from "../actions/post.action";
 
 import "../style/comment.scss";
 
@@ -12,8 +11,10 @@ import "../style/comment.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import { UidContext } from "../App";
 
 import axios from "axios";
+import { getUser } from "../actions/user.actions";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,17 +32,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Comment({ post }) {
-  //USER
-  console.log(post);
+  const uid = useContext(UidContext);
+  const [comments, setComments] = React.useState([]);
   const [content, setComment] = React.useState("");
   const users = useSelector(state => state.userReducer);
-  const [comments, setComments] = React.useState([]);
+  console.log(users);
+  const com = useSelector(state => state.commentsReducer);
+
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
   const dispatch = useDispatch();
-
-  //const uid = useContext(UidContext);
-
   React.useEffect(() => {
     axios({
       method: "get",
@@ -50,29 +50,9 @@ export default function Comment({ post }) {
     })
       .then(res => {
         setComments(res.data);
-        console.log(comments);
       })
       .catch(err => console.log(err));
-  }, []);
-
-  const handleChange = e => {
-    e.preventDefault();
-    dispatch(addComment(post, { content: content, messageId: post.id })).then(
-      res => {
-        axios({
-          method: "get",
-          url: `${process.env.REACT_APP_API_URL}/api/comments/${post.id}`,
-          withCredentials: true,
-        })
-          .then(res => {
-            setComments(res.data);
-            setComment("");
-            console.log(comments);
-          })
-          .catch(err => console.log(err));
-      }
-    );
-  };
+  }, [com]);
 
   return (
     <>
@@ -90,8 +70,15 @@ export default function Comment({ post }) {
                 );
               })}
               <strong>{com.content}</strong> <em>{com.createdAt}</em>
-              <BtnDelete />
-              <BtnModified />
+              {(com.userId === uid || users.isAdmin == 1) && (
+                <>
+                  <BtnDelete
+                    action={"DELETE_COMMENT"}
+                    data={{ postId: post.id, commentId: com.id, post: post }}
+                  />
+                  <BtnModified onClick={e => setComment(com.content)} />
+                </>
+              )}
               <Divider light />
             </div>
           );
@@ -100,7 +87,7 @@ export default function Comment({ post }) {
         <></>
       )}
       <div>
-        <form className="container_comment" onSubmit={e => handleChange(e)}>
+        <form className="container_comment">
           <Typography className={classes.heading}>
             {!isEmpty(users[0]) && users[0].firstname}{" "}
             {!isEmpty(users[0]) && users[0].lastname}
@@ -112,8 +99,7 @@ export default function Comment({ post }) {
             placeholder="Vous desirez mettre un  commentaire..."
           ></textarea>
           {/*   <input type="submit" value="Validez votre commentaire" />*/}
-          <BtnValid />
-          <BtnDelete />
+          <BtnValid action={"SAVE_COMMENT"} post={post} content={content} />
         </form>
       </div>
     </>

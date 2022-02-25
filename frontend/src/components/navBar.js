@@ -1,53 +1,55 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { UidContext } from '../App';
-import { isEmpty } from "../components/Utils";
+import { UidContext } from "../App";
+import { isEmpty } from "./Utils";
 export const NavBar = () => {
-   const uid = useContext(UidContext);
-   
-   const users = useSelector((state) => state.userReducer);
+  const uid = useContext(UidContext);
 
-    return (
+  const users = useSelector(state => state.userReducer);
+
+  return (
     <>
-        <header className="header_navBar">
-    
-            <nav className="navBarSite" >
-                <ul className="ulHome">
+      <header className="header_navBar">
+        <nav className="navBarSite">
+          <ul className="ulHome">
+            {uid ? (
+              <li>
+                <Link to="/deconnexion">Deconnection</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/">Connexion</Link>
+              </li>
+            )}
 
-                { uid ? 
-                  
-                  <li>
-                   <Link to="/deconnexion">Deconnection</Link>
-                 </li>
-             :
-                   <li>
-                     <Link to="/">Connexion</Link>
-                  </li>
-             }
-               
-                    <li>
-                      <Link to="/Blog">Blogs</Link>
-                    </li>
-                    <li>
-                      <Link to="/Profil">Profil</Link>
-                    </li>
-                </ul>
-                        
-            </nav>
-           
-                {uid ? (
-                  <p className='p_Navbar'> Bonjour {!isEmpty(users[0]) && users[0].firstname}</p>        
-                ) : ( 
-                  <p className='p_Navbar'>Merci de bien vouloir vous connecter</p>
-                )}
-            
-            <Link to="/Blog">
-              <div className='img_navBar'>
-                      <img src={require ("../images/icon-left-font-long.png") } alt="logo de notre site groupomania" />
-              </div>
-            </Link>
-        </header>
-   </>  
-    );
+            <li>
+              <Link to="/Blog">Blogs</Link>
+            </li>
+            <li>
+              <Link to="/Profil">Profil</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {uid ? (
+          <p className="p_Navbar">
+            {" "}
+            Bonjour {!isEmpty(users[0]) && users[0].firstname}
+          </p>
+        ) : (
+          <p className="p_Navbar">Merci de bien vouloir vous connecter</p>
+        )}
+
+        <Link to="/Blog">
+          <div className="img_navBar">
+            <img
+              src={require("../images/icon-left-font-long.png")}
+              alt="logo de notre site groupomania"
+            />
+          </div>
+        </Link>
+      </header>
+    </>
+  );
 };

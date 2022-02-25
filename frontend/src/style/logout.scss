@@ -1,5 +1,5 @@
-$color-red: #fd2b01;
-$color-red-white:rgba(230, 43, 6, 0.8);
+$color-red: #fdf8f7;
+$color-red-white:rgba(200, 42, 10, 0.8);
 
 @mixin add-shadow-black {
   border-radius: 9px 9px 9px 9px;
@@ -29,8 +29,9 @@ $color-red-white:rgba(230, 43, 6, 0.8);
         background-color: $color-red;
         padding: 0.8em;
         @include add-shadow-white;
-        color: aliceblue;
+        font-weight: 600;
         font-size: 1.2em;
+        text-align: center;
     }
     li {
      

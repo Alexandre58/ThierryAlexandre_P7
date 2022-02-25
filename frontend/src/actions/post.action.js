@@ -4,6 +4,8 @@ export const GET_POSTS = "GET_POSTS";
 export const ADD_POSTS = "ADD_POSTS";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const GET_COMMENTS = "GET_COMMENTS";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const DELETE_POST = "DELETE_POST";
 
 //envoi vers post.reducer (dispatch envoi vers le reducer api/posts)
 export const getPosts = () => {
@@ -17,7 +19,7 @@ export const getPosts = () => {
       .catch(err => console.log(err));
   };
 };
-//?_sort=id&_order=desc
+//?_sort=id&_order=desc remis en place pour que les dernier post arrive bien en premiere position
 
 //add post
 export const addPost = data => {
@@ -62,6 +64,36 @@ export const getComments = post => {
       .then(res => {
         console.log(res);
         dispatch({ type: GET_COMMENTS, payload: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+export const deleteComment = data => {
+  return dispatch => {
+    return axios({
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/api/user/${data.postId}/${data.commentId}`,
+      withCredentials: true,
+    })
+      .then(res => {
+        console.log(res);
+        dispatch({ type: DELETE_COMMENT, payload: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+export const deletePost = post => {
+  return dispatch => {
+    return axios({
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/api/posts/${post.id}`,
+      withCredentials: true,
+    })
+      .then(res => {
+        console.log(res);
+        dispatch(getPosts());
       })
       .catch(err => console.log(err));
   };

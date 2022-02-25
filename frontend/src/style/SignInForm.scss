@@ -15,7 +15,7 @@ $color-red-white: #f7efee;
 
 
 .login_components {
-    background-color:  $color-red;
+    background-color: rgb(252, 232, 232);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,11 +29,11 @@ $color-red-white: #f7efee;
     .form_login {
       display: flex;
       flex-direction: column;
-      color: azure;
+    
       
     }
     .h2login {
-      color: aliceblue;
+     font-weight: 400;
       font-size: 1.5em;
     }
 
