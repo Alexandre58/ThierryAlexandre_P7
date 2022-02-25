@@ -50,12 +50,15 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     }
  
 }
-@media screen and (max-width:600px){
+@media screen and (max-width:700px){
   .user-container {
     margin-left: 0em !important;
   }
   .user-container {
     display: none;
+  }
+  .section_blog .form_mediaCard {
+    width: 90% !important ;
   }
 
 }
