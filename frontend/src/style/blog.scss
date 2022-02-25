@@ -15,8 +15,8 @@ $color-red-white:rgba(230, 43, 6, 1);
   display: flex;
   position: relative;
   margin: auto;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-right: 1%;
+  margin-left: 1%;
   height: 100%;
   padding: 5em 2em;
   margin-top: 150px;
@@ -55,12 +55,10 @@ $color-red-white:rgba(230, 43, 6, 1);
          @include add-shadow-black;
          width: 90%;
          padding-left: 15px;
-         
          height: 50px;
          margin: 12px auto;
         & .btn_btnModifiedPost {
          border-radius: 50px;
-       
           background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
           url("../images/icon-left-font-long.png" );
          }
@@ -71,7 +69,6 @@ $color-red-white:rgba(230, 43, 6, 1);
          }
          & .btn_btnDeletePost {
           border: solid 2px rgb(167, 163, 163);
-        
           padding: 0;
           background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
           url("../images/icon-left-font-long.png" );
@@ -136,10 +133,54 @@ $color-red-white:rgba(230, 43, 6, 1);
   .CartContent_title_content {
     min-height: 200px;
   }
-  @media screen and (max-width: 500px){
-    .blog_container {
-      font-size: 1em;
-      
-    }
+ 
+
+}
+@media screen and (max-width: 850px){
+  .form_mediaCard {
+    border: solid 2px rgb(197, 9, 9);
+    min-width: 400px;
+
+  }
+  
+  .p_form_mediaCard {
+    font-size: 0em;
+    padding: 0.5em;
+    margin-bottom: 3px;
+  }
+}
+@media screen and (max-width: 600px){
+  .section_blog {
+    margin-right: 0%;
+    margin-left: 0%;
+    height: 90%;
+    margin-top: 150px;
+    margin-right: 0% !important ;
+    margin-left: 0% !important;
+    background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
+    url("../images/icon-left-font-long.png" );
+  }
+  .container_blog_mediaCard {
+  background-image: $color-red-white !important;
+   
+   
+  }
+}
+@media screen and (max-width: 500px){
+  .container_blog_mediaCard {
+    margin: auto;
+    row-gap: 0px !important;
+    margin-top: 5px !important;
+    padding-top: 0px !important;
+  }
+  .form_mediaCard {
+    min-width: 250px;
+    margin: auto !important;
+    font-size: 0.7em !important;
+  }
+  .p_form_mediaCard {
+    font-size: 0em;
+    padding: 0.5em;
+    margin-bottom: 3px;
   }
 }
