@@ -16,6 +16,7 @@ import { getComments } from "../actions/post.action";
 
 //scss
 import "../style/blog.scss";
+import "../style/btnDeleteandMody.scss";
 /*pour memoire et remettre la connection correct 
 {userId ? <Home/> :
         <>

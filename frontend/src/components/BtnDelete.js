@@ -1,16 +1,16 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
 
+import "../style/btnDeleteandMody.scss";
 const BtnDelete = () => {
 
 
     return (
         <>
-            
-            <IconButton aria-label="delete" className='btn_btnDeletePost'>
-                <DeleteIcon />
-            </IconButton>
+        <button aria-label="delete"  className="btn_btnModifiedPost">
+          <DeleteIcon />
+        </button>
+      
         </>
     );
 };

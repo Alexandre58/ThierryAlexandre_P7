@@ -57,24 +57,17 @@ $color-red-white:rgba(230, 43, 6, 1);
          padding-left: 15px;
          height: 50px;
          margin: 12px auto;
-        & .btn_btnModifiedPost {
-         border-radius: 50px;
-          background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
-          url("../images/icon-left-font-long.png" );
-         }
-         & .btn_btnModifiedPost:hover {
-           transform: scale(1.03);
-           padding: 0.3em;
-           
-         }
+      
          & .btn_btnDeletePost {
           border: solid 2px rgb(167, 163, 163);
-          padding: 0;
+          padding: 0.2em;
           background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
           url("../images/icon-left-font-long.png" );
         }
         & .btn_btnDeletePost:hover {
-            padding: 0.05em;
+           transform: scale(1.1);
+            background-image: linear-gradient(rgba(240, 98, 70, 0.8), rgba(243, 236, 234, 0.2)),
+           url("../images/icon-left-font-long.png" );
         }
        }
   }

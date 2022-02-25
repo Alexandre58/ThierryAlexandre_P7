@@ -35,7 +35,6 @@ export default function Comment({ post }) {
   console.log(post);
   const [content, setComment] = React.useState("");
   const users = useSelector(state => state.userReducer);
-  const coms = useSelector(state => state.postReducer);
   const [comments, setComments] = React.useState([]);
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
@@ -60,8 +59,17 @@ export default function Comment({ post }) {
     e.preventDefault();
     dispatch(addComment(post, { content: content, messageId: post.id })).then(
       res => {
-        setComment("");
-        setComments([{ content: content, messageId: post.id }, ...comments]);
+        axios({
+          method: "get",
+          url: `${process.env.REACT_APP_API_URL}/api/comments/${post.id}`,
+          withCredentials: true,
+        })
+          .then(res => {
+            setComments(res.data);
+            setComment("");
+            console.log(comments);
+          })
+          .catch(err => console.log(err));
       }
     );
   };
@@ -71,9 +79,19 @@ export default function Comment({ post }) {
       {comments ? (
         comments.map((com, index) => {
           return (
-            <div key={index}>
-              {com.content}
+            <div key={com.id}>
+              {users.map(us => {
+                return us.id === com.userId ? (
+                  <div key={us.id}>
+                    {us.firstname} {us.firstname}
+                  </div>
+                ) : (
+                  ""
+                );
+              })}
+              <strong>{com.content}</strong> <em>{com.createdAt}</em>
               <BtnDelete />
+              <BtnModified />
               <Divider light />
             </div>
           );
@@ -95,7 +113,6 @@ export default function Comment({ post }) {
           ></textarea>
           {/*   <input type="submit" value="Validez votre commentaire" />*/}
           <BtnValid />
-          <BtnModified />
           <BtnDelete />
         </form>
       </div>

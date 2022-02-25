@@ -30,8 +30,13 @@ $color-red-white:rgba(230, 43, 6, 0.8);
         justify-content: center;
         align-items: center;
         margin: auto;
-        width: 90%;
+        width: 80%;
         height: 50px;
+        
+    }
+    .button_comment {
+      display: flex;
+      flex-direction: column;
     }
     & input {
         background-color: $color-red;
