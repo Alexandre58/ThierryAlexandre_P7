@@ -16,8 +16,10 @@ export const Home = () => {
     {uid ? <Blog /> :
       <>
       <NavBar />
-      <main className="mainRoot">  
+      <main className="mainRoot"> 
+      
         <section className="section_home">
+        
             <div className="h1_Home" >
               <Typography variant='h1' className="h1_home_titre" >Bienvenu sur Groupomania</Typography> 
             </div>

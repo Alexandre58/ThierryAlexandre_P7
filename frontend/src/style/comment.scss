@@ -14,7 +14,6 @@ $color-red-white:rgba(230, 43, 6, 0.8);
 
 
 
-
 .container_comment {
     display: flex;
     flex-direction: column;
@@ -52,9 +51,44 @@ $color-red-white:rgba(230, 43, 6, 0.8);
   }
   @media screen and (max-width: 650px){
     .container_comment {
-
+      padding: 1em;
       width: 300px;
       margin: auto;
+      margin-top: 12em !important;
     }  
+  }
+  @media screen and (max-width: 480px){
+    .container_comment {
+      width: 100% !important;
+      margin: auto;
+      padding: 0em;
+   
+    }
+    .comment_textArea {
+   
+      width: 100% !important;
+      height: 100px !important;
+  
+      
+  }
+
+
+  }
+  @media screen and (max-width: 350px){
+    .container_comment {
+      width: 100% !important;
+      margin: auto;
+      padding: 0em;
+   
+    }
+    .comment_textArea {
+   
+      width: 100% !important;
+      height: 100px !important;
+  
+      
+  }
+
+
   }
 }

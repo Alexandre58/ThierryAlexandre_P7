@@ -11,6 +11,7 @@ const Users = () => {
   return (
     <div className="user-container">
       <p>
+     <span> Bienvenue </span> 
         {!isEmpty(users) && users[0].firstname}{" "}
         {!isEmpty(users[0]) && users[0].lastname}
       </p>

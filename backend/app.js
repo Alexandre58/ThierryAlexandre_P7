@@ -47,6 +47,6 @@ app.use("/api", likeRoute);
 app.use("/api", commentRoute);
 
 //images
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("api/images", express.static(path.join(__dirname, "images")));
 
 module.exports = app;

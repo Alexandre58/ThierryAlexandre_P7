@@ -63,7 +63,7 @@ export default function Comment({ post }) {
               {users.map(us => {
                 return us.id === com.userId ? (
                   <div key={us.id}>
-                    {us.firstname} {us.firstname}
+                    {us.firstname} {us.lastname}
                   </div>
                 ) : (
                   ""
@@ -93,6 +93,7 @@ export default function Comment({ post }) {
             {!isEmpty(users[0]) && users[0].lastname}
           </Typography>
           <textarea
+            aria-label="vous pouvez reagir au message en envoyant un commentaire."
             className="comment_textArea"
             value={content}
             onChange={e => setComment(e.target.value)}

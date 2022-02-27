@@ -54,9 +54,10 @@ const SignInForm = () => {
           Se connecter
         </Typography>
 
-        <form action="" onSubmit={handleLogin} className="form_login">
+        <form action="" onSubmit={handleLogin} className="form_login" aria-label="formulaire pour se connecter" >
           <label htmlFor="password">Password</label>
           <input
+            aria-label="entrer votre mot de passe" 
             className="btnType"
             type="password"
             name="password"
@@ -70,6 +71,7 @@ const SignInForm = () => {
 
           <label htmlFor="email">Email</label>
           <input
+            aria-label="entrer votre email" 
             className="btnType"
             type="email"
             name="email"
@@ -81,7 +83,7 @@ const SignInForm = () => {
           />
           <div className="email error"></div>
 
-          <input type="submit" className="btnLogin" value="Se connecter" />
+          <input type="submit" className="btnLogin" value="Se connecter" aria-label="bouton de validation du formulaire se connecter"  />
         </form>
       </div>
     </>

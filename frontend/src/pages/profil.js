@@ -45,6 +45,7 @@ export const Profil = () => {
               src={require("../images/icon.png")}
               className="img_profil"
               alt="image profil"
+
             />
             {/*a mettre          <img src={userId.attachment} alt="image de l'utilisateur groupomania" />
                     UPLOAD profil_container
@@ -57,8 +58,7 @@ export const Profil = () => {
             {updateForm === false && (
               <>
                 <p onClick={() => setUpdateForm(!updateForm)}>{userId.bio}</p>
-                <button
-                  className="content_profil_button"
+                         <button className="content_profil_button"
                   onClick={() => setUpdateForm(!updateForm)}
                 >
                   Cliquer ici pour mettre à jour votre profil
@@ -69,9 +69,10 @@ export const Profil = () => {
             {updateForm && (
               <>
               <TextareaAutosize
+
               defaultValue={userId.bio}
               onChange={(e) => setBio(e.target.value)}
-              aria-label="minimum height"
+              aria-label="changer ,modifier votre mofil ici"
               className="content_profil2"
               minRows={20}
               placeholder="Laissez-vous guider par votre imagination..."

@@ -10,14 +10,12 @@ $color-red: #f8340c;
     -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
     box-shadow: 3px 2px 12px 0px #e4d7d7;
     }  
-
-
 .signin_profil {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     .upload_img_profil {
-        display: flex;
+       // display: none;
         flex-wrap: wrap;
         justify-content: space-evenly;
         align-items: center;
@@ -26,7 +24,7 @@ $color-red: #f8340c;
     }
         .content_profil_input {
             font-size: 1em;
-            padding: 0.2em;
+            padding: 0.3em;
             background-color: rgb(240, 224, 224);
             @include add-shadow-black;
             background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),

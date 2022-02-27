@@ -11,6 +11,10 @@ $color-red-white:rgba(230, 43, 6, 0.8);
   -webkit-box-shadow: 3px 2px 12px 0px #e4d7d7;
   box-shadow: 3px 2px 12px 0px #e4d7d7;
 }
+@mixin background-general{
+  background-image: linear-gradient(rgba(248, 164, 148, 1), rgb(243, 236, 234));
+
+ }
 
 
 
@@ -20,13 +24,13 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0.8em;
-    background-color: rgb(250, 237, 237);
+    padding: 0.2em;
+    @include background-general;
     @include add-shadow-black;
     font-size: 1em;
     color: black;
-    margin-top: -200px;
-    margin-left: 40%;
+    margin-top: 80px;
+   
     width: 150px;
     .user-container {
       position: absolute;
@@ -50,15 +54,24 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     }
  
 }
-@media screen and (max-width:700px){
+@media screen and (max-width:635px){
   .user-container {
     margin-left: 0em !important;
+    margin-top: 170px !important;
+    font-size: 0.8em;
   }
-  .user-container {
-    display: none;
-  }
+ 
   .section_blog .form_mediaCard {
     width: 90% !important ;
   }
+
+}
+@media screen and (max-width:350px){
+  .user-container {
+    margin-left: 0em !important;
+    margin-top: 170px !important;
+  }
+
+
 
 }

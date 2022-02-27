@@ -52,7 +52,9 @@ const SignUpForm = () => {
                 passwordError.innerHTML = res.data.errors.password;
                 confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
                 emailError.innerHTML = res.data.errors.email;
-              } 
+              }  else {
+                window.location = "/blog";
+              }
             })
             .catch((err) => console.log(err));
         }
@@ -65,29 +67,29 @@ const SignUpForm = () => {
         S'inscrire
       </Typography>
         
-        <form action="" onSubmit={handleRegister}  className="form_signup">
+        <form action="" onSubmit={handleRegister}  className="form_signup" aria-label="entrer votre email" >
     
-             <label htmlFor= "firstname">Prenom</label>
+             <label aria-label="entrer votre prenom"  htmlFor= "firstname">Prenom</label>
             <input className="btnType" type= "text" name= "firstname" id="firstname" placeholder="Votre prenom" required onChange={(e) => setFirstname(e.target.value)} value={firstname} />
             <div className= 'firstname error'></div>
          
             <label htmlFor= "lastname">Nom</label>
-            <input className= "btnType" type="text" name="lastname" id="lastname"   placeholder="Votre nom" required onChange={(e) => setLastname(e.target.value)} value={lastname} />
+            <input className= "btnType" aria-label="entrer votre nom"  type="text" name="lastname" id="lastname"   placeholder="Votre nom" required onChange={(e) => setLastname(e.target.value)} value={lastname} />
             <div className= 'lastname error'></div>
 
             <label htmlFor= "password">Password</label>
-            <input className= "btnType" type="password" name="password" id="password" placeholder="mot de passe" required  onChange={(e) => setPassword(e.target.value)} value={password} />
+            <input className= "btnType" type="password" aria-label="entrer votre mot de passe"  name="password" id="password" placeholder="mot de passe" required  onChange={(e) => setPassword(e.target.value)} value={password} />
             <div className= 'password error'></div>
 
             <label htmlFor = "confirmPassword">Confirm Password</label>
-            <input className ="btnType" type ="password" name ="confirmPassword" id ="confirmPassword" onChange = {(e) => setConfirmPassword(e.target.value)} value = {confirmPassword} placeholder ="confirmer le mot de passe" required/>
+            <input className ="btnType" aria-label="entrer votre confirmation de votre mot de passe"  type ="password" name ="confirmPassword" id ="confirmPassword" onChange = {(e) => setConfirmPassword(e.target.value)} value = {confirmPassword} placeholder ="confirmer le mot de passe" required/>
             <div className ='confirmPassword error'></div>
  
             <label htmlFor= "email">Email</label>
-            <input className="btnType" type="email" name="email" id="email" placeholder="exemple@groupomania.com" required onChange={(e)=> setEmail(e.target.value)} value={email} />
+            <input className="btnType" aria-label="entrer votre email"  type="email" name="email" id="email" placeholder="exemple@groupomania.com" required onChange={(e)=> setEmail(e.target.value)} value={email} />
             <div className='email error'></div>
    
-        <button type="submit" className="btnSignup">S'inscrire</button>
+        <button type="submit" aria-label="bouton de validation de votre inscription"  className="btnSignup">S'inscrire</button>
       </form>
       </div>
           

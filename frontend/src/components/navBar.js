@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { UidContext } from "../App";
 import { isEmpty } from "./Utils";
+import "../style/navBar.scss";
+
 export const NavBar = () => {
   const uid = useContext(UidContext);
 
@@ -15,19 +17,19 @@ export const NavBar = () => {
           <ul className="ulHome">
             {uid ? (
               <li>
-                <Link to="/deconnexion">Deconnection</Link>
+                <Link aria-label="Vous déconnecter" to="/deconnexion">Deconnexion</Link>
               </li>
             ) : (
               <li>
-                <Link to="/">Connexion</Link>
+                <Link aria-label="Vous connecter" to="/">Connexion</Link>
               </li>
             )}
 
             <li>
-              <Link to="/Blog">Blogs</Link>
+              <Link aria-label="accéder aux messages et en créer" to="/Blog">Blogs</Link>
             </li>
             <li>
-              <Link to="/Profil">Profil</Link>
+              <Link aria-label="accéder à votre profif et le modifier"  to="/Profil">Profil</Link>
             </li>
           </ul>
         </nav>

@@ -52,8 +52,8 @@ export const Blog = () => {
           </div>
         </Container>
       </section>
-
       <Footer />
+    
     </>
   );
 };

@@ -37,6 +37,7 @@ export default function MediaCard({ post }) {
   const classes = useStyles();
   return (
     <>
+    <div className="div_mediaCard_container">
       <Card className={classes.root}>
         <div className="btnDeleteAndMofified_mediaCard_container">
           <BtnDelete action={"DELETE_POST"} data={post} />
@@ -81,7 +82,9 @@ export default function MediaCard({ post }) {
         <Divider />
         <Divider light />
         <Comment post={post} />
+      
       </Card>
+      </div>
     </>
   );
 }

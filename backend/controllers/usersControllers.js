@@ -18,19 +18,14 @@ const password_regex = /^[a-zA-Z]\w{3,14}$/;
 const name_regex =
   /^([A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ-]* ?[A-zàâäçéèêëîïôùûüÿæœÀÂÄÇÉÈÊËÎÏÔÙÛÜŸÆŒ]+$)$/;
 
-
-
-
-
 //*******************************************SIGUP **********************************
 module.exports = {
-  
-deconnect: function (req, res) {
-  res.clearCookie("token");
-  req.session.destroy();
-  res.redirect("/");
-},
-
+  deconnect: function (req, res) {
+    res.clearCookie("token");
+    //req.session.destroy();
+    //res.redirect("/");
+    return res.status(200).json("utilisateur déconnecté");
+  },
 
   signup: function (req, res) {
     // Paramètres
@@ -67,7 +62,7 @@ deconnect: function (req, res) {
     if (!password_regex.test(password)) {
       return res.status(400).json({
         error:
-          "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilis",
+          "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilisé",
       });
     }*/
 
@@ -224,76 +219,45 @@ deconnect: function (req, res) {
       return res.status(400).json({ error: "champ(s) manquant(s)" });
     }
 
-    asyncLib.waterfall(
-      [
-        function (done) {
-          models.User.findOne({
-            where: { email: email },
-          })
-            .then(function (userFound) {
-              done(null, userFound);
-            })
-            .catch(function (err) {
-              return res
-
-                .status(500)
-                .json({ error: "vérification utilisateur impossible" });
-            });
-        },
-        // si utilisateur trouvé via son mail, on compare le mot de passe
-        function (userFound, done) {
-          if (userFound) {
-            bcrypt.compare(
-              password,
-              userFound.password,
-              function (errBycrypt, resBycrypt) {
-                done(null, userFound, resBycrypt);
-              }
-            );
-          } else {
-            return res
-              .status(404)
-              .json({ error: "utilisateur absent de la base de donnée" });
-          }
-        },
-        // si le mot de passe est décodé, c'est bien le bon utilisateur
-        function (userFound, resBycrypt, done) {
-          if (resBycrypt) {
-            done(userFound);
-          } else {
-            return res.status(403).json({ error: "mot de passe invalide" });
-          }
-        },
-      ],
-      // si le bon utilisateur on affiche son id et on lui attribut un token pour la session
-      function (userFound) {
-        if (userFound) {
-          const token = jwt.sign(
-            {
-              userId: userFound.id,
-              isAdmin: userFound.isAdmin,
-            },
-            process.env.TOKEN,
-            { expiresIn: "48h" }
-          );
-          res.cookie("token", token, {
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000,
-          });
-          res.status(201).json({
-            userId: userFound.id,
-            firstname: userFound.firstname,
-            lastname: userFound.lastname,
-            token: token,
-          });
-          return;
-        } else {
-          return res
-            .status(500)
-            .json({ error: "login utilisateur impossible" });
+    models.User.findAll({
+      where: { email: email },
+    })
+      .then(user => {
+        console.log(user);
+        if (!user) {
+          return res.status(401).json({ error: "Utilisateur non trouvé !" });
         }
-      }
-    );
+        bcrypt
+          .compare(password, user[0].password)
+          .then(pass => {
+            if (pass === false) {
+              return res.status(401).json({
+                message: "Wrong password !",
+              });
+            }
+            const token = jwt.sign(
+              {
+                userId: user[0].dataValues.id,
+                isAdmin: user[0].dataValues.isAdmin,
+              },
+              process.env.TOKEN,
+              { expiresIn: "48h" }
+            );
+            res.cookie("token", token, {
+              httpOnly: true,
+              maxAge: 24 * 60 * 60 * 1000,
+            });
+            res.status(200).json({
+              userId: user[0].dataValues.id,
+              firstname: user[0].dataValues.firstname,
+              lastname: user[0].dataValues.lastname,
+              email: user[0].dataValues.email,
+              token: token,
+            });
+          })
+          .catch(error => res.status(500).json({ error }));
+      })
+      .catch(error => res.status(500).json({ error }));
   },
   //*********************************************************recup user profil with his token valid
   getUserProfil: function (req, res) {
@@ -648,587 +612,13 @@ deconnect: function (req, res) {
   /*********************DELETE****************************************** */
   deleteUser: function (req, res) {
     // Getting auth header
-    const token = req.cookies.token;
-    const decodedToken = jwt.verify(token, process.env.TOKEN);
-    const userId = decodedToken.userId;
+
+    const userId = parseInt(req.params.id);
     // Params
-    models.User.findByPk(req.params.id).then(function (userFound) {
-      models.User.findAndCountAll({
-        where: { isAdmin: true },
-      }).then(allUserAdmin => {
-        if (userFound.isAdmin && allUserAdmin.count < 2) {
-          return res.status(400).json({
-            error: "Donner les droits d'administrateur à un autre compte",
-          });
-        } else {
-          asyncLib.waterfall([
-            function (done) {
-              models.User.findByPk(req.params.id)
-                .then(function (userFound) {
-                  done(null, userFound);
-                })
-                .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({ error: "1 impossible de vérifier l'utilisateur" });
-                });
-            },
-            function (userFound, done) {
-              models.User.findOne({
-                where: { isAdmin: true, id: userId },
-              })
-                .then(function (userAdminFound) {
-                  done(null, userFound, userAdminFound);
-                })
-                .catch(function (err) {
-                  return res
-                    .status(500)
-                    .json({ error: "2 impossible de vérifier l'utilisateur" });
-                });
-            },
-            function (userFound, userAdminFound, done) {
-              models.Message.findAll({
-                attributes: [
-                  "id",
-                  "attachment",
-                  "likes",
-                  "dislikes",
-                  "comments",
-                ],
-              })
-                .then(allMessageFound => {
-                  let messageIdTab = [];
-                  allMessageFound.forEach(element => {
-                    messageIdTab.push(element.id);
-                  });
-                  done(null, userFound, userAdminFound, messageIdTab);
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "3 impossible de vérifier tous les messages",
-                  });
-                });
-            },
-
-            function (userFound, userAdminFound, messageIdTab, done) {
-              models.Like.findAll({
-                where: { userId: userFound.id, userDislike: true },
-                attributes: ["messageId"],
-              })
-                .then(function (allLikeFoundDislike) {
-                  done(
-                    null,
-                    userFound,
-                    userAdminFound,
-                    messageIdTab,
-                    allLikeFoundDislike
-                  );
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "4 impossible de vérifier tous les userDislike",
-                  });
-                });
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              messageIdTab,
-              allLikeFoundDislike,
-              done
-            ) {
-              models.Like.findAll({
-                where: { userId: userFound.id, userLike: true },
-                attributes: ["messageId"],
-              })
-                .then(function (allLikeFoundLike) {
-                  done(
-                    null,
-                    userFound,
-                    userAdminFound,
-                    messageIdTab,
-                    allLikeFoundDislike,
-                    allLikeFoundLike
-                  );
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "5 impossible de vérifier tous les userLike",
-                  });
-                });
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              messageIdTab,
-              allLikeFoundDislike,
-              allLikeFoundLike,
-              done
-            ) {
-              models.Comment.findAll({
-                where: { userId: userFound.id, messageId: messageIdTab },
-                attributes: ["id", "messageId"],
-              })
-                .then(function (allCommentFound) {
-                  let messageToDelete = Object.values(
-                    allCommentFound.reduce((a, { messageId }) => {
-                      let key = `${messageId}`;
-                      a[key] = a[key] || { messageId, count: 0 };
-                      a[key].count++;
-                      return a;
-                    }, {})
-                  );
-                  const abc = JSON.parse(JSON.stringify(allCommentFound)).sort(
-                    (a, b) =>
-                      a.messageId < b.messageId
-                        ? 1
-                        : b.messageId < a.messageId
-                        ? -1
-                        : 0
-                  );
-                  const userMessageComment =
-                    abc.length > 0
-                      ? abc
-                          .map(item => item.messageId)
-                          .filter((elt, i, a) => a.indexOf(elt) === i)
-                          .sort((a, b) => a - b)
-                      : [];
-                  done(
-                    null,
-                    userFound,
-                    userAdminFound,
-                    allLikeFoundDislike,
-                    allLikeFoundLike,
-                    messageToDelete,
-                    userMessageComment
-                  );
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "6 impossible de vérifier tous les commentaires",
-                  });
-                });
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              allLikeFoundDislike,
-              allLikeFoundLike,
-              messageToDelete,
-              userMessageComment,
-              done
-            ) {
-              models.CommentsLike.findAll({
-                where: { userId: userFound.id, userLike: true },
-                attributes: ["commentId"],
-              })
-                .then(function (allCommentLikeFoundLike) {
-                  done(
-                    null,
-                    userFound,
-                    userAdminFound,
-                    allLikeFoundDislike,
-                    allLikeFoundLike,
-                    allCommentLikeFoundLike,
-                    messageToDelete,
-                    userMessageComment
-                  );
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "7 impossible de vérifier tous les commentsLike",
-                  });
-                });
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              allLikeFoundDislike,
-              allLikeFoundLike,
-              allCommentLikeFoundLike,
-              messageToDelete,
-              userMessageComment,
-              done
-            ) {
-              models.CommentsLike.findAll({
-                where: { userId: userFound.id, userDislike: true },
-                attributes: ["commentId"],
-              })
-                .then(function (allCommentLikeFoundDislike) {
-                  done(
-                    null,
-                    userFound,
-                    userAdminFound,
-                    allLikeFoundDislike,
-                    allLikeFoundLike,
-                    allCommentLikeFoundLike,
-                    allCommentLikeFoundDislike,
-                    messageToDelete,
-                    userMessageComment
-                  );
-                })
-                .catch(function (err) {
-                  return res.status(500).json({
-                    error: "8 impossible de vérifier tous les commentsDislike",
-                  });
-                });
-            },
-            function (
-              userFound,
-              userAdminFound,
-              allLikeFoundDislike,
-              allLikeFoundLike,
-              allCommentLikeFoundLike,
-              allCommentLikeFoundDislike,
-              messageToDelete,
-              userMessageComment,
-              done
-            ) {
-              if (
-                userFound.id === userId ||
-                (userAdminFound.isAdmin === true &&
-                  userAdminFound.id === userId)
-              ) {
-                models.Message.findAll({
-                  where: { userId: userFound.id },
-                  attributes: ["id"],
-                })
-                  .then(result => {
-                    let tabMessageId = [];
-                    result.forEach(({ id }) => {
-                      tabMessageId.push(id);
-                    });
-                    models.Like.destroy({
-                      where: { messageId: tabMessageId },
-                    });
-                  })
-                  .then(() => {
-                    models.Like.destroy({
-                      where: { userId: userFound.id },
-                    })
-                      .then(result => {
-                        let likeMessageIdTabDislike = [];
-                        allLikeFoundDislike.forEach(element => {
-                          likeMessageIdTabDislike.push(element.messageId);
-                        });
-                        models.Message.decrement(
-                          { dislikes: 1 },
-                          {
-                            where: { id: likeMessageIdTabDislike },
-                          }
-                        );
-                      })
-                      .then(result => {
-                        let likeMessageIdTabLike = [];
-                        allLikeFoundLike.forEach(element => {
-                          likeMessageIdTabLike.push(element.messageId);
-                        });
-                        models.Message.decrement(
-                          { likes: 1 },
-                          {
-                            where: { id: likeMessageIdTabLike },
-                          }
-                        );
-                      })
-                      .then(function () {
-                        done(
-                          null,
-                          userFound,
-                          userAdminFound,
-                          allCommentLikeFoundLike,
-                          allCommentLikeFoundDislike,
-                          userMessageComment,
-                          messageToDelete
-                        );
-                      })
-                      .catch(err => {
-                        return res.status(500).json({
-                          error: "9 impossible de supprimer les likes",
-                        });
-                      });
-                  });
-              } else {
-                return res
-                  .status(500)
-                  .json({ error: "Vous n'avez pas les droits" });
-              }
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              allCommentLikeFoundLike,
-              allCommentLikeFoundDislike,
-              userMessageComment,
-              messageToDelete,
-              done
-            ) {
-              if (
-                userFound.id === userId ||
-                (userAdminFound.isAdmin === true &&
-                  userAdminFound.id === userId)
-              ) {
-                models.Message.findAll({
-                  where: { userId: userFound.id },
-                  attributes: ["id"],
-                })
-                  .then(result => {
-                    let tabMessageId = [];
-                    result.forEach(({ id }) => {
-                      tabMessageId.push(id);
-                    });
-                    return tabMessageId;
-                  })
-                  .then(tabMessageId => {
-                    models.Comment.findAll({
-                      where: { messageId: tabMessageId },
-                      attributes: ["id"],
-                    })
-                      .then(result => {
-                        let tabCommentId = [];
-                        result.forEach(({ id }) => {
-                          tabCommentId.push(id);
-                        });
-                        models.CommentsLike.destroy({
-                          where: { commentId: tabCommentId },
-                        });
-                      })
-                      .then(() => {
-                        models.CommentsLike.destroy({
-                          where: { userId: userFound.id },
-                        })
-                          .then(() => {
-                            let commentLikeMessageIdTablike = [];
-                            allCommentLikeFoundLike.forEach(element => {
-                              commentLikeMessageIdTablike.push(
-                                element.commentId
-                              );
-                            });
-                            models.Comment.decrement(
-                              { commentLikes: 1 },
-                              {
-                                where: { id: commentLikeMessageIdTablike },
-                              }
-                            );
-                          })
-                          .then(() => {
-                            let commentLikeMessageIdTabDislike = [];
-                            allCommentLikeFoundDislike.forEach(element => {
-                              commentLikeMessageIdTabDislike.push(
-                                element.commentId
-                              );
-                            });
-                            models.Comment.decrement(
-                              { commentDislikes: 1 },
-                              {
-                                where: { id: commentLikeMessageIdTabDislike },
-                              }
-                            );
-                          })
-                          .then(() => {
-                            done(
-                              null,
-                              userFound,
-                              userAdminFound,
-                              userMessageComment,
-                              messageToDelete
-                            );
-                          })
-                          .catch(err => {
-                            return res.status(500).json({
-                              error:
-                                "10 impossible de supprimer les commentaires",
-                            });
-                          });
-                      });
-                  });
-              } else {
-                return res
-                  .status(500)
-                  .json({ error: "Vous n'avez pas les droits" });
-              }
-            },
-
-            function (
-              userFound,
-              userAdminFound,
-              userMessageComment,
-              messageToDelete,
-              done
-            ) {
-              if (
-                userFound.id === userId ||
-                (userAdminFound.isAdmin === true &&
-                  userAdminFound.id === userId)
-              ) {
-                models.Message.findAll({
-                  where: { userId: userFound.id },
-                  attributes: ["id"],
-                })
-                  .then(result => {
-                    let tabMessageId = [];
-                    result.forEach(({ id }) => {
-                      tabMessageId.push(id);
-                    });
-                    models.Comment.destroy({
-                      where: { messageId: tabMessageId },
-                    });
-                  })
-                  .then(() => {
-                    if (userMessageComment) {
-                      models.Message.findAll({
-                        where: { id: userMessageComment },
-                      })
-                        .then(result => {
-                          const finalTab = [];
-                          const objectsEqual = (o1, o2) => {
-                            Object.keys(o1).map((elt, p) => {
-                              if (o1[p].messageId === o2[p]?.id) {
-                                o2[p].comments = o2[p].comments - o1[p].count;
-                                finalTab.push(o2[p]);
-                              }
-                            });
-                          };
-                          objectsEqual(messageToDelete, result);
-                          userMessageComment.map((id, i) => {
-                            models.Message.update(
-                              { comments: finalTab[i].comments },
-                              {
-                                where: { id },
-                              }
-                            );
-                          });
-                        })
-                        .then(() => {
-                          models.Comment.destroy({
-                            where: { userId: userFound.id },
-                          });
-                        })
-                        .then(() => {
-                          done(null, userFound, userAdminFound);
-                        })
-                        .catch(err => {
-                          return res.status(500).json({
-                            error:
-                              "11 impossible de supprimer les commentLikes",
-                          });
-                        });
-                    } else {
-                      done(null, userFound);
-                    }
-                  });
-              } else {
-                return res
-                  .status(500)
-                  .json({ error: "Vous n'avez pas les droits" });
-              }
-            },
-
-            function (userFound, userAdminFound, done) {
-              if (
-                userFound.id === userId ||
-                (userAdminFound.isAdmin === true &&
-                  userAdminFound.id === userId)
-              ) {
-                models.Message.findAll({
-                  where: { userId: userFound.id },
-                }).then(result => {
-                  const resultAttachment = result.filter(({ attachment }) => {
-                    return attachment !== null;
-                  });
-                  if (resultAttachment.length) {
-                    const dynamiquePath = __dirname
-                      .split("controllers")
-                      .shift();
-                    const files = resultAttachment.map(
-                      message => message.attachment
-                    );
-                    const deleteFiles = (files, callback) => {
-                      let i = files.length;
-                      files.forEach(filepath => {
-                        let fileName = filepath
-                          .split("http://localhost:4000/")
-                          .pop();
-                        fileName = dynamiquePath + fileName;
-
-                        fs.unlink(fileName, err => {
-                          i--;
-                          if (err) {
-                            callback(err);
-                            return;
-                          } else if (i <= 0) {
-                            callback(null);
-                          }
-                        });
-                      });
-                    };
-                    deleteFiles(files, err => {
-                      if (err) {
-                        console.log(err);
-                      } else {
-                        console.log("all files removed");
-                        models.Message.destroy({
-                          where: { userId: userFound.id },
-                        })
-                          .then(() => {
-                            done(null, userFound, userAdminFound);
-                          })
-                          .catch(err => {
-                            return res.status(500).json({
-                              error: "12 impossible de supprimer les messages",
-                            });
-                          });
-                      }
-                    });
-                  } else {
-                    models.Message.destroy({
-                      where: { userId: userFound.id },
-                    })
-                      .then(() => {
-                        done(null, userFound, userAdminFound);
-                      })
-                      .catch(err => {
-                        return res.status(500).json({
-                          error: "13 impossible de supprimer les messages",
-                        });
-                      });
-                  }
-                });
-              } else {
-                return res
-                  .status(500)
-                  .json({ error: "vous n'avez pas les droits" });
-              }
-            },
-
-            function (userFound, userAdminFound, done) {
-              if (
-                userFound.id === userId ||
-                (userAdminFound.isAdmin === true &&
-                  userAdminFound.id === userId)
-              ) {
-                userFound
-                  .destroy({
-                    where: { userId: userFound.id },
-                  })
-                  .then(() => {
-                    return res
-                      .status(201)
-                      .json("Le compte à été supprimé avec succès");
-                  });
-              } else {
-                return res
-                  .status(500)
-                  .json({ error: "vous n'avez pas les droits" });
-              }
-            },
-          ]);
-        }
-      });
+    models.User.destroy({
+      where: { id: userId },
+    }).then(() => {
+      res.status(200).json("user deleted");
     });
   },
   giveAdminOtherUser: function (req, res) {

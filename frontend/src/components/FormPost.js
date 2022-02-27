@@ -8,6 +8,7 @@ import BtnValid from "./BtnValid";
 
 //scss blog.js
 import "../style/btnDeleteandMody.scss";
+import "../style/formPost.scss";
 
 const FormPost = () => {
   const [title, setTitle] = useState("");
@@ -34,12 +35,13 @@ const FormPost = () => {
 
   return (
     <>
-      <form className="form_mediaCard" onSubmit={e => handleForm(e)}>
+      <form aria-label="vous pouvez pouvez créer votre message dans ce formulaire" className="form_mediaCard" onSubmit={e => handleForm(e)}>
         <p className="p_form_mediaCard">
           Vous pouvez créer votre message ici{" "}
           {!isEmpty(users[0]) && users[0].firstname}
         </p>
         <input
+          aria-label="vous pouvez mettre un titre à votre message"
           className="input_title_mediaCard"
           type="text"
           placeholder="Titre de votre message :"
@@ -47,6 +49,7 @@ const FormPost = () => {
           onChange={e => setTitle(e.target.value)}
         />
         <textarea
+          aria-label="votre histoire ,vos envies , les recontres avec vos collégues !, enovyez leurs des message"
           className="input_post_mediaCard"
           placeholder="dites nous en plus sur vous ..."
           value={content}
@@ -55,6 +58,7 @@ const FormPost = () => {
 
         <div className="btnDeleteAndMofified_FormPost_container">
           <input
+            aria-label="vous pouvez envoyer votre message ici"
             className="input_button_mediaCard"
             type="submit"
             value="Envoyer"
