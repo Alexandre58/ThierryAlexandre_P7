@@ -8,7 +8,7 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
 
     const passwordError = document.querySelector(".password.error");
@@ -16,33 +16,24 @@ const SignInForm = () => {
 
     /*`http://localhost:4000/api/user/login`*/
     axios({
-      
       url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       method: "post",
       withCredentials: true,
       data: {
-        "password": password,
-        "email": email,
+        password: password,
+        email: email,
       },
     })
-      .then((res) => {
-        console.log("then" + {
-          password,
-          email,
-        });
+      .then(res => {
         console.log(res);
         if (res.data.errors) {
           passwordError.innerHTML = res.data.errors.password;
           emailError.innerHTML = res.data.errors.email;
         } else {
-          window.location = "/blog";
+          window.location = "/profil";
         }
       })
-      .catch((err) => {
-        console.log({
-          password,
-          email,
-        });
+      .catch(err => {
         console.log(err);
       });
   };
@@ -54,15 +45,14 @@ const SignInForm = () => {
           Se connecter
         </Typography>
 
-        <form action="" onSubmit={handleLogin} className="form_login" aria-label="formulaire pour se connecter" >
+        <form action="" onSubmit={handleLogin} className="form_login">
           <label htmlFor="password">Password</label>
           <input
-            aria-label="entrer votre mot de passe" 
             className="btnType"
             type="password"
             name="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             value={password}
             placeholder="mot de passe"
             required
@@ -71,19 +61,18 @@ const SignInForm = () => {
 
           <label htmlFor="email">Email</label>
           <input
-            aria-label="entrer votre email" 
             className="btnType"
             type="email"
             name="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             value={email}
             placeholder="exemple@groupomania.com"
             required
           />
           <div className="email error"></div>
 
-          <input type="submit" className="btnLogin" value="Se connecter" aria-label="bouton de validation du formulaire se connecter"  />
+          <input type="submit" className="btnLogin" value="Se connecter" />
         </form>
       </div>
     </>

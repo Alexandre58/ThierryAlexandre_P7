@@ -34,13 +34,15 @@ export const Profil = () => {
       <section className="section_profil">
         <div className="profil_container">
           <Typography variant="h1" className="h1profil">
-            Vous pouvez changer votre bio et votre photo {userId.firstname}{" "}
+            Bienvenu sur votre page profil Goupomania {userId.firstname}{" "}
             {userId.lastname}
           </Typography>
         </div>
 
         <div className="profil_page">
+      
           <div className="img_container_profil">
+       
             <img
               src={require("../images/icon.png")}
               className="img_profil"
@@ -54,15 +56,17 @@ export const Profil = () => {
               */}
           </div>
           <div className="bio_profil_container">
-            <h3>Votre bio</h3>
+       
             {updateForm === false && (
               <>
                 <p onClick={() => setUpdateForm(!updateForm)}>{userId.bio}</p>
                          <button className="content_profil_button"
                   onClick={() => setUpdateForm(!updateForm)}
                 >
-                  Cliquer ici pour mettre à jour votre profil
+              
+                  Créer votre profil
                 </button>
+              
               </>
             )}
           
@@ -87,9 +91,9 @@ export const Profil = () => {
               </>
             )}
           </div>
-      
+        
           <div className="signin_profil">
-
+      
             <UploadImg />
           </div>
         </div>

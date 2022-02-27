@@ -23,15 +23,15 @@ $color-red: #f8340c;
         @include add-shadow-black;
     }
         .content_profil_input {
-            font-size: 1em;
-            padding: 0.3em;
+          
+            padding: 0.1em;
             background-color: rgb(240, 224, 224);
             @include add-shadow-black;
             background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
             url("../images/icon-left-font-long.png" );
             margin: 1em;
             color: black;
-            font-size: 1em;
+            font-size: 0.8em;
         }
         .content_profil_input:hover {
             transform: scale(1.02);
@@ -48,11 +48,7 @@ $color-red: #f8340c;
             font-size: 1em;
         }
         @media screen and (max-width: 600px) {
-            .upload_img_profil {
-                height: 400px;
-                max-width: 245px;
-                
-            }
+            
             .content_profil_input {
              
                 margin: 0.5em;
@@ -61,15 +57,13 @@ $color-red: #f8340c;
           }
           @media screen and (max-width: 400px) {
             .upload_img_profil {
-                height: 400px;
-                max-width: 205px;
-                
+              font-size: 0.7em;
+                margin-top: 0 !important;
             }
             .content_profil_input {
-            
-                margin: 0.5em;
-                
+                margin: 0.2em;
             }
+        
           } 
     
     
