@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const usersControllers = require("../controllers/usersControllers");
 const auth = require("../middlewares/auth");
-const multer = require("../middlewares/multer-config");
 
 /*********************SIGN-UP AND LOGIN***************************************************** */
 // localhost:4000/user/sign-up
@@ -21,7 +20,7 @@ router.get("/:userId/profiluser/", auth, usersControllers.getUserProfileId);
 
 //**************************************************************************PUT USERS PROFIF */
 //4000:/users/profil/ can change bio and avatar with token user
-router.put("/users/profil/",multer, auth, usersControllers.updateUserProfil);
+router.put("/users/profil/", auth, usersControllers.updateUserProfil);
 
 //************************************************************************PUT PATH ONLY ADMIN*/
 //4000/users/modifname/email/password/with id
@@ -33,10 +32,5 @@ router.put("/users/:id", auth, usersControllers.giveAdminOtherUser);
 /*********************DELETE****************************************** */
 // localhost:4000/user/recup users with his id
 router.delete("/user/:id", auth, usersControllers.deleteUser);
-
-
-
-
-
 
 module.exports = router;

@@ -1,19 +1,17 @@
 //design card users
 import { useSelector } from "react-redux";
-import { isEmpty } from "./Utils";
+import { isEmpty, findUser } from "./Utils";
 
 import "../style/users.scss";
 
-const Users = () => {
+const Users = ({ uid, allUsers, user }) => {
   //USER
   const users = useSelector(state => state.userReducer);
 
   return (
     <div className="user-container">
       <p>
-     <span> Bienvenue </span> 
-        {!isEmpty(users) && users[0].firstname}{" "}
-        {!isEmpty(users[0]) && users[0].lastname}
+        {!isEmpty(user) && user.firstname} {!isEmpty(user) && user.lastname}
       </p>
       <div className="img__users">
         <img

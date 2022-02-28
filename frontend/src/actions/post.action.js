@@ -13,13 +13,12 @@ export const getPosts = () => {
     return axios
       .get("http://localhost:4000/api/posts")
       .then(res => {
-        console.log(res);
         dispatch({ type: GET_POSTS, payload: res.data });
       })
       .catch(err => console.log(err));
   };
 };
-//?_sort=id&_order=desc remis en place pour que les dernier post arrive bien en premiere position
+//?_sort=id&_order=desc
 
 //add post
 export const addPost = data => {
@@ -31,7 +30,6 @@ export const addPost = data => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res);
         dispatch({ type: ADD_POSTS, payload: data });
       })
       .catch(err => console.log(err));
@@ -47,7 +45,6 @@ export const addComment = (post, comment) => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res);
         dispatch(getPosts());
       })
       .catch(err => console.log(err));
@@ -62,7 +59,6 @@ export const getComments = post => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res);
         dispatch({ type: GET_COMMENTS, payload: res.data });
       })
       .catch(err => console.log(err));
@@ -77,7 +73,6 @@ export const deleteComment = data => {
       withCredentials: true,
     })
       .then(res => {
-        console.log(res);
         dispatch({ type: DELETE_COMMENT, payload: res.data });
       })
       .catch(err => console.log(err));

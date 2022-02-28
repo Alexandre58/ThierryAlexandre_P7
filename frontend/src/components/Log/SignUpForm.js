@@ -51,7 +51,7 @@ const SignUpForm = () => {
           passwordError.innerHTML = res.data.errors.password;
           confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
           emailError.innerHTML = res.data.errors.email;
-        } else {
+        }else {
           axios({
             url: `${process.env.REACT_APP_API_URL}/api/user/login`,
             method: "post",

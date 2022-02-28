@@ -1,18 +1,17 @@
 import React from "react";
-import "../style/btnDeleteandMody.scss";
+
 import {} from "../actions/post.action";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addComment,
-  getComments,
-  addPost,
-  getPosts,
-} from "../actions/post.action";
+import { addComment, getComments } from "../actions/post.action";
 import axios from "axios";
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
+import { updateBio } from "../actions/user.actions";
+
+//css
+import "../style/btnDeleteandMody.scss";
 
 
-const BtnValid = ({ action, post, content }) => {
+const BtnValid = ({ action, post, content, user }) => {
   const dispatch = useDispatch();
 
   const saveComment = e => {
@@ -32,14 +31,16 @@ const BtnValid = ({ action, post, content }) => {
             .catch(err => console.log(err));
         }
       );
+    } else if (action === "SAVE_BIO") {
+      dispatch(updateBio(user, content)).then(() => {
+        //window.location = "/profil";
+      });
     }
-  }
-  
-
+  };
 
   return (
     <button onClick={e => saveComment(e)} className="btn_btnModifiedPost">
-        <SaveAltIcon />
+      <SaveAltIcon />
     </button>
   );
 };

@@ -36,7 +36,8 @@ const App = () => {
         withCredentials: true,
       })
         .then(res => {
-          setUserId(res.data);
+          if (res.data) setUserId(res.data.id);
+          else setUserId(null);
         })
         .catch(err => console.log(err));
     };

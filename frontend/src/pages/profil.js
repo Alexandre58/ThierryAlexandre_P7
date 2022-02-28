@@ -1,7 +1,9 @@
 //raccourci rsc
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UidContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import BtnValid from '../components/BtnValid';
+import BtnValid from "../components/BtnValid";
+
 //css
 import "../style/profils.scss";
 //import
@@ -12,6 +14,8 @@ import { Typography } from "@material-ui/core";
 import { Footer } from "../components/Footer";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { updateBio } from "../actions/user.actions";
+import { findUser } from "../components/Utils";
+import BtnDelete from "../components/BtnDelete";
 
 export const Profil = () => {
   const dispatch = useDispatch();
@@ -19,9 +23,9 @@ export const Profil = () => {
   const [bio, setBio] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
   //USER
-  const userId = useSelector((state) => state.userReducer);
-  //  const postId = useSelector((state) => state.postReducer);
-
+  const uid = useContext(UidContext);
+  const userId = useSelector(state => state.userReducer);
+  const user = findUser(uid, userId);
   //function validate change bio
   const handleUpdate = () => {
     dispatch(updateBio(userId.id, bio));
@@ -30,24 +34,20 @@ export const Profil = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar uid={uid} allUsers={userId} user={user} />
       <section className="section_profil">
         <div className="profil_container">
           <Typography variant="h1" className="h1profil">
-            Bienvenu sur votre page profil Goupomania {userId.firstname}{" "}
-            {userId.lastname}
+            Vous pouvez changer votre bio et votre photo
           </Typography>
         </div>
 
         <div className="profil_page">
-      
           <div className="img_container_profil">
-       
             <img
-              src={require("../images/icon.png")}
+              src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
               className="img_profil"
               alt="image profil"
-
             />
             {/*a mettre          <img src={userId.attachment} alt="image de l'utilisateur groupomania" />
                     UPLOAD profil_container
@@ -56,44 +56,42 @@ export const Profil = () => {
               */}
           </div>
           <div className="bio_profil_container">
-       
+            <h3>{user ? user.bio : "Vous n'avez pas encore de bio"}</h3>
             {updateForm === false && (
               <>
                 <p onClick={() => setUpdateForm(!updateForm)}>{userId.bio}</p>
-                         <button className="content_profil_button"
+                <button
+                  className="content_profil_button"
                   onClick={() => setUpdateForm(!updateForm)}
                 >
-              
-                  Créer votre profil
+                  Mettre à jour votre profil
                 </button>
-              
               </>
             )}
-          
+
             {updateForm && (
               <>
-              <TextareaAutosize
+                <TextareaAutosize
+                  defaultValue={user.bio}
+                  onChange={e => setBio(e.target.value)}
+                  aria-label="minimum height"
+                  className="content_profil2"
+                  minRows={20}
+                  placeholder="Laissez-vous guider par votre imagination..."
+                />
 
-              defaultValue={userId.bio}
-              onChange={(e) => setBio(e.target.value)}
-              aria-label="changer ,modifier votre mofil ici"
-              className="content_profil2"
-              minRows={20}
-              placeholder="Laissez-vous guider par votre imagination..."
-            />
-         {/**   <button
-              className="content_profil_button2"
-              onClick={handleUpdate}
-            >
-              Valider vos modifications
-            </button>*/}
-            <BtnValid />
+                <BtnValid
+                  onClick={() => setUpdateForm(!updateForm)}
+                  action={"SAVE_BIO"}
+                  content={bio}
+                  user={user}
+                />
               </>
             )}
           </div>
-        
+
           <div className="signin_profil">
-      
+            <BtnDelete action={"DELETE_USER"} data={uid} />
             <UploadImg />
           </div>
         </div>

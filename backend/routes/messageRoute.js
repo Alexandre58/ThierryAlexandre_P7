@@ -16,11 +16,11 @@ router.get("/view/:userId/posts", auth, postsController.listMessagesOtherUser);
 
 /**********************************POST************************************************ */
 //news posts=4000/posts/new/ post users with their token
-router.post("/posts/new/", auth,multer, postsController.createPosts);
+router.post("/posts/new/", auth, postsController.createPosts);
 
 //4000:/posts/Images/new
 router.post(
-  "/posts/images/new",
+  "/posts/Images/new",
   auth,
   multer,
   postsController.createPostWithImage

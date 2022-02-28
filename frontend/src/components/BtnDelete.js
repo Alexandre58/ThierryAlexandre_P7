@@ -3,9 +3,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useDispatch } from "react-redux";
 import { deletePost, getComments, deleteComment } from "../actions/post.action";
 import axios from "axios";
+import { deleteUser } from "../actions/user.actions";
 
 const BtnDelete = ({ action, data }) => {
   const dispatch = useDispatch();
+
   const deleteIt = e => {
     e.preventDefault();
     if (action == "DELETE_COMMENT") {
@@ -33,14 +35,22 @@ const BtnDelete = ({ action, data }) => {
           })
           .catch(err => console.log(err));
       });
+    } else if (action == "DELETE_USER") {
+      dispatch(deleteUser(data)).then(res => {
+        window.location = "/";
+      });
     }
   };
- 
+
   return (
     <>
-      <button onClick={e => deleteIt(e)} aria-label="delete" className="btn_btnModifiedPost">
-         <DeleteIcon />
-      </button>  
+      <button
+        onClick={e => deleteIt(e)}
+        aria-label="delete"
+        className="btn_btnModifiedPost"
+      >
+        <DeleteIcon />
+      </button>
     </>
   );
 };

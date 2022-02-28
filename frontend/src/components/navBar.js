@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
+import { UidContext } from "../App";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { UidContext } from "../App";
-import { isEmpty } from "./Utils";
+import { isEmpty, findUser } from "./Utils";
+
+
+//css
 import "../style/navBar.scss";
-
-export const NavBar = () => {
-  const uid = useContext(UidContext);
-
-  const users = useSelector(state => state.userReducer);
-
+export const NavBar = ({ uid, allUsers, user }) => {
   return (
     <>
       <header className="header_navBar">
@@ -17,19 +15,19 @@ export const NavBar = () => {
           <ul className="ulHome">
             {uid ? (
               <li>
-                <Link aria-label="Vous déconnecter" to="/deconnexion">Deconnexion</Link>
+                <Link to="/deconnexion">Deconnection</Link>
               </li>
             ) : (
               <li>
-                <Link aria-label="Vous connecter" to="/">Connexion</Link>
+                <Link to="/">Connexion</Link>
               </li>
             )}
 
             <li>
-              <Link aria-label="accéder aux messages et en créer" to="/Blog">Blogs</Link>
+              <Link to="/Blog">Blogs</Link>
             </li>
             <li>
-              <Link aria-label="accéder à votre profif et le modifier"  to="/Profil">Profil</Link>
+              <Link to="/Profil">Profil</Link>
             </li>
           </ul>
         </nav>
@@ -37,7 +35,7 @@ export const NavBar = () => {
         {uid ? (
           <p className="p_Navbar">
             {" "}
-            Bonjour {!isEmpty(users[0]) && users[0].firstname}
+            Bonjour {!isEmpty(user) && user.firstname}
           </p>
         ) : (
           <p className="p_Navbar">Merci de bien vouloir vous connecter</p>

@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { getUser } from "../actions/user.actions";
+
+//impo files.js
 import { isEmpty } from "../components/Utils";
 import BtnValid from "./BtnValid";
 import BtnDelete from "./BtnDelete";
 import BtnModified from "./BtnModified";
 
+//css
 import "../style/comment.scss";
 
 //matrial ui
@@ -13,8 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { UidContext } from "../App";
 
-import axios from "axios";
-import { getUser } from "../actions/user.actions";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,12 +35,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Comment({ post }) {
-  const uid = useContext(UidContext);
+export default function Comment({ post, uid, allUsers, user }) {
   const [comments, setComments] = React.useState([]);
   const [content, setComment] = React.useState("");
-  const users = useSelector(state => state.userReducer);
-  console.log(users);
+  const users = allUsers;
   const com = useSelector(state => state.commentsReducer);
 
   const classes = useStyles();
@@ -54,6 +56,10 @@ export default function Comment({ post }) {
       .catch(err => console.log(err));
   }, [com]);
 
+  React.useEffect(() => {
+    console.log(content);
+  }, [content]);
+
   return (
     <>
       {comments ? (
@@ -63,14 +69,14 @@ export default function Comment({ post }) {
               {users.map(us => {
                 return us.id === com.userId ? (
                   <div key={us.id}>
-                    {us.firstname} {us.lastname}
+                    {us.firstname} {us.firstname}
                   </div>
                 ) : (
                   ""
                 );
               })}
               <strong>{com.content}</strong> <em>{com.createdAt}</em>
-              {(com.userId === uid || users.isAdmin == 1) && (
+              {user && (com.userId === uid || user.isAdmin == 1) && (
                 <>
                   <BtnDelete
                     action={"DELETE_COMMENT"}
@@ -89,11 +95,9 @@ export default function Comment({ post }) {
       <div>
         <form className="container_comment">
           <Typography className={classes.heading}>
-            {!isEmpty(users[0]) && users[0].firstname}{" "}
-            {!isEmpty(users[0]) && users[0].lastname}
+            {!isEmpty(user) && user.firstname} {!isEmpty(user) && user.lastname}
           </Typography>
           <textarea
-            aria-label="vous pouvez reagir au message en envoyant un commentaire."
             className="comment_textArea"
             value={content}
             onChange={e => setComment(e.target.value)}

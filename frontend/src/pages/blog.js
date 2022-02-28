@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-
+import React, { useContext } from "react";
+import { UidContext } from "../App";
 //import { BlogNotConnect  } from "../components/BlogNotConnect";
 //material ui
 import { Typography } from "@material-ui/core";
@@ -13,47 +14,47 @@ import MediaCard from "../components/MediaCard";
 import FormPost from "../components/FormPost";
 //import { Home } from './home';
 import { getComments } from "../actions/post.action";
-
+import { findUser } from "../components/Utils";
 //scss
 import "../style/blog.scss";
-/*pour memoire et remettre la connection correct 
-{userId ? <Home/> :
-        <>
-  }
-    </>
-
- */
 
 export const Blog = () => {
+  const uid = useContext(UidContext);
   const dispatch = useDispatch();
   const posts = useSelector(state => state.postReducer);
   //USER
-  const userId = useSelector(state => state.userReducer);
-
-  //
+  const users = useSelector(state => state.userReducer);
+  const user = findUser(uid, users);
   return (
     <>
-      <NavBar />
+      <NavBar uid={uid} allUsers={users} user={user} />
       <section className="section_blog">
-        <Users />
+        <Users uid={uid} allUsers={users} user={user} />
         <div className="blog_container">
           <Typography variant="h1" className="h1blog">
-            Bienvenu {/*  {userId[0].firstname} {userId[0].lastname}*/} sur
-            Groupomania publications
+            Bienvenu sur Groupomania publications
           </Typography>
         </div>
         <Container>
-          <FormPost />
+          <FormPost uid={uid} allUsers={users} user={user} />
           <div className="container_blog_mediaCard">
             {!isEmpty(posts) &&
               posts.map((post, index) => {
-                return <MediaCard post={post} key={post.id} />;
+                return (
+                  <MediaCard
+                    post={post}
+                    key={post.id}
+                    uid={uid}
+                    allUsers={users}
+                    user={user}
+                  />
+                );
               })}
           </div>
         </Container>
       </section>
+
       <Footer />
-    
     </>
   );
 };

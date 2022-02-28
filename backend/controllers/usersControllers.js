@@ -1,3 +1,4 @@
+
 // Imports
 const bcrypt = require("bcryptjs");
 const models = require("../models");
@@ -62,7 +63,7 @@ module.exports = {
     if (!password_regex.test(password)) {
       return res.status(400).json({
         error:
-          "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilisé",
+          "Le premier caractère du mot de passe doit être une lettre, il doit contenir au moins 4 caractères et pas plus de 15 caractères et aucun caractère autre que des lettres, des chiffres et le trait de soulignement ne peut être utilis",
       });
     }*/
 
@@ -252,6 +253,7 @@ module.exports = {
               firstname: user[0].dataValues.firstname,
               lastname: user[0].dataValues.lastname,
               email: user[0].dataValues.email,
+              bio: user[0].dataValues.bio,
               token: token,
             });
           })
@@ -265,21 +267,12 @@ module.exports = {
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
 
-    models.User.findOne({
-      attributes: [
-        "id",
-        "email",
-        "firstname",
-        "lastname",
-        "bio",
-        "avatar",
-        "isAdmin",
-      ],
+    models.User.findAll({
       where: { id: userId },
     })
       .then(function (user) {
         if (user) {
-          res.status(201).json(user);
+          res.status(201).json(user[0]);
         } else {
           res.status(404).json({ error: "utilisateur introuvable" });
         }
@@ -315,7 +308,7 @@ module.exports = {
 
     models.User.findAll({
       order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-      attributes: ["id", "firstname", "lastname", "avatar", "isAdmin"],
+      attributes: ["id", "firstname", "lastname", "avatar", "isAdmin", "bio"],
     })
       .then(function (user) {
         if (user) {
@@ -684,4 +677,4 @@ module.exports = {
       }
     );
   },
-};
+}

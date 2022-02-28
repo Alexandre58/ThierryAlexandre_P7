@@ -21,6 +21,7 @@ import Avatar from "@material-ui/core/Avatar";
 
 import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
+import { findUser } from "./Utils";
 
 export const useStyles = makeStyles({
   root: {
@@ -33,15 +34,20 @@ export const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ post }) {
+export default function MediaCard({ post, uid, allUsers, user }) {
   const classes = useStyles();
+
+  const postOwner = findUser(post.UserId, allUsers);
   return (
     <>
-    <div className="div_mediaCard_container">
       <Card className={classes.root}>
         <div className="btnDeleteAndMofified_mediaCard_container">
-          <BtnDelete action={"DELETE_POST"} data={post} />
-          <BtnModified />
+          {user && (post.UserId === uid || user.isAdmin === 1) && (
+            <>
+              <BtnDelete action={"DELETE_POST"} data={post} />
+              <BtnModified />
+            </>
+          )}
         </div>
         <CardActionArea>
           <CardHeader
@@ -54,8 +60,8 @@ export default function MediaCard({ post }) {
                 />
               </Avatar>
             }
-            title="firstname en attente"
-            subheader="lastname en att ente"
+            title={postOwner ? postOwner.firstname : ""}
+            subheader={postOwner ? postOwner.lastname : ""}
           ></CardHeader>
           <CardMedia
             className={classes.media}
@@ -81,10 +87,8 @@ export default function MediaCard({ post }) {
 
         <Divider />
         <Divider light />
-        <Comment post={post} />
-      
+        <Comment post={post} uid={uid} allUsers={allUsers} user={user} />
       </Card>
-      </div>
     </>
   );
 }

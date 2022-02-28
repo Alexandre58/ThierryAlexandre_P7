@@ -1,4 +1,5 @@
 import axios from "axios";
+import cookie from "js-cookie";
 
 export const GET_USER = "GET_USER";
 export const GET_USER_ERROR = "GET_USER_ERROR";
@@ -55,13 +56,41 @@ export const updateBio = (userId, bio) => {
   return dispatch => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_URL}/api/users/profil/` + userId.id,
+      url: `${process.env.REACT_APP_API_URL}/api/users/profil/`,
       data: { bio },
       withCredentials: true,
     })
       .then(res => {
-        dispatch({ type: UPDATE_BIO, payload: bio });
+        dispatch(getUser());
       })
       .catch(err => console.log(err));
+  };
+};
+
+export const deleteUser = userId => {
+  console.log(userId);
+  return dispatch => {
+    return axios({
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}/api/user/${userId}`,
+
+      withCredentials: true,
+    })
+      .then(() => {
+        console.log("deconnection");
+        axios({
+          method: "get",
+          url: `${process.env.REACT_APP_API_URL}/api/user/deconnect`,
+          withCredentials: true,
+        })
+          .then(res => {
+            console.log(res);
+            dispatch({ type: "DELETE_USER", payload: res });
+          })
+          .catch(err => console.log(err));
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   };
 };

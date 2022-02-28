@@ -33,8 +33,8 @@ app.use(cookieParser());
 app.get("*", auth);
 
 app.get("/tokenRecup", auth, (req, res) => {
-  res.user && delete res.user.password;
-  res.status(200).json(res.user.id);
+  if (res.user) delete res.user.password;
+  res.status(200).json(res.user);
 });
 
 //***************************************************USER
@@ -47,6 +47,6 @@ app.use("/api", likeRoute);
 app.use("/api", commentRoute);
 
 //images
-app.use("api/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 
-module.exports = app;
+module.exports = app
