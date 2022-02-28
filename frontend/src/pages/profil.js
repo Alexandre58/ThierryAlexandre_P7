@@ -64,11 +64,11 @@ export const Profil = () => {
                   className="content_profil_button"
                   onClick={() => setUpdateForm(!updateForm)}
                 >
-                  Mettre à jour votre profil
+                  Mettre à jour votre bio
                 </button>
               </>
             )}
-
+             <h3>Votre bio</h3>
             {updateForm && (
               <>
                 <TextareaAutosize

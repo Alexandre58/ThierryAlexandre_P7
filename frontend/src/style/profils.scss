@@ -1,4 +1,9 @@
-$color-red: #fd2b01;
+$color-red: #faeae7;
+@mixin background-general{
+  background-image: linear-gradient(rgba(248, 164, 148, 1), rgb(243, 236, 234));
+
+ }
+
 @mixin boxShadow {box-shadow: 3px 2px 12px 0px #131212};
 @mixin add-shadow-black{
   border-radius: 9px 9px 9px 9px;
@@ -74,13 +79,14 @@ $color-red: #fd2b01;
       max-width: 500px;
       margin-top: 50px;
       @include add-shadow-black;
-      
+      @include background-general;
+      color: whitesmoke;
     }
   
       .content_profil2 {
         width: 80%;
         height: 20% !important;
-
+        @include add-shadow-black;
       } 
     .content_profil_button {
       padding: 0.5em;
@@ -113,8 +119,8 @@ $color-red: #fd2b01;
     }
     .img_container_profil {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 100px;
       margin:-2em;
       background-color: #e4d7d7;
@@ -123,8 +129,8 @@ $color-red: #fd2b01;
       margin-bottom: 450px;
       position: absolute;
       object-fit: cover;
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 100px;
       -webkit-box-shadow: 5px 2px 29px 5px #0f0202;
       box-shadow: 5px 2px 29px 5px #0f0202;
