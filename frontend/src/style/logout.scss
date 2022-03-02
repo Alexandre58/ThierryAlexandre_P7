@@ -20,12 +20,16 @@ $color-red-white:rgba(200, 42, 10, 0.8);
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: auto !important;
     height: 100vh;
     width: 100vw;
     background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
     url("../images/icon-left-font-long.png" );
 
     .logout_deconnect {
+      display: flex;
+      justify-content: center;
+      align-items: center;
         width: 100%;
         background-color: $color-red;
         padding: 0.8em;
@@ -43,7 +47,8 @@ $color-red-white:rgba(200, 42, 10, 0.8);
 }
 @media screen and (max-width:450px){
   .logout_deconnect {
-    font-size: 0.9em !important;
+    font-size: 0.8em !important;
+    width: 80% !important;
   }
 }
 

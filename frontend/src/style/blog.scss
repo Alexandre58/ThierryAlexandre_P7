@@ -98,11 +98,11 @@ $color-red-white:rgb(247, 235, 233);
 }
 @media screen and (max-width: 755px){
   .section_blog .form_mediaCard {
-    width: 90% !important ;
+//    width: 90% !important ;
     margin-top: 230px !important;
   }
   .blog_container {
-    width: 60vw!important;
+ //   width: 60vw!important;
     font-size: 0.8em !important;
     margin-top: 600px !important;
   }
@@ -115,6 +115,36 @@ $color-red-white:rgb(247, 235, 233);
     border: black 1px solid !important;
   }
 }
+
+
+@media screen and (max-width:450px){
+  .section_blog .form_mediaCard {
+   // width: 90% !important ;
+    margin-top: 210px !important;
+  }
+  .blog_container {
+  //  width: 60vw!important;
+    font-size: 0.55em !important;
+    margin-top: 560px !important;
+   
+  }
+ 
+  .container_blog_mediaCard {
+  //  padding: 30px!important;
+  //  width: 80%;
+    margin-top: 4em !important;
+  }
+  
+
+}
+.div_mediaCard_container {
+  border: rgb(17, 16, 16) 1px solid !important;
+  max-width:280px !important;
+  margin-top: 0 !important;
+//  width: 100%;
+}
+
+
 @media screen and (max-width:350px){
   .section_blog .form_mediaCard {
     width: 90% !important ;
@@ -124,27 +154,20 @@ $color-red-white:rgb(247, 235, 233);
     width: 60vw!important;
     font-size: 0.55em !important;
     margin-top: 560px !important;
-   
+  
   }
   .div_mediaCard_container {
     border: rgb(236, 4, 4) 1px solid !important;
-    max-width:280px !important;
+  //  max-width:280px !important;
     margin-top: 0 !important;
-    width: 100%;
+  //  width: 100%;
   }
   .container_blog_mediaCard {
     padding: 30px!important;
-    width: 80%;
+  //  width: 80%;
     margin-top: 4em !important;
   }
   
-  .MuiButtonBase-root {
-    height: 100% !important;
-  }
-  /*
-  .MuiCardHeader-content span {
-    font-size: 0.8em !important;
-  }
   .makeStyles-media-2 {
     height: 120px !important;
   }
@@ -158,31 +181,5 @@ $color-red-white:rgb(247, 235, 233);
   height: 1px!important;
  
 }
-*/
-@media screen and (max-width:450px){
-  .section_blog .form_mediaCard {
-    width: 90% !important ;
-    margin-top: 210px !important;
-  }
-  .blog_container {
-    width: 60vw!important;
-    font-size: 0.55em !important;
-    margin-top: 560px !important;
-   
-  }
-  .div_mediaCard_container {
-    border: rgb(236, 4, 4) 1px solid !important;
-    max-width:280px !important;
-    margin-top: 0 !important;
-    width: 100%;
-  }
-  .container_blog_mediaCard {
-    padding: 30px!important;
-    width: 80%;
-    margin-top: 4em !important;
-  }
-  
 
 }
-}
-

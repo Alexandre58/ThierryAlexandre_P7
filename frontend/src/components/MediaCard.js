@@ -40,6 +40,7 @@ export default function MediaCard({ post, uid, allUsers, user }) {
   const postOwner = findUser(post.UserId, allUsers);
   return (
     <>
+    <div className="div_container_mediaCard">
       <Card className={classes.root}>
         <div className="btnDeleteAndMofified_mediaCard_container">
           {user && (post.UserId === uid || user.isAdmin === 1) && (
@@ -89,6 +90,7 @@ export default function MediaCard({ post, uid, allUsers, user }) {
         <Divider light />
         <Comment post={post} uid={uid} allUsers={allUsers} user={user} />
       </Card>
+      </div>
     </>
   );
 }

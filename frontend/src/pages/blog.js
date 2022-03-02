@@ -15,6 +15,7 @@ import FormPost from "../components/FormPost";
 //import { Home } from './home';
 import { getComments } from "../actions/post.action";
 import { findUser } from "../components/Utils";
+import { Home } from "./home";
 //scss
 import "../style/blog.scss";
 
@@ -27,32 +28,36 @@ export const Blog = () => {
   const user = findUser(uid, users);
   return (
     <>
-      <NavBar uid={uid} allUsers={users} user={user} />
-      <section className="section_blog">
-        <Users uid={uid} allUsers={users} user={user} />
-        <div className="blog_container">
-          <Typography variant="h1" className="h1blog">
-            Bienvenu sur Groupomania publications
-          </Typography>
-        </div>
-        <Container>
-          <FormPost uid={uid} allUsers={users} user={user} />
-          <div className="container_blog_mediaCard">
-            {!isEmpty(posts) &&
-              posts.map((post, index) => {
-                return (
-                  <MediaCard
-                    post={post}
-                    key={post.id}
-                    uid={uid}
-                    allUsers={users}
-                    user={user}
-                  />
-                );
-              })}
+      {uid && <NavBar uid={uid} allUsers={users} user={user} />}
+      {!uid ? (
+        <Home />
+      ) : (
+        <section className="section_blog">
+          <Users uid={uid} allUsers={users} user={user} />
+          <div className="blog_container">
+            <Typography variant="h1" className="h1blog">
+              Bienvenu sur Groupomania publications
+            </Typography>
           </div>
-        </Container>
-      </section>
+          <Container>
+            <FormPost uid={uid} allUsers={users} user={user} />
+            <div className="container_blog_mediaCard">
+              {!isEmpty(posts) &&
+                posts.map((post, index) => {
+                  return (
+                    <MediaCard
+                      post={post}
+                      key={post.id}
+                      uid={uid}
+                      allUsers={users}
+                      user={user}
+                    />
+                  );
+                })}
+            </div>
+          </Container>
+        </section>
+      )}
 
       <Footer />
     </>

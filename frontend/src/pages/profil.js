@@ -8,6 +8,7 @@ import BtnValid from "../components/BtnValid";
 import "../style/profils.scss";
 //import
 import { NavBar } from "../components/NavBar";
+import { Home } from "../pages/home";
 import UploadImg from "../images/UploadImg";
 //material ui
 import { Typography } from "@material-ui/core";
@@ -34,68 +35,73 @@ export const Profil = () => {
 
   return (
     <>
-      <NavBar uid={uid} allUsers={userId} user={user} />
-      <section className="section_profil">
-        <div className="profil_container">
-          <Typography variant="h1" className="h1profil">
-            Vous pouvez changer votre bio et votre photo
-          </Typography>
-        </div>
+      {uid && <NavBar uid={uid} allUsers={userId} user={user} />}
 
-        <div className="profil_page">
-          <div className="img_container_profil">
-            <img
-              src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
-              className="img_profil"
-              alt="image profil"
-            />
-            {/*a mettre          <img src={userId.attachment} alt="image de l'utilisateur groupomania" />
+      {!uid ? (
+        <Home />
+      ) : (
+        <section className="section_profil">
+          <div className="profil_container">
+            <Typography variant="h1" className="h1profil">
+              Vous pouvez changer votre bio et votre photo
+            </Typography>
+          </div>
+
+          <div className="profil_page">
+            <div className="img_container_profil">
+              <img
+                src={require("../images/image_fkctWwWEdRrlktfd9elt5.jpg")}
+                className="img_profil"
+                alt="image profil"
+              />
+              {/*a mettre          <img src={userId.attachment} alt="image de l'utilisateur groupomania" />
                     UPLOAD profil_container
                     <p>{errors.maxSize}</p>
                     <p>{errors.format}</p>
               */}
-          </div>
-          <div className="bio_profil_container">
-            <h3>{user ? user.bio : "Vous n'avez pas encore de bio"}</h3>
-            {updateForm === false && (
-              <>
-                <p onClick={() => setUpdateForm(!updateForm)}>{userId.bio}</p>
-                <button
-                  className="content_profil_button"
-                  onClick={() => setUpdateForm(!updateForm)}
-                >
-                  Mettre à jour votre bio
-                </button>
-              </>
-            )}
-             <h3>Votre bio</h3>
-            {updateForm && (
-              <>
-                <TextareaAutosize
-                  defaultValue={user.bio}
-                  onChange={e => setBio(e.target.value)}
-                  aria-label="minimum height"
-                  className="content_profil2"
-                  minRows={20}
-                  placeholder="Laissez-vous guider par votre imagination..."
-                />
+            </div>
+            <div className="bio_profil_container">
+              <h3>{user ? user.bio : "Vous n'avez pas encore de bio"}</h3>
+              {updateForm === false && (
+                <>
+                  <p onClick={() => setUpdateForm(!updateForm)}>{userId.bio}</p>
+                  <button
+                    className="content_profil_button"
+                    onClick={() => setUpdateForm(!updateForm)}
+                  >
+                    Mettre à jour votre bio
+                  </button>
+                </>
+              )}
+             
+              {updateForm && (
+                <>
+                  <TextareaAutosize
+                    defaultValue={user.bio}
+                    onChange={e => setBio(e.target.value)}
+                    aria-label="minimum height"
+                    className="content_profil2"
+                    minRows={20}
+                    placeholder="Laissez-vous guider par votre imagination..."
+                  />
 
-                <BtnValid
-                  onClick={() => setUpdateForm(!updateForm)}
-                  action={"SAVE_BIO"}
-                  content={bio}
-                  user={user}
-                />
-              </>
-            )}
-          </div>
+                  <BtnValid
+                    onClick={() => setUpdateForm(!updateForm)}
+                    action={"SAVE_BIO"}
+                    content={bio}
+                    user={user}
+                  />
+                </>
+              )}
+            </div>
 
-          <div className="signin_profil">
-            <BtnDelete action={"DELETE_USER"} data={uid} />
-            <UploadImg />
+            <div className="signin_profil">
+              <BtnDelete action={"DELETE_USER"} data={uid} />
+              <UploadImg />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       <Footer />
     </>
   );
