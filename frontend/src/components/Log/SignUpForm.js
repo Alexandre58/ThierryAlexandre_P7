@@ -9,15 +9,25 @@ const SignUpForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const bio = "";
-  const handleRegister = async e => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    const firstnameError = document.querySelector(".firstname.error");
-    const lastnameError = document.querySelector(".lastname.error");
-    const passwordError = document.querySelector(".password.error");
-    const confirmPasswordError = document.querySelector(
-      ".confirmPassword.error"
-    );
-    const emailError = document.querySelector(".email.error");
+    const email_regex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //*******************  REGEX PASSWORD
+    const password_regex =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
+    const testPassword = password_regex.test(password);
+    const testEmail = email_regex.test(email);
+    const passwordError = document.getElementById("passwordError");
+    const emailError = document.getElementById("emailError");
+
+    // const firstnameError = document.querySelector(".firstname.error");
+    // const lastnameError = document.querySelector(".lastname.error");
+    //   const passwordError = document.querySelector(".password.error");
+    //  const confirmPasswordError = document.querySelector(
+    //    ".confirmPassword.error"
+    //  );
+    //  const emailError = document.querySelector(".email.error");
 
     // confirmPassword.innerHTML = "";
 
@@ -29,29 +39,30 @@ const SignUpForm = () => {
       email,
       bio,
     };
+    if (testEmail === false || testPassword === false) {
+      if (testEmail === false) {
+        emailError.innerHTML = "Email incorrect";
+      }
+      if (testPassword === false) {
+        passwordError.innerHTML =
+          "Le mot de passe doit contenir une majuscule , un caractére spécial";
+      }
+    } else {
+      axios({
+        method: "post",
+        url: `http://localhost:4000/api/user/sign-up`,
+        data: {
+          firstname,
+          lastname,
+          password,
+          confirmPassword,
+          email,
+          bio,
+        },
+      })
+        .then((res) => {
+          //  console.log(data);
 
-    axios({
-      method: "post",
-      url: `http://localhost:4000/api/user/sign-up`,
-      data: {
-        firstname,
-        lastname,
-        password,
-        confirmPassword,
-        email,
-        bio,
-      },
-    })
-      .then(res => {
-        //  console.log(data);
-        console.log(res);
-        if (res.data.errors) {
-          firstnameError.innerHTML = res.data.errors.firstname;
-          lastnameError.innerHTML = res.data.errors.lastname;
-          passwordError.innerHTML = res.data.errors.password;
-          confirmPasswordError.innerHTML = res.data.errors.confirmPassword;
-          emailError.innerHTML = res.data.errors.email;
-        }else {
           axios({
             url: `${process.env.REACT_APP_API_URL}/api/user/login`,
             method: "post",
@@ -61,21 +72,17 @@ const SignUpForm = () => {
               email: email,
             },
           })
-            .then(res => {
-              console.log(res);
-              if (res.data.errors) {
-                passwordError.innerHTML = res.data.errors.password;
-                emailError.innerHTML = res.data.errors.email;
-              } else {
+            .then((res) => {
+       
                 window.location = "/profil";
-              }
+              
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err);
             });
-        }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -93,7 +100,7 @@ const SignUpForm = () => {
           id="firstname"
           placeholder="Votre prenom"
           required
-          onChange={e => setFirstname(e.target.value)}
+          onChange={(e) => setFirstname(e.target.value)}
           value={firstname}
         />
         <div className="firstname error"></div>
@@ -106,7 +113,7 @@ const SignUpForm = () => {
           id="lastname"
           placeholder="Votre nom"
           required
-          onChange={e => setLastname(e.target.value)}
+          onChange={(e) => setLastname(e.target.value)}
           value={lastname}
         />
         <div className="lastname error"></div>
@@ -119,10 +126,10 @@ const SignUpForm = () => {
           id="password"
           placeholder="mot de passe"
           required
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        <div className="password error"></div>
+        <div id="passwordError"></div>
 
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input
@@ -130,7 +137,7 @@ const SignUpForm = () => {
           type="password"
           name="confirmPassword"
           id="confirmPassword"
-          onChange={e => setConfirmPassword(e.target.value)}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           value={confirmPassword}
           placeholder="confirmer le mot de passe"
           required
@@ -145,10 +152,10 @@ const SignUpForm = () => {
           id="email"
           placeholder="exemple@groupomania.com"
           required
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
-        <div className="email error"></div>
+        <div id="emailError"></div>
 
         <button type="submit" className="btnSignup">
           S'inscrire

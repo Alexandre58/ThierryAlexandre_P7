@@ -10,33 +10,58 @@ const SignInForm = () => {
 
   const handleLogin = e => {
     e.preventDefault();
+    const email_regex =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //*******************  REGEX PASSWORD
+    const password_regex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{4,}$/;
 
-    const passwordError = document.querySelector(".password.error");
-    const emailError = document.querySelector(".email.error");
+    const testEmail = email_regex.test(email);
+    const testPassword = password_regex.test(password);
 
-    /*`http://localhost:4000/api/user/login`*/
-    axios({
-      url: `${process.env.REACT_APP_API_URL}/api/user/login`,
-      method: "post",
-      withCredentials: true,
-      data: {
-        password: password,
-        email: email,
-      },
-    })
-      .then(res => {
-        console.log(res);
-        if (res.data.errors) {
-          passwordError.innerHTML = res.data.errors.password;
-          emailError.innerHTML = res.data.errors.email;
-        } else {
-          window.location = "/profil";
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+    const passwordError = document.getElementById("passwordError");
+    const emailError = document.getElementById("emailError");
+    
+    if(testEmail === false || testPassword === false) {
+            if(testEmail === false){
+              emailError.innerHTML = "Email incorrect";
+            }
+            if(testPassword === false) {
+              passwordError.innerHTML = "Le mot de passe doit contenir une majuscule , un caractére spécial";
+            }
+
+
+    }else {
+
+           emailError.innerHTML = "";
+           passwordError.innerHTML = "";
+                  /*`http://localhost:4000/api/user/login`*/
+          axios({
+            url: `${process.env.REACT_APP_API_URL}/api/user/login`,
+            method: "post",
+            withCredentials: true,
+            data: {
+              password: password,
+              email: email,
+            },
+          })
+            .then(res => {
+              console.log(res);
+              if (res.data.errors) {
+                passwordError.innerHTML = res.data.errors.password;
+                emailError.innerHTML = res.data.errors.email;
+              } else {
+                window.location = "/profil";
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        };
+
+
+    }
+
 
   return (
     <>
@@ -57,7 +82,7 @@ const SignInForm = () => {
             placeholder="mot de passe"
             required
           />
-          <div className="password error"></div>
+          <div id="passwordError"></div>
 
           <label htmlFor="email">Email</label>
           <input
@@ -70,7 +95,7 @@ const SignInForm = () => {
             placeholder="exemple@groupomania.com"
             required
           />
-          <div className="email error"></div>
+          <div id="emailError"></div>
 
           <input type="submit" className="btnLogin" value="Se connecter" />
         </form>

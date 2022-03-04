@@ -1,4 +1,3 @@
-
 //raccourci rsc
 import React, { useContext, useEffect, useState } from "react";
 import { UidContext } from "../App";
@@ -74,7 +73,7 @@ export const Profil = () => {
               */}
             </div>
             <div className="bio_profil_container">
-              <h3>{user ? user.bio : "Vous n'avez pas encore de bio"}</h3>
+              <h3>{!userProfile ? user.bio : userProfile.bio}</h3>
               {updateForm === false && !userProfile && (
                 <>
                   <p onClick={() => setUpdateForm(!updateForm)}>
