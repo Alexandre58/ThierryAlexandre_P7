@@ -117,6 +117,19 @@ const SignUpForm = () => {
           value={lastname}
         />
         <div className="lastname error"></div>
+        
+        <label htmlFor="email">Email</label>
+        <input
+          className="btnType"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="exemple@groupomania.com"
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+        <div id="emailError"></div>
 
         <label htmlFor="password">Password</label>
         <input
@@ -144,18 +157,7 @@ const SignUpForm = () => {
         />
         <div className="confirmPassword error"></div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          className="btnType"
-          type="email"
-          name="email"
-          id="email"
-          placeholder="exemple@groupomania.com"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <div id="emailError"></div>
+      
 
         <button type="submit" className="btnSignup">
           S'inscrire

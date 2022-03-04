@@ -19,19 +19,15 @@ $color-red-white:rgba(230, 43, 6, 0.8);
 .footer {
     display: flex;
     align-items: flex-start;
-    margin-top: auto;
     justify-content: space-between;
-    flex-wrap: wrap-reverse;
- 
+    flex-wrap: nowrap;
     width: 100vw;
     @include  background-general;
-    box-shadow: 3px 5px 12px 10px #494949;
-    height: 50px;
-   
-  
+  //  box-shadow: 3px 5px 12px 10px #494949;
   }
   .p_footer {
-   font-weight: 400;
+   font-weight: 700;
+   padding-left: 2em;
   }
   .img_footer {
     display: flex;
@@ -43,7 +39,8 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     background-clip: padding-box;
     height: 5vh;
     width: 100%;
-    margin-bottom: 35px;
+    padding-bottom: 15px;
+    padding-top: 15px;
     @include add-shadow-white;
     margin-right: 30px;
   }

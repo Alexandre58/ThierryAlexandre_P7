@@ -24,7 +24,8 @@ $color-red-white:rgb(247, 235, 233);
   margin-top: 0px;
   background-color: #f4f9fa;
   box-shadow: 3px 2px 12px 0px #131212;
-
+  background-image: url("../images/body-background.jpg"); 
+  background-repeat: repeat-y;
   .blog_container {
     display: flex;
     justify-content: center;
@@ -35,7 +36,7 @@ $color-red-white:rgb(247, 235, 233);
     max-height: 80px;
     width: 70%;
     text-align: center;
-    @include add-shadow-black;
+  //  @include add-shadow-black;
     @include  background-general;
     
   }
@@ -46,10 +47,11 @@ $color-red-white:rgb(247, 235, 233);
         justify-content: center;
         align-items: center;
         row-gap: 30px;
+        background-color: rgb(27, 27, 27);
      //   background-image: linear-gradient(rgba(248, 164, 148, 0.4), rgba(243, 236, 234, 0.1)),
       //  url("../images/icon-left-font-long.png" );
         object-fit: cover;
-        @include add-shadow-black;
+      //  @include add-shadow-black;
         margin-top: 100px;
         padding-top: 50px;
        

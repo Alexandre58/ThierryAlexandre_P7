@@ -20,10 +20,11 @@ $color-red-white:rgb(247, 235, 233);
     row-gap: 5px;
     margin-top: 180px !important;
     padding: 1em;
+    background-color: aliceblue;
  //   background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
  //   url("../images/icon-left-font-long.png" );
     width: 50%;
-    @include add-shadow-black;
+  //  @include add-shadow-black;
     margin: auto;
     .p_form_mediaCard {
       background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
@@ -86,6 +87,7 @@ $color-red-white:rgb(247, 235, 233);
       margin-top: 180px !important;
       padding: 0.5em;
       width: 50%;
+     
       .p_form_mediaCard {
         font-size: 1em;
         padding: 0.3em;

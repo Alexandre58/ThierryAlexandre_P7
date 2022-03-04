@@ -16,10 +16,11 @@ $color-red-white:rgba(230, 43, 6, 0.8);
 
  }
 body {
-  
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-image: url("../images/body-background.jpg");
   .mainRoot {
     margin-top: 0px;
     padding-top: 150px !important;

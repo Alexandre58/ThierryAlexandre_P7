@@ -79,15 +79,17 @@ export const Profil = () => {
                   <p onClick={() => setUpdateForm(!updateForm)}>
                     {userProfile ? userProfile.bio : user.bio}
                   </p>
+                 
                   <button
                     className="content_profil_button"
                     onClick={() => setUpdateForm(!updateForm)}
                   >
                     Mettre à jour votre bio
                   </button>
+                  <div class="circle"></div>
                 </>
               )}
-              {!userProfile && <h3>Votre bio</h3>}
+              {!userProfile && <h3>Mettre à jour votre bio</h3>}
               {updateForm && (
                 <>
                   <TextareaAutosize
@@ -105,20 +107,21 @@ export const Profil = () => {
                     content={bio}
                     user={user}
                   />
+                  <div className="signin_profil">
+                  {(user.isadmin || !userProfile) && (
+                    <BtnDelete
+                      action={"DELETE_USER"}
+                      data={!userProfile ? uid : userProfile.id}
+                      uid={uid}
+                    />
+                  )}
+                  {!userProfile && <UploadImg />}
+                </div>
                 </>
               )}
             </div>
 
-            <div className="signin_profil">
-              {(user.isadmin || !userProfile) && (
-                <BtnDelete
-                  action={"DELETE_USER"}
-                  data={!userProfile ? uid : userProfile.id}
-                  uid={uid}
-                />
-              )}
-              {!userProfile && <UploadImg />}
-            </div>
+        
           </div>
         </section>
       )}

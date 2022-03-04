@@ -26,7 +26,7 @@ $color-red-white:rgba(230, 43, 6, 0.8);
     align-items: center;
     padding: 0.2em;
     @include background-general;
-    @include add-shadow-black;
+   // @include add-shadow-black;
     font-size: 1em;
     color: black;
     margin-top: 80px;
@@ -41,15 +41,15 @@ $color-red-white:rgba(230, 43, 6, 0.8);
       background-color: #e4d7d7;
     }
     .img_profil {
-      margin-left: -20px;
+      margin-left: 0px;
       margin-top: -90px;
       position: absolute;
       object-fit: cover;
-      width: 50px;
-      height: 50px;
+      width: 75px;
+      height: 75px;
       border-radius: 100px;
-      -webkit-box-shadow: 5px 2px 29px 5px #0f02029a;
-      box-shadow: 5px 2px 29px 5px #0f02029a;
+      -webkit-box-shadow: 5px 2px 29px 5px #f3eded9a;
+      box-shadow: 5px 2px 29px 5px #f3eded9a;
     
     }
  
