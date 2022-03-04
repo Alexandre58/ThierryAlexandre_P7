@@ -1,3 +1,4 @@
+
 import React, { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -17,8 +18,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { UidContext } from "../App";
-
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,7 +42,6 @@ export default function Comment({ post, uid, allUsers, user }) {
 
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
-  const dispatch = useDispatch();
   React.useEffect(() => {
     axios({
       method: "get",
@@ -76,7 +74,7 @@ export default function Comment({ post, uid, allUsers, user }) {
                 );
               })}
               <strong>{com.content}</strong> <em>{com.createdAt}</em>
-              {user && (com.userId === uid || user.isAdmin == 1) && (
+              {user && (com.userId === uid || user.isadmin) && (
                 <>
                   <BtnDelete
                     action={"DELETE_COMMENT"}

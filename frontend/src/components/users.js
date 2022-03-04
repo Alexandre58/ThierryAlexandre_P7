@@ -4,10 +4,7 @@ import { isEmpty, findUser } from "./Utils";
 
 import "../style/users.scss";
 
-const Users = ({ uid, allUsers, user }) => {
-  //USER
-  const users = useSelector(state => state.userReducer);
-
+const Users = ({ user }) => {
   return (
     <div className="user-container">
       <p>

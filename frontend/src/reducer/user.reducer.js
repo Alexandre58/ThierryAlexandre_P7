@@ -1,5 +1,4 @@
 import {
-  GET_USER,
   GET_USER_TOKEN,
   UPDATE_BIO,
   UPLOAD_PICTURE,
@@ -9,21 +8,16 @@ import {
 const initialState = {};
 
 export default function userReducer(state = initialState, action) {
-  if (action.type === GET_USER) {
-    return action.payload;
-  } else if (action.type === GET_USER_TOKEN) {
-    return action.payload;
-  }
   switch (action.type) {
-    case GET_USER:
+    case GET_USER_TOKEN:
       return action.payload;
     case UPLOAD_PICTURE:
       return {
         ...state,
-        images: action.payload,
+        avatar: action.payload,
       };
     case UPDATE_BIO:
-      return state;
+      return {...state, bio: action.payload}
     case "DELETE_USER":
       return state;
 

@@ -1,4 +1,3 @@
-
 // Imports
 "use strict";
 const models = require("../models");
@@ -18,15 +17,15 @@ module.exports = {
   /**********************************************************CREATE POST IMAGE */
   //4000:/posts/Images/new
   createPostWithImage: function (req, res) {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.TOKEN); // look file .env
+    const token = req.cookies.token;
+    const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
-
+    console.log(userId);
     // Paramètres
-    const formMessage = JSON.parse(req.body.message);
+
+    const formMessage = req.body;
 
     const { title, content } = formMessage;
-
     if (!title) {
       return res.status(400).json({ error: "Please complete the following" });
     }
@@ -40,15 +39,9 @@ module.exports = {
         function (done) {
           models.User.findOne({
             where: { id: userId },
-          })
-            .then(function (userFound) {
-              done(null, userFound);
-            })
-            .catch(function (err) {
-              return res
-                .status(500)
-                .json({ error: "user verification not possible" });
-            });
+          }).then(function (userFound) {
+            done(null, userFound);
+          });
         },
         function (userFound, done) {
           if (userFound) {
@@ -57,7 +50,7 @@ module.exports = {
               content: content,
               likes: 0,
               dislikes: 0,
-              UserId: userFound.id,
+              UserId: userId,
               comments: 0,
               attachment: `${req.protocol}://${req.get("host")}/images/${
                 req.file.filename

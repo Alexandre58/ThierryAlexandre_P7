@@ -1,23 +1,21 @@
 const multer = require("multer");
-const newNanoId = require("nanoid"); // package npm qui permet de générer des id
 
 const MIME_TYPES = {
   "image/jpg": "jpg",
   "image/jpeg": "jpg",
   "image/png": "png",
-  "image/gif": "gif",
 };
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
+    console.log(file)
     callback(null, "images");
   },
   filename: (req, file, callback) => {
-    const name = file.originalname.split(" ").join("_");
     const extension = MIME_TYPES[file.mimetype];
-    const id = newNanoId.nanoid();
-    callback(null, "image_" + id + "." + extension);
+    const name = file.originalname.split(" ").join("_").split(".") [0]; 
+    callback(null, name + Date.now() + "." + extension);
   },
 });
 
-module.exports = multer({ storage: storage }).single("image");
+module.exports = multer({ storage }).single("image");

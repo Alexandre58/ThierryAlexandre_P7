@@ -1,20 +1,30 @@
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addPost, getPosts } from "../actions/post.action";
+import { addPost, addPost2, getPosts } from "../actions/post.action";
 import { isEmpty } from "../components/Utils";
-import BtnDeletePost from "./BtnDelete";
-import BtnModifiedPost from "./BtnModified";
-import BtnValid from "./BtnValid";
+import UploadImg from "../images/UploadImg";
 
 //scss blog.js
 import "../style/btnDeleteandMody.scss";
 import "../style/formPost.scss";
 
+const FormPost = ({ user }) => {
+  var data2 = new FormData();
 
-const FormPost = ({ uid, allUsers, user }) => {
+  const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.userReducer);
+  console.log(userId);
+  /*const handlePicture = e => {
+    e.preventDefault();
+    var data = new FormData();
+    data.append("image", file);
+    dispatch(uploadPicture(data, userId.id));
+  };*/
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const dispatch = useDispatch();
 
   //if not emply
   const handleForm = async e => {
@@ -24,10 +34,15 @@ const FormPost = ({ uid, allUsers, user }) => {
         title: title,
         content: content,
       };
-      await dispatch(addPost(data));
+      if (!file) await dispatch(addPost(data));
+      else {
+        data2.append("image", file);
+        data2.append("title", title);
+        data2.append("content", content);
+        dispatch(addPost2(data2));
+      }
       setTitle("");
       setContent("");
-      dispatch(getPosts());
     }
   };
 
@@ -50,7 +65,17 @@ const FormPost = ({ uid, allUsers, user }) => {
           value={content}
           onChange={e => setContent(e.target.value)}
         ></textarea>
-
+        <div className="upload_img_profil">
+          {/*   <label  className="content_profil_label"  htmlFor="file">Click pour changer votre image</label>*/}
+          <input
+            className="content_profil_input"
+            type="file"
+            id="file"
+            name="file"
+            accept=".jpg, .jpeg, .png, .gif"
+            onChange={e => setFile(e.target.files[0])}
+          />
+        </div>
         <div className="btnDeleteAndMofified_FormPost_container">
           <input
             className="input_button_mediaCard"

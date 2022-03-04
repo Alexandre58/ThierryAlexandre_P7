@@ -23,7 +23,7 @@ const name_regex =
 module.exports = {
   deconnect: function (req, res) {
     res.clearCookie("token");
-    //req.session.destroy();
+    /*req.session.destroy();*/
     //res.redirect("/");
     return res.status(200).json("utilisateur déconnecté");
   },
@@ -224,7 +224,6 @@ module.exports = {
       where: { email: email },
     })
       .then(user => {
-        console.log(user);
         if (!user) {
           return res.status(401).json({ error: "Utilisateur non trouvé !" });
         }
@@ -305,23 +304,26 @@ module.exports = {
   // localhost:4000/user/recup all users
   getAllUsers: function (req, res) {
     const order = req.query.order;
-
-    models.User.findAll({
-      order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
-      attributes: ["id", "firstname", "lastname", "avatar", "isAdmin", "bio"],
-    })
-      .then(function (user) {
-        if (user) {
-          res.status(201).json(user);
-        } else {
-          res.status(404).json({ error: "utilisateurs introuvable" });
-        }
+    if (res.user !== null) {
+      models.User.findAll({
+        order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
+        attributes: ["id", "firstname", "lastname", "avatar", "isAdmin", "bio"],
       })
-      .catch(function (err) {
-        res
-          .status(500)
-          .json({ error: "impossible de récupérer les utilisateurs" });
-      });
+        .then(function (user) {
+          if (user) {
+            res.status(201).json(user);
+          } else {
+            res.status(404).json({ error: "utilisateurs introuvable" });
+          }
+        })
+        .catch(function (err) {
+          res
+            .status(500)
+            .json({ error: "impossible de récupérer les utilisateurs" });
+        });
+    } else {
+      res.status(500).json({ error: "Utilisateur non autorisé" });
+    }
   },
   //**************************************************************************PUT USERS PROFIF */
 
@@ -330,10 +332,10 @@ module.exports = {
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, process.env.TOKEN); // lien avec fichier .env
     const userId = decodedToken.userId;
-
     // Paramètres
     const bio = req.body.bio;
-    const avatar = req.body.avatar;
+    var avatar = req.body.avatar
+    if(req.file) avatar = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
 
     asyncLib.waterfall(
       [
@@ -362,9 +364,8 @@ module.exports = {
                 done(userFound);
               })
               .catch(function (err) {
-                res
-                  .status(500)
-                  .json({ error: "mise à jour utilisateur impossible" });
+                console.log(err);
+                res.status(500).json({ error: err });
               });
           } else {
             res.status(404).json({ error: "utilisateur introuvable" });
@@ -608,11 +609,15 @@ module.exports = {
 
     const userId = parseInt(req.params.id);
     // Params
-    models.User.destroy({
-      where: { id: userId },
-    }).then(() => {
-      res.status(200).json("user deleted");
-    });
+    if (res.user) {
+      models.User.destroy({
+        where: { id: userId },
+      }).then(() => {
+        res.status(200).json("user deleted");
+      });
+    } else {
+      res.status(500).json("not allowed");
+    }
   },
   giveAdminOtherUser: function (req, res) {
     const token = req.cookies.token;
@@ -677,4 +682,4 @@ module.exports = {
       }
     );
   },
-}
+};

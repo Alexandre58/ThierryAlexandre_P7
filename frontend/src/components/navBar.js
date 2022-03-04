@@ -1,13 +1,13 @@
+
 import React, { useContext } from "react";
 import { UidContext } from "../App";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { isEmpty, findUser } from "./Utils";
 
-
 //css
 import "../style/navBar.scss";
-export const NavBar = ({ uid, allUsers, user }) => {
+export const NavBar = ({ uid, user }) => {
   return (
     <>
       <header className="header_navBar">

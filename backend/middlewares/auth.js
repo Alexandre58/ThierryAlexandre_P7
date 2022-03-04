@@ -11,15 +11,20 @@ module.exports = (req, res, next) => {
         //res.cookie("jwt", "", { maxAge: 1 });
         next();
       } else {
-        let user = await models.User.findAll({
+        await models.User.findAll({
           where: { id: decodedToken.userId },
-        });
-        res.user = user[0].dataValues;
+        })
+          .then(user => {
+            res.user = user[0].dataValues;
+          })
+          .catch(err => {
+            res.user = null;
+          });
+
         next();
       }
     });
   } else {
-    console.log(token);
     res.user = null;
     next();
   }

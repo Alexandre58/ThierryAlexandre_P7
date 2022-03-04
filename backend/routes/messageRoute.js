@@ -20,14 +20,14 @@ router.post("/posts/new/", auth, postsController.createPosts);
 
 //4000:/posts/Images/new
 router.post(
-  "/posts/Images/new",
+  "/posts/images/new",
   auth,
   multer,
   postsController.createPostWithImage
 );
 
 /**********************************PUT************************************************** */
-router.put("/:messageId", auth, multer, postsController.updatePosts);
+router.put("/posts/:messageId", auth, multer, postsController.updatePosts);
 
 /**********************************DELETE************************************************ */
 

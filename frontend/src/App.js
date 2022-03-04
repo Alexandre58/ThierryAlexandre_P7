@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, createContext } from "react";
 import {
   BrowserRouter as Router,
@@ -13,20 +14,13 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 //import { getUserToken } from "./actions/user.actions";
-import { getUser } from "./actions/user.actions";
+import { getUser, getUserToken } from "./actions/user.actions";
 
 export const UidContext = createContext();
 
 const App = () => {
   const [userId, setUserId] = useState(null);
   const dispatch = useDispatch();
-  // const userData = useSelector(state => state.userReducer);
-  // console.log(userData);
-  /*  useEffect(() => {
-    dispatch(getUserToken());
-  }, [dispatch]);
-  console.log(userData);
-*/
 
   useEffect(() => {
     let fetchToken = async () => {
@@ -39,11 +33,10 @@ const App = () => {
           if (res.data) setUserId(res.data.id);
           else setUserId(null);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log("err"));
     };
     fetchToken();
-
-    if (userId) dispatch(getUser(userId));
+    //if (userId) dispatch(getUserToken());
   }, [userId]);
 
   return (

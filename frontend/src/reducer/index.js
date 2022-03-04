@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import userReducer from "./user.reducer";
 import postReducer from "./post.reducer";
 import commentsReducer from "./comments.reducer";
+import allUsersReducer from "./allUsers.reducer";
 //
 
 //stock tout les reducer et envoi a l'index.js
@@ -15,6 +16,7 @@ const rootReducer = (state = initialState, action) => {
 export default combineReducers({
   rootReducer,
   userReducer,
+  allUsersReducer,
   postReducer,
   commentsReducer,
 });

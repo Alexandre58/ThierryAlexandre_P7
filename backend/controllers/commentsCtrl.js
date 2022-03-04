@@ -324,41 +324,20 @@ module.exports = {
 
       function (messageFound, commentFound, userFoundAdmin, _done) {
         if (commentFound) {
-          if (
-            commentFound.UserId === userId ||
-            (userFoundAdmin.isAdmin === true && userFoundAdmin.id === userId)
-          ) {
-            models.Comment.destroy({
-              where: { id: commentId },
-            })
-              .then(commentFound => {
-                messageFound.update({
-                  comments: messageFound.comments - 1,
-                });
-                return res.status(201).json(commentFound);
-              })
-              .catch(_err => {
-                return res
-                  .status(500)
-                  .json({ error: "impossible de supprimer ce commentaire" });
+          models.Comment.destroy({
+            where: { id: commentId },
+          })
+            .then(commentFound => {
+              messageFound.update({
+                comments: messageFound.comments - 1,
               });
-          } else {
-            models.Comment.destroy({
-              where: { id: commentId, userId: userId },
+              return res.status(201).json(commentFound);
             })
-              .then(commentFound => {
-                messageFound.update({
-                  comments: messageFound.comments - 1,
-                });
-
-                return res.status(201).json(commentFound);
-              })
-              .catch(_err => {
-                return res
-                  .status(500)
-                  .json({ error: "impossible de supprimer ce commentaire" });
-              });
-          }
+            .catch(_err => {
+              return res
+                .status(500)
+                .json({ error: "impossible de supprimer ce commentaire" });
+            });
         } else {
           return res.status(500).json({ error: "commentaire introuvable" });
         }

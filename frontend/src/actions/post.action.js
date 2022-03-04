@@ -1,3 +1,4 @@
+
 import axios from "axios";
 
 export const GET_POSTS = "GET_POSTS";
@@ -10,8 +11,11 @@ export const DELETE_POST = "DELETE_POST";
 //envoi vers post.reducer (dispatch envoi vers le reducer api/posts)
 export const getPosts = () => {
   return dispatch => {
-    return axios
-      .get("http://localhost:4000/api/posts")
+    return axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}/api/posts/`,
+      withCredentials: true,
+    })
       .then(res => {
         dispatch({ type: GET_POSTS, payload: res.data });
       })
@@ -30,7 +34,22 @@ export const addPost = data => {
       withCredentials: true,
     })
       .then(res => {
-        dispatch({ type: ADD_POSTS, payload: data });
+        dispatch({ type: ADD_POSTS, payload: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+export const addPost2 = data => {
+  return dispatch => {
+    return axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}/api/posts/images/new`,
+      data: data,
+      withCredentials: true,
+    })
+      .then(res => {
+        dispatch({ type: ADD_POSTS, payload: res.data });
       })
       .catch(err => console.log(err));
   };
