@@ -67,7 +67,7 @@ $color-red: #faeae7;
       display: flex;
       flex-direction: column;
       align-items: center;
-   //   justify-content: flex-end;
+      //   justify-content: flex-end;
       width: 100vw;
       margin: auto;
       height: 100%;
@@ -82,12 +82,12 @@ $color-red: #faeae7;
 
     .content_profil2 {
       width: 80%;
-     
+
       border: #131212 solid 2px;
       padding-bottom: 100px;
     }
     .content_profil_button {
-      position:absolute;
+      position: absolute;
       padding: 0.5em;
       margin-top: 233px;
       width: 80px;
@@ -97,44 +97,37 @@ $color-red: #faeae7;
       z-index: 10;
       color: aliceblue;
       background-color: black;
-      transition: transform 0.4s cubic-bezier(0.23,1.83,0.42,1.19);
+      transition: transform 0.4s cubic-bezier(0.23, 1.83, 0.42, 1.19);
     }
     .circle {
-     position: absolute;
-     margin-top: 230px;
-    width: 82px;
-    height: 82px;
-    border-radius: 50%;
-  //  background-color: blue;
-    border: 3px solid #f1f1f1;
-    animation: 1s linear infinite alternate boxMagic,
-     4s linear infinite spinning;
-     padding-top: 1px;
+      position: absolute;
+      margin-top: 230px;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      //  background-color: blue;
+      border: 3px solid #f1f1f1;
+      animation: 1s linear infinite alternate boxMagic,
+        4s linear infinite spinning;
+      padding-top: 1px;
     }
     @keyframes boxMagic {
-        from {
-          box-shadow: 
-            0 0 0 rgb(226, 226, 83),
-            0 0 0 rgb(145, 145, 228),
-            0 0 0 rgb(113, 113, 236),
-            0 0 0 rgb(27, 27, 235);
-        } to {
-          
-            box-shadow: 
-              0 -3px 0 rgb(226, 226, 83),
-              -3px 0 0 rgb(145, 145, 228),
-              0 3px 0 rgb(113, 113, 236),
-              4px 0 0 rgb(31, 31, 233);
-          
-        }
+      from {
+        box-shadow: 0 0 0 rgb(226, 226, 83), 0 0 0 rgb(145, 145, 228),
+          0 0 0 rgb(113, 113, 236), 0 0 0 rgb(27, 27, 235);
+      }
+      to {
+        box-shadow: 0 -3px 0 rgb(226, 226, 83), -3px 0 0 rgb(145, 145, 228),
+          0 3px 0 rgb(113, 113, 236), 4px 0 0 rgb(31, 31, 233);
+      }
     }
     @keyframes spinning {
       from {
         transform: rotate(0deg);
-      } to {
+      }
+      to {
         transform: rotate(360deg);
       }
-      
     }
     .circle:hover {
       transform: scale(1.2);
@@ -186,7 +179,6 @@ $color-red: #faeae7;
     height: 50%;
     margin-top: 0px;
   }
-
 }
 @media screen and (max-width: 570px) {
   .section_profil {

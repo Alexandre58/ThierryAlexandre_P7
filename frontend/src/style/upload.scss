@@ -25,7 +25,7 @@ $color-red: #f8340c;
         justify-content: space-evenly;
         align-items: center;
         background-color: aliceblue;
-        @include add-shadow-black;
+      //  @include add-shadow-black;
         background-image: linear-gradient(rgba(248, 164, 148, 0.8), rgba(243, 236, 234, 0.2)),
         url("../images/icon-left-font-long.png" );
     }

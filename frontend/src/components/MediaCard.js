@@ -59,7 +59,7 @@ export default function MediaCard({ post, uid, user }) {
           {user && (post.UserId === uid || user.isadmin) && (
             <>
               <BtnDelete action={"DELETE_POST"} data={post} />
-              <BtnModified />
+            {/**   <BtnModified />*/}
             </>
           )}
         </div>

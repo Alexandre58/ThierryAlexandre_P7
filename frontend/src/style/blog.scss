@@ -32,7 +32,7 @@ $color-red-white:rgb(247, 235, 233);
     position: absolute;
     font-size: 1em;
     margin-top: 680px;
-  
+    border-radius: 100px;
     max-height: 80px;
     width: 70%;
     text-align: center;
@@ -47,6 +47,7 @@ $color-red-white:rgb(247, 235, 233);
         justify-content: center;
         align-items: center;
         row-gap: 30px;
+        border-radius: 15px;
         background-color: rgb(27, 27, 27);
      //   background-image: linear-gradient(rgba(248, 164, 148, 0.4), rgba(243, 236, 234, 0.1)),
       //  url("../images/icon-left-font-long.png" );
@@ -111,6 +112,7 @@ $color-red-white:rgb(247, 235, 233);
   .div_mediaCard_container {
     border: black 1px solid !important;
     max-width:350px !important;
+  
   }
   .container_blog_mediaCard {
     padding: 30px!important;

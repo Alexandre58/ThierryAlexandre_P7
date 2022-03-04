@@ -29,9 +29,9 @@ const Logout = () => {
     return (
       <div className='logout_deconnect_container'>
           <li onClick={logout} aria-label="confirmation de connection merci de votre visite, a bientôt" >
-              <p className='logout_deconnect'>Merci de votre visite, cliquer pour valider la déconnexion...<br/>A bientôt!</p>
-
+              <p className='logout_deconnect'><em>Merci de votre visite, cliquer pour valider la déconnexion...</em></p>
           </li>
+         
       </div>
     );
 };
